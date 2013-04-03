@@ -1,0 +1,20 @@
+html {
+}
+
+body {
+}
+
+#gameArea {
+	width: auto;
+	height: auto;
+	float: left;
+    /*background-image:url('');*/
+	margin: 1%;
+    margin-bottom: 0px;
+}
+
+#game {
+	border: 1px solid black;
+}
+
+
