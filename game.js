@@ -1,3 +1,4 @@
+
 // ------------------------------------------------------------------
 // Global animate frame with rate of 16 milliseconds
 // ------------------------------------------------------------------
@@ -26,6 +27,7 @@ function load(){
 
 	update();
 };
+
 
 // -------------------------------------------------------------------
 // Globals
@@ -58,6 +60,19 @@ function initGame(){
     }, false);
 
     // Init Objects Here
+
+//
+//  Registering mouse position - Hong Shing
+//
+    canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+      }, false);
+//
+//  End
+//
+
 }
 
 // ------------------------------------------------------------------
@@ -78,3 +93,27 @@ function animate(){
     // Keep running update
     requestAnimFrame(update);
 }
+
+//
+//  Testing the printing of mouse position (HONG SHING)
+//
+
+function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '18pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 10, 25);
+      }
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+
+
+//
+//  End
+//
