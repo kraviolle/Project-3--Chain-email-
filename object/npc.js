@@ -1,5 +1,41 @@
 
-function NPC(){
+function NPC(pos_x,pos_y,faction,id){// passes in the X & Y coordinates to see where they stand, and type and unique id.
+	
+	this.x=pos_x;
+	this.y=pos_y;
+
+			
+	this.id=id;
 	this.health = 100;
-	this.faction = 0; // 0 = Neutral, 1 = Your lackey, 2 = Your rival's lacky
+	this.faction=faction;        // 0 = Neutral, 1 = Your lackey, 2 = Your rival's lacky, 3= undercover cop
+	this.attack=20;
+	this.defense=20;
+
+
+	this.fight = function(targetid){
+
+	}
+
+	this.bribe= function(targetid){
+	
+	}
+
+	this.recruit= fucntion(tartgetid){
+	
+	}
+	
+
+	this.speech = function(random){
+	//draw texts
+	}
+
+
+	this.draw= function(){
+	var c=document.getElementById("game");			//canvas id	
+	var ctx=c.getContext("2d");
+	var img=document.getElementById("XXXX");		//havent had any images just yet.
+	ctx.drawImage(img,this.x,this.y);
+	
+	}
+
 }
