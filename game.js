@@ -60,19 +60,29 @@ function initGame(){
     }, false);
 
     // Init Objects Here
+    var abstraction = new level(); // HS
+    var renderingEngine = new Renderer(); // HS
+    
 
-//
-//  Registering mouse position - Hong Shing
-//
-    canvas.addEventListener('mousemove', function(evt) {
+
+    //
+    //  Registering mouse position on mouse click - Hong Shing
+    //
+    canvas.addEventListener('mousedown', function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        writeMessage(canvas, message);
+        abstraction.mousepos_x = mousePos.x;
+        abstraction.mousepos_y = mousePos.y;
+        abstraction.Mouseclick();
+        renderingEngine.Draw_level(abstraction.abst_level);
+        //var message = 'Level: ' + abstraction.abst_level;
+        //writeMessage(canvas, message);
       }, false);
-//
-//  End
-//
+    //
+    //  End
+    //
 
+    renderingEngine.Draw_country();
+    renderingEngine.mark_HUD();
 }
 
 // ------------------------------------------------------------------
@@ -100,18 +110,19 @@ function animate(){
 
 function writeMessage(canvas, message) {
         var context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, 500, 100);
         context.font = '18pt Calibri';
         context.fillStyle = 'black';
         context.fillText(message, 10, 25);
       }
-      function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
+      
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
 
 
 //

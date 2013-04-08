@@ -20,7 +20,7 @@ function NPC(pos_x,pos_y,faction,id){// passes in the X & Y coordinates to see w
 	
 	}
 
-	this.recruit= fucntion(tartgetid){
+	this.recruit= function(tartgetid){
 	
 	}
 	
