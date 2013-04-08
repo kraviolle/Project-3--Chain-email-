@@ -1,16 +1,36 @@
+var max_cities = 3;
+var max_buildings = 10;
+
+function building()
+{
+	var name;
+	var total_people;
+	var ratio_blue;
+	var ratio_red;
+	var ratio_neutral
+}
+
 function level(){
 
 	this.mousepos_x = 0;
 	this.mousepos_y = 0;
 	this.abst_level = 0; // The current abstraction level that the screen is at. 3 = Country, 2 = City, 1 = Room
-	this.city = 0; // Current or previous city that was entered. 1 = West Coast, 2 = East Coast, 3 = Northern Territory
+	this.city = [];
+
+	for(var i =0; i < max_cities; i++)
+	{
+		this.city[i] = [];
+		for(var j = 0; j < max_buildings; j++)
+		{
+			this.city[i][j] = new building();
+		}
+	}
 
 
 	//
 	//	Updates the game base one what buttons have been clicked
 	//
 	this.Mouseclick = function(){
-		console.log(this.mousepos_x + this.mousepos_y);
 		if(this.mousepos_x <= 890 && this.mousepos_x >= 810)
 		{
 			if(this.mousepos_y <= 50 && this.mousepos_y >= 10)
