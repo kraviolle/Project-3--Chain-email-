@@ -46,6 +46,18 @@ function initGame(){
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
 
+    //-------------------
+    //  Init Objects Here
+    //-------------------
+    var abstraction = new level(); // HS
+    var renderingEngine = new Renderer(); // HS
+    var lobby = new room(20, 20); // HS
+    var FPS = 30; //HS
+    var screenUpdateTime = 1000/FPS; //HS
+    //------------------------------
+    //  End initialization of object
+    //------------------------------
+
     // Listen for key set
     addEventListener("keydown", function (e){
         e.preventDefault();
@@ -59,16 +71,71 @@ function initGame(){
         keysUp[e.keyCode] = true;
     }, false);
 
-    // Init Objects Here
-    var abstraction = new level(); // HS
-    var renderingEngine = new Renderer(); // HS
-    var lobby = new room(20, 20); // HS
+
+    //-------------------------
+    //  Registering key-presses - Hong Shing
+    //-------------------------
+
+    document.addEventListener('keydown', function(event) {
+
+
+            // Press up down left right to move the player on screen
+          if(event.keyCode == 37) {
+            //go left
+            if(lobby.player_position.x != 0 && !lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // Not at the left most column
+            {
+              lobby.player_position.x = lobby.player_position.x - 1; // Change position of player in room
+              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+              lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
+              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+            }
+          }//end if(event.keyCode == 37)
+          
+          if(event.keyCode == 39) {
+            //go right
+            if(lobby.player_position.x != (lobby.column - 1) && !lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied)
+            {
+              lobby.player_position.x = lobby.player_position.x + 1; // Change position of player in room
+              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+              lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
+              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+            }
+          }//end if(event.keyCode == 39)
+          
+          if(event.keyCode == 38) {
+            //go up
+            if(lobby.player_position.y != 0 && !lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied)
+            {
+              lobby.player_position.y = lobby.player_position.y - 1; // Change position of player in room
+              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+              lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied = false;// Change old position to unoccupied
+              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+            }
+          }//end if(event.keyCode == 38)
+          
+          if(event.keyCode == 40) {
+            //go down
+            if(lobby.player_position.y != (lobby.row - 1) && !lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied)
+            {
+              lobby.player_position.y = lobby.player_position.y + 1; // Change position of player in room
+              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+              lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied = false;// Change old position to unoccupied
+              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+            }
+          }//end if (event.keyCode == 40)
+          
+          }
+         
+    );///end addEventListener
     
+    //----------------------------------------
+    //  End registering key press - Hong Shing
+    //----------------------------------------
 
 
-    //
+    //--------------------------------------------------------
     //  Registering mouse position on mouse click - Hong Shing
-    //
+    //--------------------------------------------------------
     canvas.addEventListener('mousedown', function(evt) {
         var mousePos = getMousePos(canvas, evt);
         abstraction.mousepos_x = mousePos.x;
@@ -78,14 +145,24 @@ function initGame(){
         //var message = 'Level: ' + abstraction.abst_level;
         //writeMessage(canvas, message);
       }, false);
-    //
+    //--------------------------------------------------------
     //  End
-    //
+    //--------------------------------------------------------
 
     //renderingEngine.Draw_country();
     //renderingEngine.mark_HUD();
-    lobby.drawroom();
-    lobby.drawplayer();
+
+    //------------------
+    //  Rendering screen
+    //------------------
+    setInterval(function () {lobby.draw()}, screenUpdateTime);
+    //----------------------
+    //  Rendering screen end
+    //----------------------
+
+
+
+
 }
 
 // ------------------------------------------------------------------

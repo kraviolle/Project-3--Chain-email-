@@ -89,4 +89,11 @@ function room(start_x, start_y){
       	ctx.stroke();
 	}
 
+	this.draw = function(){
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		this.drawroom();
+		this.drawplayer();
+		
+	}
+
 }
