@@ -62,6 +62,7 @@ function initGame(){
     // Init Objects Here
     var abstraction = new level(); // HS
     var renderingEngine = new Renderer(); // HS
+    var lobby = new room(20, 20); // HS
     
 
 
@@ -81,8 +82,10 @@ function initGame(){
     //  End
     //
 
-    renderingEngine.Draw_country();
-    renderingEngine.mark_HUD();
+    //renderingEngine.Draw_country();
+    //renderingEngine.mark_HUD();
+    lobby.drawroom();
+
 }
 
 // ------------------------------------------------------------------
