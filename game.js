@@ -85,7 +85,7 @@ function initGame(){
     //renderingEngine.Draw_country();
     //renderingEngine.mark_HUD();
     lobby.drawroom();
-
+    lobby.drawplayer();
 }
 
 // ------------------------------------------------------------------

@@ -6,14 +6,18 @@ function Point(x,y){
 function cell(x,y){
     this.point=new Point(x,y);
     this.occupied=false;
+    this.door = false;
+    this.player = false;
+    this.npc = false;
 }
 
 function room(start_x, start_y){
 
 	this.map = [];
 	this.cellsize = 50;
-	this.column = 7;
-	this.row = 7;
+	this.column = 8;
+	this.row = 8;
+	this.door_thickness = 8;
 
 	for(var i = 0; i < this.column; i++)
 	{
@@ -21,10 +25,19 @@ function room(start_x, start_y){
 
 		for(var j = 0; j < this.row; j++)
 		{
-			this.map[i][j] = new cell(start_x + (i * 20), start_y + (j * 20));
+			this.map[i][j] = new cell(start_x + (i * this.cellsize), start_y + (j * this.cellsize));
 		}
 	}
 
+	// Initializing doors of the room
+	// Doors are at [7,3], [7,4]
+	this.map[3][7].door = true;
+	this.map[3][7].door = true;
+
+	// Initialize player position to the door
+	this.map[3][7].player = true;
+	this.occupied = true;
+	this.player_position = new Point(3,7); //Cell coordinates of the player
 
 
 	this.drawroom = function(){
@@ -54,6 +67,26 @@ function room(start_x, start_y){
       		ctx.lineTo(start_x + (this.column * this.cellsize), start_y + (j * this.cellsize));
       		ctx.stroke();
       	}
+
+      	// Drawing the doors
+      	ctx.beginPath();
+		ctx.rect(this.map[3][7].point.x, this.map[3][7].point.y + this.cellsize - this.door_thickness, 2 * this.cellsize, this.door_thickness);      
+      	ctx.fillStyle = 'brown';
+      	ctx.fill();
+      	ctx.lineWidth = 1;
+      	ctx.strokeStyle = 'black';
+      	ctx.stroke();
+	}
+
+	this.drawplayer = function(){
+		ctx.beginPath();
+      	ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+     	ctx.fillStyle = 'blue';
+      	ctx.fill();
+     	ctx.lineWidth = 2;
+     	// line color
+      	ctx.strokeStyle = 'black';
+      	ctx.stroke();
 	}
 
 }
