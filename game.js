@@ -84,49 +84,129 @@ function initGame(){
             // Press up down left right to move the player on screen
           if(event.keyCode == 37) {
             //go left
-            lobby.player_direction = 3;
-            if(lobby.player_position.x != 0 && !lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // Not at the left most column
+            if(lobby.active)// If player in the room
             {
-              lobby.player_position.x = lobby.player_position.x - 1; // Change position of player in room
-              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
-              lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
-              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              lobby.player_direction = 3;
+              if(lobby.player_position.x != 0 && !lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // Not at the left most column
+              {
+                lobby.player_position.x = lobby.player_position.x - 1; // Change position of player in room
+                lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+                lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
+                console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              }
             }
+
+            if(Outside.active)// If player in the room
+            {
+              Outside.player_direction = 3;
+              if(Outside.player_position.x != 0 && !Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied) // Not at the left most column
+              {
+                Outside.player_position.x = Outside.player_position.x - 1; // Change position of player in room
+                Outside.map[Outside.player_position.x][Outside.player_position.y].occupied = true; // Change new position to occupied
+                Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied = false;// Change old position to unoccupied
+                console.log(Outside.player_position.x + ',' + Outside.player_position.y);
+              }
+            }
+          
           }//end if(event.keyCode == 37)
           
           if(event.keyCode == 39) {
             //go right
-            lobby.player_direction = 4;
-            if(lobby.player_position.x != (lobby.column - 1) && !lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied)
+            if(lobby.active)
             {
-              lobby.player_position.x = lobby.player_position.x + 1; // Change position of player in room
-              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
-              lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
-              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              lobby.player_direction = 4;
+              if(lobby.player_position.x != (lobby.column - 1) && !lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied)
+              {
+                lobby.player_position.x = lobby.player_position.x + 1; // Change position of player in room
+                lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+                lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied = false;// Change old position to unoccupied
+                console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              }
+            }
+
+            if(Outside.active)
+            {
+              Outside.player_direction = 4;
+              if(Outside.player_position.x != (Outside.column - 1) && !Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied)
+              {
+                Outside.player_position.x = Outside.player_position.x + 1; // Change position of player in room
+                Outside.map[Outside.player_position.x][Outside.player_position.y].occupied = true; // Change new position to occupied
+                Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied = false;// Change old position to unoccupied
+                console.log(Outside.player_position.x + ',' + Outside.player_position.y);
+              }
             }
           }//end if(event.keyCode == 39)
           
           if(event.keyCode == 38) {
             //go up
-            lobby.player_direction = 1;
-            if(lobby.player_position.y != 0 && !lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied)
+            if(lobby.active)
             {
-              lobby.player_position.y = lobby.player_position.y - 1; // Change position of player in room
-              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
-              lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied = false;// Change old position to unoccupied
-              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              lobby.player_direction = 1;
+              if(lobby.player_position.y != 0 && !lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied)
+              {
+                lobby.player_position.y = lobby.player_position.y - 1; // Change position of player in room
+                lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+                lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied = false;// Change old position to unoccupied
+                console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              }
             }
+
+            if(Outside.active)
+            {
+              Outside.player_direction = 1;
+              if(Outside.player_position.y != 0 && !Outside.map[Outside.player_position.x][Outside.player_position.y - 1].occupied)
+              {
+                Outside.player_position.y = Outside.player_position.y - 1; // Change position of player in room
+                Outside.map[Outside.player_position.x][Outside.player_position.y].occupied = true; // Change new position to occupied
+                Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied = false;// Change old position to unoccupied
+                console.log(Outside.player_position.x + ',' + Outside.player_position.y);
+              }
+
+              // Player enters the door to enter the building
+              else if(Outside.player_position.y == 3 && Outside.player_position.x == 7)
+              {
+                Outside.active = false;
+                lobby.active = true;
+                lobby.player_direction = 1;
+              }
+            }
+
+          
           }//end if(event.keyCode == 38)
           
           if(event.keyCode == 40) {
             //go down
-            lobby.player_direction = 2;
-            if(lobby.player_position.y != (lobby.row - 1) && !lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied)
+            if(lobby.active)
             {
-              lobby.player_position.y = lobby.player_position.y + 1; // Change position of player in room
-              lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
-              lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied = false;// Change old position to unoccupied
-              console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              lobby.player_direction = 2;
+              if(lobby.player_position.y != (lobby.row - 1) && !lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied)
+              {
+                lobby.player_position.y = lobby.player_position.y + 1; // Change position of player in room
+                lobby.map[lobby.player_position.x][lobby.player_position.y].occupied = true; // Change new position to occupied
+                lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied = false;// Change old position to unoccupied
+                console.log(lobby.player_position.x + ',' + lobby.player_position.y);
+              }
+
+              // Player exits the building to go outside
+              else if(lobby.player_position.y == 7 && lobby.player_position.x == 3)
+              {
+                lobby.active = false;
+                Outside.active = true;
+                Outside.player_direction = 2;
+              }
+              
+            }
+
+            else if(Outside.active)
+            {
+              Outside.player_direction = 2;
+              if(Outside.player_position.y != (Outside.row - 1) && !Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied)
+              {
+                Outside.player_position.y = Outside.player_position.y + 1; // Change position of player in room
+                Outside.map[Outside.player_position.x][Outside.player_position.y].occupied = true; // Change new position to occupied
+                Outside.map[Outside.player_position.x][Outside.player_position.y - 1].occupied = false;// Change old position to unoccupied
+                console.log(Outside.player_position.x + ',' + Outside.player_position.y);
+              }
             }
           }//end if (event.keyCode == 40)
           
@@ -161,12 +241,16 @@ function initGame(){
     //------------------
     //  Rendering screen
     //------------------
-    setInterval(function () {Outside.drawoutside()}, screenUpdateTime);
+    setInterval(function () {
+      if(lobby.active)
+        lobby.draw();
+      if(Outside.active)
+        Outside.draw();
+
+    }, screenUpdateTime);
     //----------------------
     //  Rendering screen end
     //----------------------
-
-    console.log(this.gameStart);
 
 
 

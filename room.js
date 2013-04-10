@@ -13,7 +13,7 @@ function cell(x,y){
 
 function room(start_x, start_y){
 
-  this.active = true; // This signifies that player is within the room
+  this.active = false; // This signifies that player is within the room
 	this.map = [];
 	this.cellsize = 50;
 	this.column = 8;
@@ -77,7 +77,7 @@ function room(start_x, start_y){
 
       	// Drawing the doors
       	ctx.beginPath();
-		ctx.rect(this.map[3][7].point.x, this.map[3][7].point.y + this.cellsize - this.door_thickness, 2 * this.cellsize, this.door_thickness);      
+		ctx.rect(this.map[3][7].point.x, this.map[3][7].point.y + this.cellsize - this.door_thickness, this.cellsize, this.door_thickness);      
       	ctx.fillStyle = 'brown';
       	ctx.fill();
       	ctx.lineWidth = 1;
@@ -156,6 +156,15 @@ function outdoor(start_x, start_y){
     }
   }
 
+  // Initialize player position to the door
+  this.map[7][3].player = true;
+  this.occupied = true;
+  this.player_position = new Point(7,3); //Cell coordinates of the player
+  this.player_direction = 2; // 1 = up, 2 = down, 3 = left, 4 = right
+  //
+  // Create this into player class
+  //
+
   this.drawoutside = function(){
 
     // Drawing the entire room
@@ -200,15 +209,65 @@ function outdoor(start_x, start_y){
         }
 
         
-        // Drawing the doors
+        // Drawing the door
         ctx.beginPath();
-        ctx.rect(this.map[7][2].point.x, this.map[7][2].point.y + this.cellsize - this.door_thickness, 2 * this.cellsize, this.door_thickness);      
+        ctx.rect(this.map[7][2].point.x, this.map[7][2].point.y + this.cellsize - this.door_thickness, this.cellsize, this.door_thickness);      
         ctx.fillStyle = 'brown';
         ctx.fill();
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'black';
         ctx.stroke();
         
+  }
+
+  this.drawplayer = function(){
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'red';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      // line color
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
+    switch(this.player_direction)
+    {
+      case 1: // UP
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/4, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 2: // DOWN
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 3: // LEFT
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/4, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 4: // RIGHT
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + (3 * this.cellsize/4), this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+    }
+  }
+
+  this.draw = function(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    this.drawoutside();
+    this.drawplayer();
+    
   }
 
 }
