@@ -52,3 +52,53 @@ function level(){
 	//
 	//
 }
+
+function levelThree(){
+	/*Data to display*/
+	var northCity = {
+		population	: 1000,
+		neutral		: 830,
+		police		: 114,
+		rivals		: 56,
+		allied		: 0
+	};
+	var westCity = {
+		population	: 1000,
+		neutral		: 912,
+		police		: 64,
+		rivals		: 24,
+		allied		: 0
+	};
+	var eastCity = {
+		population	: 1000,
+		neutral		: 723,
+		police		: 179,
+		rivals		: 98,
+		allied		: 0
+	};
+}
+
+function levelTwo(){
+	/*Data to display*/
+	var hospital = {
+		population	: 261,
+		neutral		: 115,
+		police		: 57,
+		rivals		: 89,
+		allied		: 0
+	};
+	var policeStation = {
+		population	: 381,
+		neutral		: 225,
+		police		: 156,
+		rivals		: 0,
+		allied		: 0
+	};
+	var buildingOne = {
+		population	: 358,
+		neutral		: 266,
+		police		: 20,
+		rivals		: 72,
+		allied		: 0
+	};
+}

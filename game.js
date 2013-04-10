@@ -17,8 +17,6 @@ window.requestAnimFrame = (function(){
 // Load the game when html body is loaded
 // ------------------------------------------------------------------
 function load(){
-    
-    initGlobal();
 	// Initialise game
 	initGame();
 
@@ -28,16 +26,6 @@ function load(){
 	update();
 };
 
-
-// -------------------------------------------------------------------
-// Globals
-// -------------------------------------------------------------------
-function initGlobal(){
-	// Key Control
-	keysDown = {};
-	keysUp = {};
-}
-
 // ------------------------------------------------------------------
 // Initialise Game Backend and setting
 // ------------------------------------------------------------------
@@ -45,6 +33,9 @@ function initGame(){
     // Game
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
+    // Debug
+    debug = document.getElementById("debug");
+    ctxDebug = canvas.getContext("2d");
 
 //-------------------
 //  Init Objects Here
@@ -58,20 +49,6 @@ function initGame(){
 //------------------------------
 //  End initialization of object
 //------------------------------
-
-
-    // Listen for key set
-    addEventListener("keydown", function (e){
-        e.preventDefault();
-        delete keysUp[e.KeyCode];
-        keysDown[e.keyCode] = true;
-    }, false);
-    // Listen for key unset
-    addEventListener("keyup", function (e){
-        e.preventDefault();
-        delete keysDown[e.keyCode];
-        keysUp[e.keyCode] = true;
-    }, false);
 
 
     //-------------------------
