@@ -1,35 +1,8 @@
 
 // ------------------------------------------------------------------
-// Global animate frame with rate of 16 milliseconds
-// ------------------------------------------------------------------
-window.requestAnimFrame = (function(){
-    return window.requestAnimationFrame  ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame  ||
-        window.msRequestAnimationFrame  ||
-        function(/* function */ callback, /* DOMElement */ element){
-            window.setTimeout(callback, 1000 / 60);
-        };
-})();
-
-// ------------------------------------------------------------------
-// Load the game when html body is loaded
-// ------------------------------------------------------------------
-function load(){
-	// Initialise game
-	initGame();
-
-	// Time that game start
-	gameStart = Date.now();
-
-	update();
-};
-
-// ------------------------------------------------------------------
 // Initialise Game Backend and setting
 // ------------------------------------------------------------------
-function initGame(){
+function load(){
     // Game
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
@@ -232,25 +205,6 @@ function initGame(){
 
 
 
-}
-
-// ------------------------------------------------------------------
-// Update the objects at frame rate
-// ------------------------------------------------------------------
-function update(){
-}
-
-// ------------------------------------------------------------------
-// Animate objects
-// ------------------------------------------------------------------
-function animate(){
-    // Clear contexts
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-        
-    // Draw Objects Here
-    //lobby.draw();
-    // Keep running update
-    requestAnimFrame(update);
 }
 
 //
