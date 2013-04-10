@@ -34,11 +34,17 @@ function room(start_x, start_y){
 	this.map[3][7].door = true;
 	this.map[3][7].door = true;
 
-	// Initialize player position to the door
+	//
+  // Create this into player class
+  //
+  // Initialize player position to the door
 	this.map[3][7].player = true;
 	this.occupied = true;
 	this.player_position = new Point(3,7); //Cell coordinates of the player
-
+  this.player_direction = 1; // 1 = up, 2 = down, 3 = left, 4 = right
+  //
+  // Create this into player class
+  //
 
 	this.drawroom = function(){
 
@@ -79,14 +85,46 @@ function room(start_x, start_y){
 	}
 
 	this.drawplayer = function(){
-		ctx.beginPath();
-      	ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+		  ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
      	ctx.fillStyle = 'blue';
-      	ctx.fill();
+      ctx.fill();
      	ctx.lineWidth = 2;
      	// line color
       	ctx.strokeStyle = 'black';
       	ctx.stroke();
+
+    switch(this.player_direction)
+    {
+      case 1: // UP
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/4, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 2: // DOWN
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 3: // LEFT
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/4, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+      case 4: // RIGHT
+      ctx.beginPath();
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + (3 * this.cellsize/4), this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'brown';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      break;
+    }
 	}
 
 	this.draw = function(){
