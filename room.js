@@ -13,6 +13,7 @@ function cell(x,y){
 
 function room(start_x, start_y){
 
+  this.active = true; // This signifies that player is within the room
 	this.map = [];
 	this.cellsize = 50;
 	this.column = 8;
@@ -87,7 +88,7 @@ function room(start_x, start_y){
 	this.drawplayer = function(){
 		  ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-     	ctx.fillStyle = 'blue';
+     	ctx.fillStyle = 'red';
       ctx.fill();
      	ctx.lineWidth = 2;
      	// line color
@@ -133,5 +134,81 @@ function room(start_x, start_y){
 		this.drawplayer();
 		
 	}
+
+}
+
+function outdoor(start_x, start_y){
+
+  this.active = true; // Player is outside
+  this.map = [];
+  this.cellsize = 30;
+  this.column = 16;
+  this.row = 8;
+  this.door_thickness = 8;
+
+  for(var i = 0; i < this.column; i++)
+  {
+    this.map[i] = [];
+
+    for(var j = 0; j < this.row; j++)
+    {
+      this.map[i][j] = new cell(start_x + (i * this.cellsize), start_y + (j * this.cellsize));
+    }
+  }
+
+  this.drawoutside = function(){
+
+    // Drawing the entire room
+        ctx.beginPath();
+        ctx.rect(start_x, start_y, this.column * this.cellsize, this.row * this.cellsize);      
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
+        // Drawing the grid
+        for(var i = 0; i < this.column; i++)
+        {
+          ctx.beginPath();
+          ctx.moveTo(start_x + (i * this.cellsize), start_y);
+          ctx.lineTo(start_x + (i * this.cellsize), start_y + (this.row * this.cellsize));
+          ctx.stroke();
+        }
+
+        for(var j = 0; j < this.row; j++)
+        {
+          ctx.beginPath();
+          ctx.moveTo(start_x, start_y + (j * this.cellsize));
+          ctx.lineTo(start_x + (this.column * this.cellsize), start_y + (j * this.cellsize));
+          ctx.stroke();
+        }
+
+
+        //Draw the building
+        for(i = 5; i < 11; i++)
+        {
+          for(j = 0; j < 3; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        
+        // Drawing the doors
+        ctx.beginPath();
+        ctx.rect(this.map[7][2].point.x, this.map[7][2].point.y + this.cellsize - this.door_thickness, 2 * this.cellsize, this.door_thickness);      
+        ctx.fillStyle = 'brown';
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+        
+  }
 
 }

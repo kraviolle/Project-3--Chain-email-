@@ -46,17 +46,19 @@ function initGame(){
     canvas = document.getElementById("game");
     ctx = canvas.getContext("2d");
 
-    //-------------------
-    //  Init Objects Here
-    //-------------------
+//-------------------
+//  Init Objects Here
+//-------------------
     var abstraction = new level(); // HS
     var renderingEngine = new Renderer(); // HS
     var lobby = new room(20, 20); // HS
+    var Outside = new outdoor(20,20); // HS
     var FPS = 30; //HS
     var screenUpdateTime = 1000/FPS; //HS
-    //------------------------------
-    //  End initialization of object
-    //------------------------------
+//------------------------------
+//  End initialization of object
+//------------------------------
+
 
     // Listen for key set
     addEventListener("keydown", function (e){
@@ -159,10 +161,12 @@ function initGame(){
     //------------------
     //  Rendering screen
     //------------------
-    setInterval(function () {lobby.draw()}, screenUpdateTime);
+    setInterval(function () {Outside.drawoutside()}, screenUpdateTime);
     //----------------------
     //  Rendering screen end
     //----------------------
+
+    console.log(this.gameStart);
 
 
 
@@ -183,7 +187,7 @@ function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
         
     // Draw Objects Here
-
+    //lobby.draw();
     // Keep running update
     requestAnimFrame(update);
 }
