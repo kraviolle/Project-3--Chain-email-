@@ -303,9 +303,8 @@ function NPC_controller(room, outside){
         if(!this.NPC_array[i].inside)
         {
           ctx.beginPath();
-          //ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-          ctx.arc(60, 70, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-          /*
+          ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.outside.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.outside.cellsize/2, this.outside.cellsize/2 - 2, 0, 2*Math.PI, true);
+      
           switch (this.NPC_array[i].faction)
           {
             case 0: // Neutral
@@ -321,8 +320,8 @@ function NPC_controller(room, outside){
             ctx.fillStyle = 'green';
             break;
           }
-          */
-          ctx.fillStyle = 'black';
+          
+          
           ctx.fill();
           ctx.lineWidth = 2;
           // line color
@@ -335,7 +334,7 @@ function NPC_controller(room, outside){
           if(this.NPC_array[i].inside)
           {
           ctx.beginPath();
-          ctx.arc(this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.cellsize/2, this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+          ctx.arc(this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.room.cellsize/2, this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.room.cellsize/2, this.room.cellsize/2 - 2, 0, 2*Math.PI, true);
           switch (this.NPC_array[i].faction)
           {
             case 0: // Neutral
