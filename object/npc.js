@@ -1,10 +1,10 @@
 
-function NPC(pos_x,pos_y,faction,id){// passes in the X & Y coordinates to see where they stand, and type and unique id.
+function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates to see where they stand, and type and unique id.
 	
 	this.x=pos_x;
 	this.y=pos_y;
 
-			
+	this.inside = where; // True if NPC in building, false if NPC outside building - HS
 	this.id=id;
 	this.health = 100;
 	this.faction=faction;        // 0 = Neutral, 1 = Your lackey, 2 = Your rival's lacky, 3= undercover cop

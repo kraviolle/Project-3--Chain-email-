@@ -40,7 +40,7 @@ function room(start_x, start_y){
   //
   // Initialize player position to the door
 	this.map[3][7].player = true;
-	this.occupied = true;
+	this.map[3][7].occupied = true;
 	this.player_position = new Point(3,7); //Cell coordinates of the player
   this.player_direction = 1; // 1 = up, 2 = down, 3 = left, 4 = right
   //
@@ -88,7 +88,7 @@ function room(start_x, start_y){
 	this.drawplayer = function(){
 		  ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-     	ctx.fillStyle = 'red';
+     	ctx.fillStyle = 'black';
       ctx.fill();
      	ctx.lineWidth = 2;
      	// line color
@@ -100,28 +100,28 @@ function room(start_x, start_y){
       case 1: // UP
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/4, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 2: // DOWN
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 3: // LEFT
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/4, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 4: // RIGHT
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + (3 * this.cellsize/4), this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
@@ -157,10 +157,10 @@ function outdoor(start_x, start_y){
   }
 
   // Initialize player position to the door
-  this.map[7][3].player = true;
-  this.occupied = true;
-  this.player_position = new Point(7,3); //Cell coordinates of the player
-  this.player_direction = 2; // 1 = up, 2 = down, 3 = left, 4 = right
+  this.map[15][4].player = true;
+  this.map[15][4].occupied = true;
+  this.player_position = new Point(15,4); //Cell coordinates of the player
+  this.player_direction = 3; // 1 = up, 2 = down, 3 = left, 4 = right
   //
   // Create this into player class
   //
@@ -223,7 +223,7 @@ function outdoor(start_x, start_y){
   this.drawplayer = function(){
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'red';
+      ctx.fillStyle = 'black';
       ctx.fill();
       ctx.lineWidth = 2;
       // line color
@@ -235,28 +235,28 @@ function outdoor(start_x, start_y){
       case 1: // UP
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/4, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 2: // DOWN
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 3: // LEFT
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/4, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
       case 4: // RIGHT
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + (3 * this.cellsize/4), this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'brown';
+      ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
       break;
@@ -268,6 +268,97 @@ function outdoor(start_x, start_y){
     this.drawoutside();
     this.drawplayer();
     
+  }
+
+}
+
+function idle_location(x, y, where, occupancy){
+
+  this.point = new Point(x,y);
+  this.inside = where; // true signifies inside the room, false signifies outside the room
+  this.occupied = occupancy; // true signifies occupied, false signifies unoccupied
+  this.NPC = -1; // If -1 means not occupied. If occupied, stores the index of the NPC at the location
+}
+
+function NPC_controller(room, outside){
+
+  this.NPC_array = []; // Stores the data of NPC at a location
+  //this.idle = []; // Stores the idle locations on the map and signifies whether it is in the room or outside
+  this.room = room;
+  this.outside = outside;
+
+  // Initialize all idle points.
+
+
+  // Initialize NPCs. Location starts with 25 neutral NPCs.
+  this.NPC_array.push(new NPC(1,2,3,123,false));
+  this.outside.map[1][2].occupied = true;
+
+  this.drawNPC = function(inside){
+      // If inside == true, draw NPC for within the room, otherwise, draw NPC for outside the room
+      for(var i = 0; i < this.NPC_array.length; i++)
+      {
+        if(!inside)
+        {
+        if(!this.NPC_array[i].inside)
+        {
+          ctx.beginPath();
+          //ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+          ctx.arc(60, 70, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+          /*
+          switch (this.NPC_array[i].faction)
+          {
+            case 0: // Neutral
+            ctx.fillStyle = 'white';
+            break;
+            case 1: // Your lackey
+            ctx.fillStyle = 'red';
+            break;
+            case 2: // Rival
+            ctx.fillStyle = 'blue';
+            break;
+            case 3: // Policeman
+            ctx.fillStyle = 'green';
+            break;
+          }
+          */
+          ctx.fillStyle = 'black';
+          ctx.fill();
+          ctx.lineWidth = 2;
+          // line color
+          ctx.strokeStyle = 'black';
+          ctx.stroke();
+        }
+        }
+        else
+        {
+          if(this.NPC_array[i].inside)
+          {
+          ctx.beginPath();
+          ctx.arc(this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.cellsize/2, this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+          switch (this.NPC_array[i].faction)
+          {
+            case 0: // Neutral
+            ctx.fillStyle = 'white';
+            break;
+            case 1: // Your lackey
+            ctx.fillStyle = 'red';
+            break;
+            case 2: // Rival
+            ctx.fillStyle = 'blue';
+            break;
+            case 3: // Policeman
+            ctx.fillStyle = 'green';
+            break;
+          }
+          ctx.fill();
+          ctx.lineWidth = 2;
+          // line color
+          ctx.strokeStyle = 'black';
+          ctx.stroke();
+        }
+      }
+      }
   }
 
 }

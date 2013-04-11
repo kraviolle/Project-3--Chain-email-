@@ -19,6 +19,7 @@ function load() {
 	var FPS = 30; //HS
 	var screenUpdateTime = 1000 / FPS; //HS
 	var simulator = new Controller();
+	var npc_controller = new NPC_controller(lobby, Outside); // HS
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -196,9 +197,15 @@ function load() {
 	//------------------
 	setInterval(function() {
 		if (lobby.active)
+		{
 			lobby.draw();
+			npc_controller.drawNPC(true);
+		}
 		if (Outside.active)
+		{
 			Outside.draw();
+			npc_controller.drawNPC(false);
+		}
 
 	}, screenUpdateTime);
 	//----------------------
