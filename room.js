@@ -291,8 +291,11 @@ function NPC_controller(room, outside){
 
 
   // Initialize NPCs. Location starts with 25 neutral NPCs.
-  this.NPC_array.push(new NPC(1,2,3,123,false));
-  this.outside.map[1][2].occupied = true;
+  this.NPC_array.push(new NPC(10,3,3,123,false));
+  this.outside.map[10][3].occupied = true;
+
+  this.NPC_array.push(new NPC(6,7,0,123,true));
+  this.room.map[6][7].occupied = true;
 
   this.drawNPC = function(inside){
       // If inside == true, draw NPC for within the room, otherwise, draw NPC for outside the room
