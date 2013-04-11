@@ -5,6 +5,8 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.y=pos_y;
 
 	this.inside = where; // True if NPC in building, false if NPC outside building - HS
+	this.intention = 0; // 0 = Idle - HS
+	this.destination = new Point(0, 0); // HS
 	this.id=id;
 	this.health = 100;
 	this.faction=faction;        // 0 = Neutral, 1 = Your lackey, 2 = Your rival's lacky, 3= undercover cop

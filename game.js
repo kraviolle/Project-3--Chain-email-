@@ -21,6 +21,9 @@ function load() {
 	var level3 = new levelThree(); //Lionel
 	var level2 = new levelTwo(); //Lionel
 	var simulator = new Controller(level3, level2); //Lionel
+	var npc_controller = new NPC_controller(lobby, Outside); // HS
+	var navigate = new pathfinding(lobby, Outside); //HS
+
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -199,6 +202,12 @@ function load() {
 	setInterval(function() {
 		if (lobby.active)
 			lobby.draw();
+			npc_controller.drawNPC(true);
+			if(npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x && npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x)
+			{
+				navigate.steering(npc_controller.NPC_array[1], npc_controller.NPC_array[1].destination, true);
+			}
+		}
 		if (Outside.active)
 			Outside.draw();
 
