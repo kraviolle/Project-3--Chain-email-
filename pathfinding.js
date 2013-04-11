@@ -73,21 +73,25 @@ this.steering = function(NPC, destination, inside){
 			if(destination.y < NPC.y && NPC.y != 0 && !outside.map[NPC.x][NPC.y - 1].occupied )// If destination higher than current position, go up
 			{
 				this.move_up(NPC, outside);
+				console.log('up');
 			}
 
 			if(destination.y > NPC.y && NPC.y != outside.row - 1 && !outside.map[NPC.x][NPC.y + 1].occupied)// if destination lower than current position, go down
 			{
 				this.move_down(NPC, outside);
+				console.log('down');
 			}
 
 			if(destination.x < NPC.x && NPC.x != 0 && !outside.map[NPC.x -1][NPC.y].occupied)// If destination to the left of current position, go left
 			{
 				this.move_left(NPC, outside);
+				console.log('left');
 			}	
 
 			if(destination.x > NPC.x && NPC.x != outside.column - 1 && !outside.map[NPC.x + 1][NPC.y].occupied)// If destination to the right of current position, go right
 			{
 				this.move_right(NPC,outside);
+				console.log('right');
 			}
 	}
 

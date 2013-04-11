@@ -135,6 +135,19 @@ function room(start_x, start_y){
 		
 	}
 
+  this.draw_debug = function(){
+    for(var i = 0; i < this.column; i++)
+    {
+      for(var j = 0; j < this.row; j++)
+      {
+          ctx.font="10px Arial";
+          ctx.fillStyle = 'black';
+          ctx.fillText(this.map[i][j].occupied, this.map[i][j].point.x + this.cellsize/4,this.map[i][j].point.y + this.cellsize/4); // Occupied status
+          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (3*this.cellsize/4)); // NPC ID
+      }
+    }
+  }
+
 }
 
 function outdoor(start_x, start_y){
@@ -270,6 +283,19 @@ function outdoor(start_x, start_y){
     
   }
 
+  this.draw_debug = function(){
+    for(var i = 0; i < this.column; i++)
+    {
+      for(var j = 0; j < this.row; j++)
+      {
+          ctx.font="10px Arial";
+          ctx.fillStyle = 'black';
+          ctx.fillText(this.map[i][j].occupied, this.map[i][j].point.x + this.cellsize/4,this.map[i][j].point.y + this.cellsize/4); // Occupied status
+          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (3*this.cellsize/4)); // NPC ID
+      }
+    }
+  }
+
 }
 
 function idle_location(x, y, where, occupancy){
@@ -356,8 +382,8 @@ function NPC_controller(room, outside){
 
 
   //Testing pathfinding
-  this.NPC_array[0].destination = new Point(0, 0);
-  this.NPC_array[0].destination = new Point(0, 0);
+  this.NPC_array[0].destination = new Point(0, 7);
+  
 
 
   this.drawNPC = function(inside){

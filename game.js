@@ -23,7 +23,7 @@ function load() {
 	var simulator = new Controller(level3, level2); //Lionel
 	var npc_controller = new NPC_controller(lobby, Outside); // HS
 	var navigate = new pathfinding(lobby, Outside); //HS
-
+	var debug_mode = true; // HS
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -275,16 +275,24 @@ function load() {
 			//{
 				//navigate.steering(npc_controller.NPC_array[9], npc_controller.NPC_array[9].destination, true);
 			//}
+			if(debug_mode)
+			{
+				lobby.draw_debug();
+			}
 		}
 		if (Outside.active){
 			Outside.draw();
 			npc_controller.drawNPC(false);
-			//if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x && npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
-			//{
-			//	navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
-			//}
+			if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x && npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
+			{
+				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
+			}
+			if(debug_mode)
+			{
+				Outside.draw_debug();
+			}
 		}
-	}, screenUpdateTime);
+	}, 1000);
 	//----------------------
 	//  Rendering screen end
 	//----------------------
