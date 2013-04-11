@@ -216,10 +216,12 @@ function load() {
 		if((timeCounter%24) == 0){//4 hrs in-game
 			//L3 simulation
 			simulator.countryMovement();
+			simulator.interactLevel3();
 		}
 		if ((timeCounter%12) == 0){//2 hrs in-game
 			//L2 simulation
 			simulator.cityMovement();
+			simulator.interactLevel2();
 		}
     });
     timer.run();

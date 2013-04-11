@@ -47,23 +47,24 @@ function level() {
 
 function levelThree() {
 	/*Data to display*/
+	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.northCity = {
 		neutral : 830,
 		police : 114,
 		rivals : 56,
-		allied : 0
+		allied : 80
 	};
 	this.westCity = {
 		neutral : 912,
 		police : 64,
 		rivals : 24,
-		allied : 0
+		allied : 6
 	};
 	this.eastCity = {
 		neutral : 723,
 		police : 179,
 		rivals : 98,
-		allied : 0
+		allied : 75
 	};
 
 	/*Get total population per city*/
@@ -81,13 +82,11 @@ function levelThree() {
 function levelTwo() {
 	/*Data to display*/
 	var totalLocations = 4;
-	this.playerCity = 0;//0-North, 1-East, 2-West
+	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo
 	this.hospital = {
 		neutral : 115,
-		police : 57,
-		rivals : 89,
-		allied : 0
+		police : 57
 	};
 	this.policeStation = {
 		neutral : 225,
@@ -97,13 +96,13 @@ function levelTwo() {
 		neutral : 266,
 		police : 20,
 		rivals : 72,
-		allied : 0
+		allied : 12
 	};
 	this.buildingTwo = {
 		neutral : 266,
 		police : 20,
 		rivals : 72,
-		allied : 0
+		allied : 45
 	};
 	/*Get total population per building*/
 	this.hospitalPopulation = function(){
