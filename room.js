@@ -297,7 +297,7 @@ function NPC_controller(room, outside){
   this.NPC_array.push(new NPC(6,7,0,123,true));
   this.room.map[6][7].occupied = true;
   //Testing pathfinding
-  this.NPC_array[1].destination = new Point(0, 0);
+  this.NPC_array[1].destination = new Point(2, 4);
 
 
   this.drawNPC = function(inside){

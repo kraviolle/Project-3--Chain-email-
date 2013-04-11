@@ -200,7 +200,7 @@ function load() {
 	//  Rendering screen
 	//------------------
 	setInterval(function() {
-		if (lobby.active)
+		if (lobby.active){
 			lobby.draw();
 			npc_controller.drawNPC(true);
 			if(npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x && npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x)
@@ -208,9 +208,10 @@ function load() {
 				navigate.steering(npc_controller.NPC_array[1], npc_controller.NPC_array[1].destination, true);
 			}
 		}
-		if (Outside.active)
+		if (Outside.active){
 			Outside.draw();
-
+			npc_controller.drawNPC(false);
+		}
 	}, screenUpdateTime);
 	//----------------------
 	//  Rendering screen end
