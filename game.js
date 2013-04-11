@@ -18,8 +18,9 @@ function load() {
 	var Outside = new outdoor(20, 20); // HS
 	var FPS = 30; //HS
 	var screenUpdateTime = 1000 / FPS; //HS
-	var simulator = new Controller();
-	var npc_controller = new NPC_controller(lobby, Outside); // HS
+	var level3 = new levelThree(); //Lionel
+	var level2 = new levelTwo(); //Lionel
+	var simulator = new Controller(level3, level2); //Lionel
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -197,23 +198,17 @@ function load() {
 	//------------------
 	setInterval(function() {
 		if (lobby.active)
-		{
 			lobby.draw();
-			npc_controller.drawNPC(true);
-		}
 		if (Outside.active)
-		{
 			Outside.draw();
-			npc_controller.drawNPC(false);
-		}
 
 	}, screenUpdateTime);
 	//----------------------
 	//  Rendering screen end
 	//----------------------
 
-	/*Constant timer thread
-	/*1s = 10 mins in-game*/
+	/* Constant timer thread - Lionel
+	/* 1s = 10 mins in-game*/
 	var timeCounter = 0;
 	var skipTime = 0;
 	var timer = new timeInterval(1000, function(){
@@ -221,11 +216,14 @@ function load() {
 		if((timeCounter%24) == 0){//4 hrs in-game
 			//L3 simulation
 			simulator.countryMovement();
-		} else if ((timeCounter%12) == 0){//2 hrs in-game
+		}
+		if ((timeCounter%12) == 0){//2 hrs in-game
 			//L2 simulation
+			simulator.cityMovement();
 		}
     });
     timer.run();
+    //End Timer*/
 
 }
 
