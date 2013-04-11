@@ -169,6 +169,74 @@ function load() {
 							}
 						}//end if (event.keyCode == 40)
 
+						if (event.keyCode == 90){
+							//Z key pressed - Interact with NPC
+							if(Outside.active)//If outside
+							{
+								if(Outside.player_position.y != 0 && Outside.player_direction == 1 && Outside.map[Outside.player_position.x][Outside.player_position.y - 1].occupied)// If facing up and NPC there
+								{
+									if(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc);
+									}
+								}
+								if(Outside.player_position.y != (Outside.row - 1) && Outside.player_direction == 2 && Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied)// If facing down and NPC below
+								{
+									if(Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc);
+									}
+								}
+								if(Outside.player_position.x != 0 && Outside.player_direction == 3 && Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied) // If facing left and NPC left
+								{
+									if(Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc].message + Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc);
+									}
+								}
+								if(Outside.player_position.x != (Outside.column - 1) && Outside.player_direction == 4 && Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) // If facing right and NPC left
+								{
+									if(Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc].message + Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc);
+									}
+								}
+							}
+							
+							if(lobby.active)//If inside
+							{
+								if(lobby.player_position.y != 0 && lobby.player_direction == 1 && lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied)// If facing up and NPC there
+								{
+									if(lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc].message + lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc);
+									}
+								}
+								if(lobby.player_position.y != (lobby.row - 1) && lobby.player_direction == 2 && lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied)// If facing down and NPC below
+								{
+									if(lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc].message + lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc);
+									}
+								}
+								if(lobby.player_position.x != 0 && lobby.player_direction == 3 && lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // If facing left and NPC left
+								{
+									if(lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc].message + lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc);
+									}
+								}
+								if(lobby.player_position.x != (lobby.column - 1) && lobby.player_direction == 4 && lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied) // If facing right and NPC left
+								{
+									if(lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
+									{
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc].message + lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc);
+									}
+								}
+							}
+							//console.log(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc);
+						}
+
 					}
 
 			);///end addEventListener
@@ -203,14 +271,18 @@ function load() {
 		if (lobby.active){
 			lobby.draw();
 			npc_controller.drawNPC(true);
-			if(npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x && npc_controller.NPC_array[1].x != npc_controller.NPC_array[1].destination.x)
-			{
-				navigate.steering(npc_controller.NPC_array[1], npc_controller.NPC_array[1].destination, true);
-			}
+			//if(npc_controller.NPC_array[9].x != npc_controller.NPC_array[9].destination.x && npc_controller.NPC_array[9].y != npc_controller.NPC_array[9].destination.y)
+			//{
+				//navigate.steering(npc_controller.NPC_array[9], npc_controller.NPC_array[9].destination, true);
+			//}
 		}
 		if (Outside.active){
 			Outside.draw();
 			npc_controller.drawNPC(false);
+			//if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x && npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
+			//{
+			//	navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
+			//}
 		}
 	}, screenUpdateTime);
 	//----------------------

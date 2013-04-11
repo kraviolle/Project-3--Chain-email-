@@ -8,7 +8,7 @@ function cell(x,y){
     this.occupied=false;
     this.door = false;
     this.player = false;
-    this.npc = false;
+    this.npc = -1; // Saves the index of the NPC in the NPC controller here
 }
 
 function room(start_x, start_y){
@@ -290,14 +290,74 @@ function NPC_controller(room, outside){
   // Initialize all idle points.
 
 
-  // Initialize NPCs. Location starts with 25 neutral NPCs.
+  // Initialize NPCs. Location starts with 15 neutral NPCs.
+  // Initializing NPC outside
   this.NPC_array.push(new NPC(10,3,3,123,false));
   this.outside.map[10][3].occupied = true;
+  this.outside.map[10][3].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(1,0,1,123,false));
+  this.outside.map[1][0].occupied = true;
+  this.outside.map[1][0].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(4,0,0,123,false));
+  this.outside.map[4][0].occupied = true;
+  this.outside.map[4][0].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(11,1,0,123,false));
+  this.outside.map[11][1].occupied = true;
+  this.outside.map[11][1].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(14,0,1,123,false));
+  this.outside.map[14][0].occupied = true;
+  this.outside.map[14][0].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(3,5,0,123,false));
+  this.outside.map[3][5].occupied = true;
+  this.outside.map[3][5].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(9,7,2,123,false));
+  this.outside.map[9][7].occupied = true;
+  this.outside.map[9][7].npc = this.NPC_array.length - 1;
+  
+  this.NPC_array.push(new NPC(14,3,0,123,false));
+  this.outside.map[14][3].occupied = true;
+  this.outside.map[14][3].npc = this.NPC_array.length - 1;
 
+
+  // Initializing NPC in the room
   this.NPC_array.push(new NPC(6,7,0,123,true));
   this.room.map[6][7].occupied = true;
+  this.room.map[6][7].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(0,7,2,123,true));
+  this.room.map[0][7].occupied = true;
+  this.room.map[0][7].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(5,4,0,123,true));
+  this.room.map[5][4].occupied = true;
+  this.room.map[5][4].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(1,3,1,123,true));
+  this.room.map[1][3].occupied = true;
+  this.room.map[1][3].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(2,1,0,123,true));
+  this.room.map[2][1].occupied = true;
+  this.room.map[2][1].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(5,0,0,123,true));
+  this.room.map[5][0].occupied = true;
+  this.room.map[5][0].npc = this.NPC_array.length - 1;
+
+  this.NPC_array.push(new NPC(7,1,2,123,true));
+  this.room.map[7][1].occupied = true;
+  this.room.map[7][1].npc = this.NPC_array.length - 1;
+
+
   //Testing pathfinding
-  this.NPC_array[1].destination = new Point(2, 4);
+  this.NPC_array[0].destination = new Point(0, 0);
+  this.NPC_array[0].destination = new Point(0, 0);
 
 
   this.drawNPC = function(inside){

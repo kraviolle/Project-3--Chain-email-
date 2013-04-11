@@ -70,7 +70,25 @@ this.steering = function(NPC, destination, inside){
 	}
 	else if(!NPC.inside && !inside)
 	{
+			if(destination.y < NPC.y && NPC.y != 0 && !outside.map[NPC.x][NPC.y - 1].occupied )// If destination higher than current position, go up
+			{
+				this.move_up(NPC, outside);
+			}
 
+			if(destination.y > NPC.y && NPC.y != outside.row - 1 && !outside.map[NPC.x][NPC.y + 1].occupied)// if destination lower than current position, go down
+			{
+				this.move_down(NPC, outside);
+			}
+
+			if(destination.x < NPC.x && NPC.x != 0 && !outside.map[NPC.x -1][NPC.y].occupied)// If destination to the left of current position, go left
+			{
+				this.move_left(NPC, outside);
+			}	
+
+			if(destination.x > NPC.x && NPC.x != outside.column - 1 && !outside.map[NPC.x + 1][NPC.y].occupied)// If destination to the right of current position, go right
+			{
+				this.move_right(NPC,outside);
+			}
 	}
 
 
@@ -80,26 +98,34 @@ this.steering = function(NPC, destination, inside){
 
 	this.move_left = function(NPC, place){
 		place.map[NPC.x -1][NPC.y].occupied = true;//New position occupied
+		place.map[NPC.x -1][NPC.y].npc = place.map[NPC.x][NPC.y].npc// New position NPC now contains index
 		NPC.x = NPC.x - 1;//Change position
 		place.map[NPC.x + 1][NPC.y].occupied = false;//Old position unoccupied
+		place.map[NPC.x + 1][NPC.y].npc = -1;// Old position NPC changed back to -1
 	}
 
 	this.move_right = function(NPC, place){
 		place.map[NPC.x + 1][NPC.y].occupied = true;//New position occupied
+		place.map[NPC.x + 1][NPC.y].npc = place.map[NPC.x + 1][NPC.y].npc; // New position NPC now contains index
 		NPC.x = NPC.x + 1;//Change position
 		place.map[NPC.x - 1][NPC.y].occupied = false;//Old position unoccupied
+		place.map[NPC.x - 1][NPC.y].npc = -1;// Old position NPC changed back to -1
 	}
 
 	this.move_up = function(NPC, place){
 		place.map[NPC.x][NPC.y - 1].occupied = true;//New position occupied
+		place.map[NPC.x][NPC.y - 1].npc = place.map[NPC.x][NPC.y].npc; // New position NPC now contains index
 		NPC.y = NPC.x - 1;//Change position
 		place.map[NPC.x][NPC.y + 1].occupied = false;//Old position unoccupied
+		place.map[NPC.x][NPC.y + 1].npc = -1;// Old position NPC changed back to -1
 	}
 
 	this.move_down = function(NPC, place){
 		place.map[NPC.x][NPC.y + 1].occupied = true;//New position occupied
+		place.map[NPC.x][NPC.y + 1].npc = place.map[NPC.x][NPC.y].npc; // New position NPC now contains index
 		NPC.y = NPC.y + 1;//Change position
 		place.map[NPC.x][NPC.y - 1].occupied = false;//Old position unoccupied
+		place.map[NPC.x][NPC.y - 1].npc = -1;// Old position NPC changed back to -1
 	}
 
 }
