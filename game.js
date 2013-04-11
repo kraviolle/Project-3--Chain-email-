@@ -283,7 +283,7 @@ function load() {
 		if (Outside.active){
 			Outside.draw();
 			npc_controller.drawNPC(false);
-			if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x && npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
+			if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x || npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
 			{
 				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
 			}
