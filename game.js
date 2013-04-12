@@ -292,7 +292,7 @@ function load() {
 				Outside.draw_debug();
 			}
 		}
-	}, 1000);
+	}, screenUpdateTime);
 	//----------------------
 	//  Rendering screen end
 	//----------------------
