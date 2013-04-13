@@ -20,6 +20,7 @@ function load() {
 	var screenUpdateTime = 1000 / FPS; //HS
 	var level3 = new levelThree(); //Lionel
 	var level2 = new levelTwo(); //Lionel
+	level2.decompressDataL3(level3);
 	var simulator = new Controller(level3, level2); //Lionel
 	var npc_controller = new NPC_controller(lobby, Outside); // HS
 	var navigate = new pathfinding(lobby, Outside); //HS
@@ -303,15 +304,16 @@ function load() {
 	var skipTime = 0;
 	var timer = new timeInterval(1000, function(){
 		timeCounter++;
-		if((timeCounter%24) == 0){//4 hrs in-game
+		if((timeCounter%18) == 0){//3 hrs in-game
 			//L3 simulation
 			simulator.countryMovement();
 			simulator.interactLevel3();
 		}
-		if ((timeCounter%12) == 0){//2 hrs in-game
+		if ((timeCounter%6) == 0){//1 hrs in-game
 			//L2 simulation
 			simulator.cityMovement();
 			simulator.interactLevel2();
+			level2.compressDataL3(level3);
 		}
     });
     timer.run();

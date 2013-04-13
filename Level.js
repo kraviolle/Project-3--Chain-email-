@@ -54,35 +54,34 @@ function levelThree() {
 		rivals : 56,
 		allied : 80
 	};
-	this.westCity = {
-		neutral : 912,
-		police : 64,
-		rivals : 24,
-		allied : 6
-	};
 	this.eastCity = {
 		neutral : 723,
 		police : 179,
 		rivals : 98,
 		allied : 75
 	};
+	this.westCity = {
+		neutral : 912,
+		police : 64,
+		rivals : 24,
+		allied : 6
+	};
 
 	/*Get total population per city*/
 	this.northCityPopulation = function(){
-		return this.northCity.neutral+this.northCity.police+this.northCity.rivals+this.northCity+allied;
-	}
-	this.westCityPopulation = function(){
-		return this.westCity.neutral+this.westCity.police+this.westCity.rivals+this.westCity+allied;
+		return this.northCity.neutral+this.northCity.police+this.northCity.rivals+this.northCity.allied;
 	}
 	this.eastCityPopulation = function(){
-		return this.eastCity.neutral+this.eastCity.police+this.eastCity.rivals+this.eastCity+allied;
+		return this.eastCity.neutral+this.eastCity.police+this.eastCity.rivals+this.eastCity.allied;
+	}
+	this.westCityPopulation = function(){
+		return this.westCity.neutral+this.westCity.police+this.westCity.rivals+this.westCity.allied;
 	}
 }
 
 function levelTwo() {
 	/*Data to display*/
 	var totalLocations = 4;
-	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo
 	this.hospital = {
 		neutral : 115,
@@ -106,16 +105,16 @@ function levelTwo() {
 	};
 	/*Get total population per building*/
 	this.hospitalPopulation = function(){
-		return this.hospital.neutral+this.hospital.police+this.hospital.rivals+this.hospital+allied;
+		return this.hospital.neutral+this.hospital.police;
 	}
 	this.policeStationPopulation = function(){
 		return this.policeStation.neutral+this.policeStation.police;
 	}
 	this.buildingOnePopulation = function(){
-		return this.buildingOne.neutral+this.buildingOne.police+this.buildingOne.rivals+this.buildingOne+allied;
+		return this.buildingOne.neutral+this.buildingOne.police+this.buildingOne.rivals+this.buildingOne.allied;
 	}
 	this.buildingTwoPopulation = function(){
-		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo+allied;
+		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
 	}
 
 	/*Use this function for moving to jail only*/
@@ -144,5 +143,100 @@ function levelTwo() {
 
 	this.totalLoc = function(){
 		return totalLocations;
+	}
+
+	this.decompressDataL3 = function(level3){
+		var tempPop, tempNeutral, tempPolice, tempRivals, tempAllied, tempVariance;
+		switch(level3.playerCity){
+		case 1:
+			tempPop = level3.northCityPopulation();
+			tempNeutral = level3.northCity.neutral;
+			tempPolice = level3.northCity.police;
+			tempRivals = level3.northCity.rivals;
+			tempAllied = level3.northCity.allied;
+			break;
+		case 2:
+			tempPop = level3.eastCityPopulation();
+			tempNeutral = level3.eastCity.neutral;
+			tempPolice = level3.eastCity.police;
+			tempRivals = level3.eastCity.rivals;
+			tempAllied = level3.eastCity.allied;
+			break;
+		case 3:
+			tempPop = level3.westCityPopulation();
+			tempNeutral = level3.westCity.neutral;
+			tempPolice = level3.westCity.police;
+			tempRivals = level3.westCity.rivals;
+			tempAllied = level3.westCity.allied;
+			break;
+		default:
+			//do nothing
+		}
+		//fill hospital
+		tempVariance = Math.random();
+		tempVariance = tempVariance.toFixed(2);
+		this.hospital.neutral = tempVariance * tempNeutral;
+		this.hospital.police = tempVariance * tempPolice;
+		tempNeutral -= this.hospital.neutral;
+		tempPolice -= this.hospital.police;
+		//fill police station
+		tempVariance = Math.random();
+		tempVariance = tempVariance.toFixed(2);
+		this.policeStation.neutral = tempVariance * tempNeutral;
+		this.policeStation.police = tempVariance * tempPolice;
+		tempNeutral -= this.policeStation.neutral;
+		tempPolice -= this.policeStation.police;
+		//fill buildingOne
+		tempVariance = Math.random();
+		tempVariance = tempVariance.toFixed(2);
+		this.buildingOne.neutral = tempVariance * tempNeutral;
+		this.buildingOne.police = tempVariance * tempPolice;
+		this.buildingOne.rivals = tempVariance * tempRivals;
+		this.buildingOne.allied = tempVariance * tempAllied;
+		tempNeutral -= this.buildingOne.neutral;
+		tempPolice -= this.buildingOne.police;
+		tempRivals -= this.buildingOne.rivals;
+		tempAllied -= this.buildingOne.allied;
+		//fill buildingTwo
+		this.buildingOne.neutral = tempNeutral;
+		this.buildingOne.police = tempPolice;
+		this.buildingOne.rivals = tempRivals;
+		this.buildingOne.allied = tempAllied;
+		tempNeutral -= this.buildingOne.neutral;
+		tempPolice -= this.buildingOne.police;
+		tempRivals -= this.buildingOne.rivals;
+		tempAllied -= this.buildingOne.allied;
+	}
+
+	this.compressDataL3 = function(level3){
+		var tempNeutral, tempPolice, tempRivals, tempAllied;
+		tempNeutral = this.hospital.neutral + this.policeStation.neutral + 
+					  this.buildingOne.neutral + this.buildingTwo.neutral;
+		tempPolice = this.hospital.police + this.policeStation.police + 
+					 this.buildingOne.police + this.buildingTwo.police;
+		tempRivals = this.buildingOne.rivals + this.buildingTwo.rivals;
+		tempAllied = this.buildingOne.allied + this.buildingTwo.allied;
+		switch(level3.playerCity){
+		case 1:
+			level3.northCity.neutral = tempNeutral;
+			level3.northCity.police = tempPolice;
+			level3.northCity.rivals = tempRivals;
+			level3.northCity.allied = tempAllied;
+			break;
+		case 2:
+			level3.eastCity.neutral = tempNeutral;
+			level3.eastCity.police = tempPolice;
+			level3.eastCity.rivals = tempRivals;
+			level3.eastCity.allied = tempAllied;
+			break;
+		case 3:
+			level3.westCity.neutral = tempNeutral;
+			level3.westCity.police = tempPolice;
+			level3.westCity.rivals = tempRivals;
+			level3.westCity.allied = tempAllied;
+			break;
+		default:
+			//do nothing
+		}
 	}
 }

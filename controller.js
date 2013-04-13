@@ -19,32 +19,56 @@ function Controller(level3, level2) {
 		// get population data from level 3
 		for ( var i = 0; i < 6; i++) {
 			// choose 1 random NPC type
-			// 5-6- No movement
-			var npcType = Math.floor((Math.random() * 6) + 1);
+			// 5- No movement
+			var npcType = Math.floor((Math.random() * 5) + 1);
 			switch (i) {
 			case 1:
 				// move npc from east to west
 				this.moveNPCity(npcType, L3.eastCity, L3.westCity);
+				if(L3.playerCity == 3){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 				break;
 			case 2:
 				// move npc from north to west
 				this.moveNPCity(npcType, L3.northCity, L3.westCity);
+				if(L3.playerCity == 3){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 				break;
 			case 3:
 				// move npc from east to north
 				this.moveNPCity(npcType, L3.eastCity, L3.northCity);
+				if(L3.playerCity == 1){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 				break;
 			case 4:
 				// move npc from west to east
 				this.moveNPCity(npcType, L3.westCity, L3.eastCity);
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 				break;
 			case 5:
 				// move npc from west to north
 				this.moveNPCity(npcType, L3.westCity, L3.northCity);
+				if(L3.playerCity == 1){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 				break;
 			default:
 				// move npc from north to east
 				this.moveNPCity(npcType, L3.northCity, L3.eastCity);
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving into current city.");
+					this.npcMoveIntoCurrCity(npcType);
+				}
 			}// end switch
 		}// end for
 		console.log("=======End L3 Simulation=======");
@@ -260,11 +284,11 @@ function Controller(level3, level2) {
 			}while(npcType1 == npcType2)
 			var building = Math.floor((Math.random() * L2.totalLoc()-2) + 1);
 			this.variance();
-			if(building == 1 && building != L2.playerCity){
-					this.npcMatchUp2(npcType1, npcType2, L3.northCity);
+			if(building == 1 && building != (L2.playerLocation - 1)){
+					this.npcMatchUp2(npcType1, npcType2, building);
 			}
-			if(building == 2 && building != L2.playerCity){
-					this.npcMatchUp2(npcType1, npcType2, L3.eastCity);
+			if(building == 2 && building != (L2.playerLocation - 1)){
+					this.npcMatchUp2(npcType1, npcType2, building);
 			}
 		}//end for
 		console.log("~~~~~End L2 Interaction Simulation~~~~~");
@@ -329,6 +353,7 @@ function Controller(level3, level2) {
 						}
 					}
 				} else {// fail
+					console.log("Recruitment failed.");
 				}// end if-else
 			}// end if
 		} else if ((npcType1 == 3 || npcType2 == 3) && city.rivals > 0) {// rival vs.
@@ -397,6 +422,7 @@ function Controller(level3, level2) {
 						console.log("Ally recruited");
 					}
 				} else {// fail
+					console.log("Recruitment failed.");
 				}// end if-else
 			}// end if
 		} else if ((npcType1 == 3 || npcType2 == 3) && building.rivals > 0) {// rival vs.
@@ -413,6 +439,51 @@ function Controller(level3, level2) {
 					console.log("Beat rival in fight.");
 				}// end if-else
 			}// end if
+		}
+	}
+
+	this.npcMoveIntoCurrCity = function(type){
+		var moveRandom = 0;
+		switch(type){
+		case 1:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
+			if (moveRandom == 1) {
+				L2.hospital.neutral++;
+				console.log("Neutral moved to hospital.");
+			} else if (moveRandom == 2) {
+				L2.buildingOne.neutral++;
+				console.log("Neutral moved to buildingOne.");
+			} else if (moveRandom == 3) {
+				L2.buildingTwo.neutral++;
+				console.log("Neutral moved to buildingTwo.");
+			}
+			break;
+		case 2:
+			L2.policeStation.police++;
+			console.log("Police moved to police station.");
+			break;
+		case 3:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
+			if (moveRandom == 1) {
+				L2.buildingOne.rivals++;
+				console.log("Rival moved to buildingOne.");
+			} else if (moveRandom == 2) {
+				L2.buildingTwo.rivals++;
+				console.log("Rival moved to buildingTwo.");
+			}
+			break;
+		case 4:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
+			if (moveRandom == 1) {
+				L2.buildingOne.allied++;
+				console.log("Ally moved to buildingOne.");
+			} else if (moveRandom == 2) {
+				L2.buildingTwo.allied++;
+				console.log("Ally moved to buildingTwo.");
+			}
+			break;
+		default:
+			//do nothing
 		}
 	}
 }
