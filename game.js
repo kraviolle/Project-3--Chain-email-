@@ -25,6 +25,7 @@ function load() {
 	var npc_controller = new NPC_controller(lobby, Outside); // HS
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var debug_mode = true; // HS
+	var npc_movement = 0; //HS
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -286,7 +287,11 @@ function load() {
 			npc_controller.drawNPC(false);
 			if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x || npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
 			{
+				if(npc_movement%15 == 0)
+				{
 				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
+				}
+				npc_movement++;
 			}
 			if(debug_mode)
 			{
