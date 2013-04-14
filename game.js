@@ -285,19 +285,27 @@ function load() {
 		if (Outside.active){
 			Outside.draw();
 			npc_controller.drawNPC(false);
-			if(npc_controller.NPC_array[0].x != npc_controller.NPC_array[0].destination.x || npc_controller.NPC_array[0].y != npc_controller.NPC_array[0].destination.y)
-			{
-				if(npc_movement%15 == 0)
-				{
-				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, true);
-				}
-				npc_movement++;
-			}
+			
+			
 			if(debug_mode)
 			{
 				Outside.draw_debug();
 			}
+
 		}
+
+
+			// Pathfinding to destination of NPC
+			if(npc_controller.NPC_array[8].x != npc_controller.NPC_array[8].destination.x || npc_controller.NPC_array[8].y != npc_controller.NPC_array[8].destination.y)
+			{
+				if(npc_movement%15 == 0)
+				{
+				navigate.steering(npc_controller.NPC_array[8], npc_controller.NPC_array[8].destination, false);
+				}
+				npc_movement++;
+			}
+
+
 	}, screenUpdateTime);
 	//----------------------
 	//  Rendering screen end
