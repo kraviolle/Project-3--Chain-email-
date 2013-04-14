@@ -143,7 +143,7 @@ function room(start_x, start_y){
           ctx.font="10px Arial";
           ctx.fillStyle = 'black';
           ctx.fillText(this.map[i][j].occupied, this.map[i][j].point.x + this.cellsize/4,this.map[i][j].point.y + this.cellsize/4); // Occupied status
-          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (3*this.cellsize/4)); // NPC ID
+          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (this.cellsize/2)); // NPC ID
       }
     }
   }
@@ -154,7 +154,7 @@ function outdoor(start_x, start_y){
 
   this.active = true; // Player is outside
   this.map = [];
-  this.cellsize = 30;
+  this.cellsize = 50;
   this.column = 16;
   this.row = 8;
   this.door_thickness = 8;
@@ -218,6 +218,15 @@ function outdoor(start_x, start_y){
             ctx.fillStyle = 'grey';
             ctx.fill();
 
+          }
+        }
+
+        //Draw the rubbish dumps
+        for(i = 0; i < 16; i++)
+        {
+          for(j = 0; j < 2; j++)
+          {
+        //    this.map[i][j].occupied = true;
           }
         }
 
@@ -291,7 +300,7 @@ function outdoor(start_x, start_y){
           ctx.font="10px Arial";
           ctx.fillStyle = 'black';
           ctx.fillText(this.map[i][j].occupied, this.map[i][j].point.x + this.cellsize/4,this.map[i][j].point.y + this.cellsize/4); // Occupied status
-          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (3*this.cellsize/4)); // NPC ID
+          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (this.cellsize/2)); // NPC ID
       }
     }
   }
@@ -304,153 +313,4 @@ function idle_location(x, y, where, occupancy){
   this.inside = where; // true signifies inside the room, false signifies outside the room
   this.occupied = occupancy; // true signifies occupied, false signifies unoccupied
   this.NPC = -1; // If -1 means not occupied. If occupied, stores the index of the NPC at the location
-}
-
-function NPC_controller(room, outside){
-
-  this.NPC_array = []; // Stores the data of NPC at a location
-  //this.idle = []; // Stores the idle locations on the map and signifies whether it is in the room or outside
-  this.room = room;
-  this.outside = outside;
-
-  // Initialize all idle points.
-
-
-  // Initialize NPCs. Location starts with 15 neutral NPCs.
-  // Initializing NPC outside
-  this.NPC_array.push(new NPC(10,3,3,123,false));
-  this.outside.map[10][3].occupied = true;
-  this.outside.map[10][3].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(1,0,1,123,false));
-  this.outside.map[1][0].occupied = true;
-  this.outside.map[1][0].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(4,0,0,123,false));
-  this.outside.map[4][0].occupied = true;
-  this.outside.map[4][0].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(11,1,0,123,false));
-  this.outside.map[11][1].occupied = true;
-  this.outside.map[11][1].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(14,0,1,123,false));
-  this.outside.map[14][0].occupied = true;
-  this.outside.map[14][0].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(3,5,0,123,false));
-  this.outside.map[3][5].occupied = true;
-  this.outside.map[3][5].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(9,7,2,123,false));
-  this.outside.map[9][7].occupied = true;
-  this.outside.map[9][7].npc = this.NPC_array.length - 1;
-  
-  this.NPC_array.push(new NPC(14,3,0,123,false));
-  this.outside.map[14][3].occupied = true;
-  this.outside.map[14][3].npc = this.NPC_array.length - 1;
-
-
-  // Initializing NPC in the room
-  this.NPC_array.push(new NPC(6,7,0,123,true));
-  this.room.map[6][7].occupied = true;
-  this.room.map[6][7].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(0,7,2,123,true));
-  this.room.map[0][7].occupied = true;
-  this.room.map[0][7].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(5,4,0,123,true));
-  this.room.map[5][4].occupied = true;
-  this.room.map[5][4].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(1,3,1,123,true));
-  this.room.map[1][3].occupied = true;
-  this.room.map[1][3].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(2,1,0,123,true));
-  this.room.map[2][1].occupied = true;
-  this.room.map[2][1].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(5,0,0,123,true));
-  this.room.map[5][0].occupied = true;
-  this.room.map[5][0].npc = this.NPC_array.length - 1;
-
-  this.NPC_array.push(new NPC(7,1,2,123,true));
-  this.room.map[7][1].occupied = true;
-  this.room.map[7][1].npc = this.NPC_array.length - 1;
-
-
-  //Testing pathfinding
-  this.NPC_array[8].destination.x = 15;
-  this.NPC_array[8].destination.y = 7;
-  
-
-
-  this.drawNPC = function(inside){
-      // If inside == true, draw NPC for within the room, otherwise, draw NPC for outside the room
-      for(var i = 0; i < this.NPC_array.length; i++)
-      {
-        if(!inside)
-        {
-        if(!this.NPC_array[i].inside)
-        {
-          ctx.beginPath();
-          ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.outside.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.outside.cellsize/2, this.outside.cellsize/2 - 2, 0, 2*Math.PI, true);
-      
-          switch (this.NPC_array[i].faction)
-          {
-            case 0: // Neutral
-            ctx.fillStyle = 'white';
-            break;
-            case 1: // Your lackey
-            ctx.fillStyle = 'red';
-            break;
-            case 2: // Rival
-            ctx.fillStyle = 'blue';
-            break;
-            case 3: // Policeman
-            ctx.fillStyle = 'green';
-            break;
-          }
-          
-          
-          ctx.fill();
-          ctx.lineWidth = 2;
-          // line color
-          ctx.strokeStyle = 'black';
-          ctx.stroke();
-        }
-        }
-        else
-        {
-          if(this.NPC_array[i].inside)
-          {
-          ctx.beginPath();
-          ctx.arc(this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.room.cellsize/2, this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.room.cellsize/2, this.room.cellsize/2 - 2, 0, 2*Math.PI, true);
-          switch (this.NPC_array[i].faction)
-          {
-            case 0: // Neutral
-            ctx.fillStyle = 'white';
-            break;
-            case 1: // Your lackey
-            ctx.fillStyle = 'red';
-            break;
-            case 2: // Rival
-            ctx.fillStyle = 'blue';
-            break;
-            case 3: // Policeman
-            ctx.fillStyle = 'green';
-            break;
-          }
-          ctx.fill();
-          ctx.lineWidth = 2;
-          // line color
-          ctx.strokeStyle = 'black';
-          ctx.stroke();
-        }
-      }
-      }
-  }
-
 }

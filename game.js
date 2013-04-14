@@ -22,10 +22,9 @@ function load() {
 	var level2 = new levelTwo(); //Lionel
 	level2.decompressDataL3(level3);
 	var simulator = new Controller(level3, level2); //Lionel
-	var npc_controller = new NPC_controller(lobby, Outside); // HS
 	var navigate = new pathfinding(lobby, Outside); //HS
+	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
 	var debug_mode = true; // HS
-	var npc_movement = 0; //HS
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -284,6 +283,7 @@ function load() {
 			if(debug_mode)
 			{
 				lobby.draw_debug();
+				npc_controller.drawNPC_debug(true);
 			}
 		}
 		if (Outside.active){
@@ -294,20 +294,15 @@ function load() {
 			if(debug_mode)
 			{
 				Outside.draw_debug();
+				npc_controller.drawNPC_debug(false);
 			}
 
 		}
 
 
-			// Pathfinding to destination of NPC
-			if(npc_controller.NPC_array[8].x != npc_controller.NPC_array[8].destination.x || npc_controller.NPC_array[8].y != npc_controller.NPC_array[8].destination.y)
-			{
-				if(npc_movement%15 == 0)
-				{
-				navigate.steering(npc_controller.NPC_array[8], npc_controller.NPC_array[8].destination, false);
-				}
-				npc_movement++;
-			}
+		// Runs the AI for NPC simulations
+		npc_controller.NPC_simulate();
+			
 
 
 	}, screenUpdateTime);
