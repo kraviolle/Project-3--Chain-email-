@@ -154,7 +154,7 @@ function outdoor(start_x, start_y){
 
   this.active = true; // Player is outside
   this.map = [];
-  this.cellsize = 50;
+  this.cellsize = 30;
   this.column = 16;
   this.row = 8;
   this.door_thickness = 8;
