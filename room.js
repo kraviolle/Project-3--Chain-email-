@@ -179,7 +179,10 @@ function outdoor(start_x, start_y){
   //
 
   this.drawoutside = function(){
+	
 
+
+	
     // Drawing the entire room
         ctx.beginPath();
         ctx.rect(start_x, start_y, this.column * this.cellsize, this.row * this.cellsize);      
@@ -239,11 +242,29 @@ function outdoor(start_x, start_y){
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'black';
         ctx.stroke();
+		
+			
+	// Test to draw img.
+	var Testimg = new Image();        //- KEN , drawing over your cells. the door is positioned as such. will add more background stuff nxt time.
+	Testimg.src= "images/Test.png";
+	ctx.drawImage(Testimg, 0,0);
+	
+	var textbox= new Image();			// Textbox
+	textbox.src="images/textbox.png";
+	ctx.drawImage(textbox,0,280);
         
   }
 
   this.drawplayer = function(){
-      ctx.beginPath();
+      var heroimg= new Image();
+	  heroimg.src="images/hero.png";
+	  herox =this.map[this.player_position.x][this.player_position.y].point.x;
+	  heroy = this.map[this.player_position.x][this.player_position.y].point.y;
+	  
+	  ctx.drawImage(heroimg, 0,0,20,24,herox, heroy,30,30);
+	  
+	  // Removing the black dot as player
+	 /* ctx.beginPath();     
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
       ctx.fillStyle = 'black';
       ctx.fill();
@@ -251,8 +272,23 @@ function outdoor(start_x, start_y){
       // line color
         ctx.strokeStyle = 'black';
         ctx.stroke();
-
-    switch(this.player_direction)
+	 */
+		if(this.player_direction==1){				//UP
+			ctx.drawImage(heroimg, 60,0,20,24,herox, heroy,30,30);
+		}
+		
+		if(this.player_direction==2){				//Down
+			ctx.drawImage(heroimg, 20,0,20,24,herox, heroy,30,30);
+		}
+		
+		if(this.player_direction==3){				//Left
+			ctx.drawImage(heroimg, 140,0,20,24,herox, heroy,30,30);
+		}
+		
+		if(this.player_direction==4){				//Right
+			ctx.drawImage(heroimg, 100,0,20,24,herox, heroy,30,30);
+		}
+    /*switch(this.player_direction)
     {
       case 1: // UP
       ctx.beginPath();
@@ -260,7 +296,7 @@ function outdoor(start_x, start_y){
       ctx.fillStyle = 'white';
       ctx.fill();
       ctx.lineWidth = 2;
-      break;
+	  break;
       case 2: // DOWN
       ctx.beginPath();
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
@@ -282,7 +318,9 @@ function outdoor(start_x, start_y){
       ctx.fill();
       ctx.lineWidth = 2;
       break;
-    }
+	  }*/
+	  
+    
   }
 
   this.draw = function(){
