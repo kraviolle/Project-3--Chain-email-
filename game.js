@@ -289,7 +289,7 @@ function load() {
 			{
 				if(npc_movement%15 == 0)
 				{
-				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, false);
+				navigate.steering(npc_controller.NPC_array[0], npc_controller.NPC_array[0].destination, true);
 				}
 				npc_movement++;
 			}

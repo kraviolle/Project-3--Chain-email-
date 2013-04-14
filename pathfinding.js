@@ -248,6 +248,191 @@ this.steering = function(NPC, destination, inside){
 
 
 	//If destination in not the same area
+	//If npc inside and destination outside
+	
+	//If npc outside and destination inside
+	if(!NPC.inside && inside)
+	{
+		// Make the NPC go to the position of the door first which is [7][3]
+		if(3 < NPC.y && NPC.y != 0)// If destination higher than current position, go up
+			{
+				if(!outside.map[NPC.x][NPC.y - 1].occupied)
+				{
+					this.move_up(NPC, outside);
+					console.log('up');
+					this.condition = 0;
+				}
+				else if(NPC.x != 0 && !outside.map[NPC.x - 1][NPC.y].occupied && this.condition >= 4)// If can't go up, go left
+				{	
+					this.move_left(NPC, outside);
+					this.condition = 0;					
+					if(!outside.map[NPC.x][NPC.y - 1].occupied)
+					{
+						this.move_up(NPC, outside);
+						console.log('up');
+						condition = 0;
+					}
+					
+				}
+				else if(NPC.x != outside.column - 1 && !outside.map[NPC.x + 1][NPC.y].occupied && this.condition >= 4)		// If can't go left, go right
+				{
+					this.move_right(NPC, outside);
+					this.condition = 0;					
+					if(!outside.map[NPC.x][NPC.y - 1].occupied)
+					{
+						this.move_up(NPC, outside);
+						console.log('up');
+						condition = 0;
+					}
+					
+				}
+				else
+				{
+					this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+				}
+			}
+			else
+			{
+				this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+			}
+
+			if(3 > NPC.y && NPC.y != outside.row - 1)// if destination lower than current position, go down
+			{
+				if(!outside.map[NPC.x][NPC.y + 1].occupied)
+				{
+					this.move_down(NPC, outside);
+					console.log('down');
+					condition = 0;
+				}
+				else if(NPC.x != 0 && !outside.map[NPC.x - 1][NPC.y].occupied && this.condition >= 4)		// If can't go down, go left
+				{
+					this.move_left(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x][NPC.y + 1].occupied)
+					{	
+						this.move_down(NPC, outside);
+						console.log('down');
+						condition = 0;
+					}
+					
+
+				}
+				else if(NPC.x != outside.column - 1 && !outside.map[NPC.x + 1][NPC.y].occupied && this.condition >= 4)		// If can't go left, go right
+				{
+					this.move_right(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x][NPC.y + 1].occupied)
+					{
+						this.move_down(NPC, outside);
+						console.log('down');
+						condition = 0;
+					}
+					
+				}
+				else
+				{
+					this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+				}
+			}
+			else
+			{
+				this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+			}
+
+			if(7 < NPC.x && NPC.x != 0)// If destination to the left of current position, go left
+			{
+				if(!outside.map[NPC.x -1][NPC.y].occupied)
+				{
+					this.move_left(NPC, outside);
+					console.log('left');
+					this.condition = 0;
+				}
+				else if(NPC.y != 0 && !outside.map[NPC.x][NPC.y -1].occupied && this.condition >= 4)// If can't go left, go up
+				{
+					this.move_up(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x -1][NPC.y].occupied)
+					{
+						this.move_left(NPC, outside);
+						console.log('left');
+						condition = 0;
+					}
+					
+
+				}
+				else if(NPC.y != outside.row - 1 && !outside.map[NPC.x][NPC.y + 1].occupied && this.condition >= 4)// If can't go up, go down
+				{
+					this.move_down(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x -1][NPC.y].occupied)
+					{
+						this.move_left(NPC, outside);
+						console.log('left');
+						condition = 0;
+					}
+					
+				}
+				else
+				{
+					this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+				}
+			}
+			else
+			{
+				this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+			}	
+
+			if(7 > NPC.x && NPC.x != outside.column - 1)// If destination to the right of current position, go right
+			{
+				if(!outside.map[NPC.x + 1][NPC.y].occupied)
+				{
+					this.move_right(NPC,outside);
+					console.log('right');
+					this.condition = 0;
+					console.log("Look here");
+				}
+				else if(NPC.y != 0 && !outside.map[NPC.x][NPC.y -1].occupied && this.condition >= 4)// If can't go right, go up
+				{
+					this.move_up(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x + 1][NPC.y].occupied)
+					{
+						this.move_right(NPC,outside);
+						console.log('right');
+						condition = 0;
+					}
+				}
+				else if(NPC.y != outside.row - 1 && !outside.map[NPC.x][NPC.y + 1].occupied && this.condition >= 4)		// If can't go up, go down
+				{
+					this.move_down(NPC, outside);
+					this.condition = 0;
+					if(!outside.map[NPC.x + 1][NPC.y].occupied)
+					{
+						this.move_right(NPC,outside);
+						console.log('right');
+						condition = 0;
+					}					
+				}
+				else
+				{
+					this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+				}
+			}
+			else
+			{
+				this.condition++; // tells the NPC that there is an obstacle or not the correct direction
+			}
+
+		// When the NPC reaches the position at the door, teleport him into the room!
+		if(NPC.x == 7 && NPC.y == 3)
+		{
+			NPC.inside = true;
+			NPC.x = 3;
+			NPC.y = 6;
+			outside.map[7][3].occupied = false;
+			room.map[3][6].occupied = true;
+		}
+	}
 }
 
 	this.move_left = function(NPC, place){
