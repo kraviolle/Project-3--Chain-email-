@@ -40,7 +40,7 @@ function room(start_x, start_y){
   //
   // Initialize player position to the door
 	this.map[3][7].player = true;
-	this.map[3][7].occupied = true;
+	this.map[3][7].occupied = false;
 	this.player_position = new Point(3,7); //Cell coordinates of the player
   this.player_direction = 1; // 1 = up, 2 = down, 3 = left, 4 = right
   //

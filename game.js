@@ -128,6 +128,8 @@ function load() {
 								else if (Outside.player_position.y == 3
 										&& Outside.player_position.x == 7) {
 									Outside.active = false;
+									Outside.map[7][3].occupied = false;
+									lobby.map[3][7].occupied = true;
 									lobby.active = true;
 									lobby.player_direction = 1;
 								}
@@ -153,6 +155,8 @@ function load() {
 										&& lobby.player_position.x == 3) {
 									lobby.active = false;
 									Outside.active = true;
+									Outside.map[7][3].occupied = true;
+									lobby.map[3][7].occupied = false;
 									Outside.player_direction = 2;
 								}
 

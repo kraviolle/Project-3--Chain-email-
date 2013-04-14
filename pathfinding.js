@@ -364,7 +364,7 @@ this.steering = function(NPC, destination, inside){
 	if(NPC.inside && !inside)
 	{
 		//Make the NPC to to the position of the door in the room first which is [3][6]
-		if(6 < NPC.y && NPC.y != 0)// If destination higher than current position, go up
+		if(7 < NPC.y && NPC.y != 0)// If destination higher than current position, go up
 			{
 				if(!room.map[NPC.x][NPC.y - 1].occupied)
 				{
@@ -406,7 +406,7 @@ this.steering = function(NPC, destination, inside){
 				this.condition++; // tells the NPC that there is an obstacle or not the correct direction
 			}
 
-			if(6 > NPC.y && NPC.y != room.row - 1)// if destination lower than current position, go down
+			if(7 > NPC.y && NPC.y != room.row - 1)// if destination lower than current position, go down
 			{
 				if(!room.map[NPC.x][NPC.y + 1].occupied)
 				{
@@ -534,14 +534,14 @@ this.steering = function(NPC, destination, inside){
 			}
 
 			// After that, teleport the NPC to oustide location
-			if(NPC.x == 3 && NPC.y == 6 && outside.map[7][3].occupied == false)
+			if(NPC.x == 3 && NPC.y == 7 && outside.map[7][3].occupied == false)
 			{
 				NPC.inside = false;
 				NPC.x = 7;
 				NPC.y = 3;
 				outside.map[7][3].occupied = true;
-				room.map[3][6].occupied = false ;
-				outside.map[7][3].npc = room.map[3][6].npc;
+				room.map[3][7].occupied = false ;
+				outside.map[7][3].npc = room.map[3][7].npc;
 				room.map[3][7].npc = -1;
 			}
 	}
@@ -549,7 +549,7 @@ this.steering = function(NPC, destination, inside){
 	//If npc outside and destination inside
 	if(!NPC.inside && inside)
 	{
-		// Make the NPC go to the position of the door first which is [7][3]
+		// Make the NPC go to the position of the door first which is [7][2]
 		if(3 < NPC.y && NPC.y != 0)// If destination higher than current position, go up
 			{
 				if(!outside.map[NPC.x][NPC.y - 1].occupied)
