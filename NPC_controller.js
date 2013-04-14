@@ -74,6 +74,7 @@ function NPC_controller(room, outside, navigate){
 
 
   //Testing pathfinding
+  /*
   this.NPC_array[0].destination.x = 0;
   this.NPC_array[0].destination.y = 0;
   this.NPC_array[0].destination_inside = true;
@@ -93,6 +94,7 @@ function NPC_controller(room, outside, navigate){
   this.NPC_array[3].destination.y = 7;
   this.NPC_array[3].destination_inside = false;
   this.NPC_array[3].intention = 1;
+  */
 
   this.drawNPC = function(inside){
       // If inside == true, draw NPC for within the room, otherwise, draw NPC for outside the room
@@ -216,11 +218,37 @@ function NPC_controller(room, outside, navigate){
             {
               this.NPC_array[i].intention = 0; 
             }
+            else if(this.NPC_array[i].intention ==2) // If the NPC wants to recruit a neutral NPC, the timer only starts when they are next to each other
+            {
+              //this.NPC_array[i].interaction_start = timer
+            }
           }
       }
       //
       //  End of moving to destination
       //
+
+      //
+      //  If NPC is admist an interaction, check if its over, if so trigger action
+      //
+      if(this.NPC_array[i].intention > 1) // Any interaction with another NPC
+      {
+        // Check if time now - time start more than allocated duration
+        // If so
+        // For recruitment, recruiter back to idle, neutral 50% chance of becoming recruiters gang, back to idle
+        // For fight, one npc will disappear, the other back to idle
+        // For interrogation, police stay, if NPC is gang member, dissapear
+      }
+      //
+      // End of interaction action  
+      //
+
+      // Testing recruitment
+      if(this.NPC_array[6].intention == 0)
+      {
+        this.recruitment(6, 13);
+
+      }
 
     }
 
@@ -229,7 +257,9 @@ function NPC_controller(room, outside, navigate){
   this.recruitment = function(gang, neutral){
     // gang, neutral are the ID of the two NPC
     this.NPC_array[gang].recruiting = neutral;
+    this.NPC_array[gang].intention = 2;
     this.NPC_array[neutral].recruited = gang;
+    this.NPC_array[neutral].intention = 2;
 
     // Find an adjacent location ard neutral npc for the gang member to go to
     if(this.NPC_array[neutral].inside) // NPC is indoors
