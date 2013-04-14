@@ -382,8 +382,8 @@ function NPC_controller(room, outside){
 
 
   //Testing pathfinding
-  this.NPC_array[0].destination.x = 15;
-  this.NPC_array[0].destination.y = 7;
+  this.NPC_array[0].destination.x = 11;
+  this.NPC_array[0].destination.y = 0;
   
 
 
