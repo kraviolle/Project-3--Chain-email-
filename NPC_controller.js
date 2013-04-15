@@ -193,6 +193,8 @@ function NPC_controller(room, outside, navigate){
   // NPC simulate will be called every cycle. It is what controls the movement and interactions of all NPCs!
   this.NPC_simulate = function(timeCounter){
 
+    var luck;
+
     //Run through every NPC in the array
     for(var i = 0; i < this.NPC_array.length; i++)
     {
@@ -245,9 +247,12 @@ function NPC_controller(room, outside, navigate){
             {//REcruiter
               this.NPC_array[i].intention = 0; // Recruiter back to idle
               this.NPC_array[this.NPC_array[i].recruiting].intention = 0;
-              
+              luck = Math.floor((Math.random()*10)+1);
+              console.log(luck + ' First');
+              if(luck < 4)
+              {
               this.NPC_array[this.NPC_array[i].recruiting].faction = this.NPC_array[i].faction;
-              
+              }
               this.NPC_array[this.NPC_array[i].recruiting].recruited = -1;
               this.NPC_array[i].recruiting = -1;
             }
@@ -255,10 +260,12 @@ function NPC_controller(room, outside, navigate){
             {//Recruitee
               this.NPC_array[i].intention = 0;
               this.NPC_array[this.NPC_array[i].recruited].intention = 0;
-              //if(Math.floor((Math.random()*10)+1 <4)
-              //{
+              luck = Math.floor((Math.random()*10)+1);
+              console.log(luck + ' 2nd');
+              if(luck <4)
+              {
                 this.NPC_array[i].faction = this.NPC_array[this.NPC_array[i].recruiting].faction;
-              //}
+              }
               this.NPC_array[this.NPC_array[i].recruited].recruiting = -1;
               this.NPC_array[i].recruited = 0;
 
@@ -275,7 +282,7 @@ function NPC_controller(room, outside, navigate){
       //
 
       // Testing recruitment
-      if(this.NPC_array[13].faction == 0)
+      if(timeCounter < 5)
       {
         this.recruitment(6, 13);
 
