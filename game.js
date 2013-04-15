@@ -301,7 +301,9 @@ function load() {
 
 
 		// Runs the AI for NPC simulations
-		npc_controller.NPC_simulate();
+		npc_controller.NPC_simulate(timeCounter);
+
+		writeMessage(canvas, timeCounter);
 			
 
 
@@ -339,10 +341,10 @@ function load() {
 
 function writeMessage(canvas, message) {
 	var context = canvas.getContext('2d');
-	context.clearRect(0, 0, 500, 100);
-	context.font = '18pt Calibri';
+	context.clearRect(800, 0, 100, 30);
+	context.font = '10pt Calibri';
 	context.fillStyle = 'black';
-	context.fillText(message, 10, 25);
+	context.fillText(message, 800, 25);
 }
 
 function getMousePos(canvas, evt) {

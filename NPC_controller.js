@@ -191,7 +191,7 @@ function NPC_controller(room, outside, navigate){
   }
 
   // NPC simulate will be called every cycle. It is what controls the movement and interactions of all NPCs!
-  this.NPC_simulate = function(){
+  this.NPC_simulate = function(timeCounter){
 
     //Run through every NPC in the array
     for(var i = 0; i < this.NPC_array.length; i++)
@@ -220,7 +220,8 @@ function NPC_controller(room, outside, navigate){
             }
             else if(this.NPC_array[i].intention ==2) // If the NPC wants to recruit a neutral NPC, the timer only starts when they are next to each other
             {
-              //this.NPC_array[i].interaction_start = timer
+              this.NPC_array[i].interaction_start = timeCounter;
+              this.NPC_array[this.NPC_array[i].recruiting].interaction_start = timeCounter;
             }
           }
       }
@@ -233,18 +234,48 @@ function NPC_controller(room, outside, navigate){
       //
       if(this.NPC_array[i].intention > 1) // Any interaction with another NPC
       {
-        // Check if time now - time start more than allocated duration
-        // If so
-        // For recruitment, recruiter back to idle, neutral 50% chance of becoming recruiters gang, back to idle
-        // For fight, one npc will disappear, the other back to idle
-        // For interrogation, police stay, if NPC is gang member, dissapear
+        if(timeCounter - this.NPC_array[i].interaction_start > 5)// Check if time now - time start more than allocated duration
+        {
+          console.log(i);
+          // If so
+          // For recruitment, recruiter back to idle, neutral 50% chance of becoming recruiters gang, back to idle
+          if(this.NPC_array[i].intention == 2)
+          {
+            if(this.NPC_array[i].recruited == -1)// Check if recruiting or recruited
+            {//REcruiter
+              this.NPC_array[i].intention = 0; // Recruiter back to idle
+              this.NPC_array[this.NPC_array[i].recruiting].intention = 0;
+              
+              this.NPC_array[this.NPC_array[i].recruiting].faction = this.NPC_array[i].faction;
+              
+              this.NPC_array[this.NPC_array[i].recruiting].recruited = -1;
+              this.NPC_array[i].recruiting = -1;
+            }
+            else
+            {//Recruitee
+              this.NPC_array[i].intention = 0;
+              this.NPC_array[this.NPC_array[i].recruited].intention = 0;
+              //if(Math.floor((Math.random()*10)+1 <4)
+              //{
+                this.NPC_array[i].faction = this.NPC_array[this.NPC_array[i].recruiting].faction;
+              //}
+              this.NPC_array[this.NPC_array[i].recruited].recruiting = -1;
+              this.NPC_array[i].recruited = 0;
+
+            }
+            
+
+          }
+          // For fight, one npc will disappear, the other back to idle
+          // For interrogation, police stay, if NPC is gang member, dissapear
+        }
       }
       //
       // End of interaction action  
       //
 
       // Testing recruitment
-      if(this.NPC_array[6].intention == 0)
+      if(this.NPC_array[13].faction == 0)
       {
         this.recruitment(6, 13);
 

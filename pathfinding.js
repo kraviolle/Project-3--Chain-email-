@@ -181,7 +181,7 @@ this.steering = function(NPC, destination, inside, condition){
 			{
 				condition++; // tells the NPC that there is an obstacle or not the correct direction
 			}
-			console.log(condition);
+			//console.log(condition);
 	}
 	else if(!NPC.inside && !inside)
 	{
