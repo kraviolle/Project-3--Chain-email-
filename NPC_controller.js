@@ -356,10 +356,22 @@ function NPC_controller(room, outside, navigate){
       // End of interaction action  
       //
 
+      //
+      //  Update the NPC index stored in the map 
+      //
+      if(this.NPC_array[i].inside)
+      {
+        room.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = i;
+      }
+      else
+      {
+        outside.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = i;
+      }
+
       // Testing recruitment
       if(timeCounter < 5)
       {
-        this.interrogate(0, 14);
+        this.interrogate(0, 11);
 
       }
 
