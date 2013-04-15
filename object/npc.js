@@ -8,7 +8,7 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.intention = 0; // 0 = Idle, 1 = Move, 2 = Recruiting,  3 = Fighting, 4 - Talking, 5 - Interogation - HS
 	this.destination = new Point(-1, -1); // -1,-1 signifies that there is no destination at hand - HS
 	this.destination_inside = true; // True means destination is inside, false means destination is outside. - HS
-	this.message = "Hello! I am NPC no. "; // HS testing interaction
+	
 	// For recruiting - HS
 	this.recruiting = -1; // States the ID of the NPC which this NPC is trying to recruit
 	this.recruited = -1;// States the ID of the NPC which is trying to recruit this NPC
@@ -24,7 +24,17 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.faction=faction;        // 0 = Neutral, 1 = Your lackey, 2 = Your rival's lacky, 3= undercover cop
 	this.attack=20;
 	this.defense=20;
-
+	this.message="HELLO";
+	
+	if(faction==0){
+		choice=Math.random();
+		if(choice<0.5){
+		this.message = "Oh hi ! I want no trouble...";}
+		else{this.message="I heard there is a fight going on...";}
+	}
+	
+	
+	
 
 	this.fight = function(targetid){
 
@@ -45,10 +55,7 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 
 
 	this.draw= function(){
-	var c=document.getElementById("game");			//canvas id	
-	var ctx=c.getContext("2d");
-	var img=document.getElementById("XXXX");		//havent had any images just yet.
-	ctx.drawImage(img,this.x,this.y);
+	
 	
 	}
 

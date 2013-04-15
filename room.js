@@ -158,7 +158,7 @@ function outdoor(start_x, start_y){
   this.column = 16;
   this.row = 8;
   this.door_thickness = 8;
-
+  //this.testingX=60;
   for(var i = 0; i < this.column; i++)
   {
     this.map[i] = [];
@@ -249,9 +249,7 @@ function outdoor(start_x, start_y){
 	Testimg.src= "images/Test.png";
 	ctx.drawImage(Testimg, 0,0);
 	
-	var textbox= new Image();			// Textbox
-	textbox.src="images/textbox.png";
-	ctx.drawImage(textbox,0,280);
+	
         
   }
 
@@ -274,7 +272,10 @@ function outdoor(start_x, start_y){
         ctx.stroke();
 	 */
 		if(this.player_direction==1){				//UP
-			ctx.drawImage(heroimg, 60,0,20,24,herox, heroy,30,30);
+			ctx.drawImage(heroimg, this.testingX,0,20,24,herox, heroy,30,30);
+			//this.testingX=this.testingX-20;
+			//if(this.testingX<40){this.testingX=60;}
+			
 		}
 		
 		if(this.player_direction==2){				//Down
@@ -283,6 +284,8 @@ function outdoor(start_x, start_y){
 		
 		if(this.player_direction==3){				//Left
 			ctx.drawImage(heroimg, 140,0,20,24,herox, heroy,30,30);
+				
+				
 		}
 		
 		if(this.player_direction==4){				//Right

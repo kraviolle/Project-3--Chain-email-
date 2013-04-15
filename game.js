@@ -25,6 +25,7 @@ function load() {
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
 	var debug_mode = true; // HS
+	
 	//------------------------------
 	//  End initialization of object
 	//------------------------------
@@ -41,6 +42,7 @@ function load() {
 						// Press up down left right to move the player on screen
 						if (event.keyCode == 37) {
 							//go left
+							
 							if (lobby.active)// If player in the room
 							{
 								lobby.player_direction = 3;
@@ -183,6 +185,12 @@ function load() {
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
 										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc);
+									var textbox= new Image();			// Textbox
+									textbox.src="images/textbox.png";
+									ctx.drawImage(textbox,0,280);
+									ctx.font="20px Arial";
+									ctx.fillStyle = 'black';
+									ctx.filltext(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message, 50,300);
 									}
 								}
 								if(Outside.player_position.y != (Outside.row - 1) && Outside.player_direction == 2 && Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied)// If facing down and NPC below
@@ -273,6 +281,7 @@ function load() {
 	//  Rendering screen
 	//------------------
 	setInterval(function() {
+		
 		if (lobby.active){
 			lobby.draw();
 			npc_controller.drawNPC(true);
