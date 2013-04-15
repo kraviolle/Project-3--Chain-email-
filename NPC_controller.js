@@ -225,6 +225,11 @@ function NPC_controller(room, outside, navigate){
               this.NPC_array[i].interaction_start = timeCounter;
               this.NPC_array[this.NPC_array[i].recruiting].interaction_start = timeCounter;
             }
+            else if(this.NPC_array[i].intention == 3) // This NPC is gonna fight another gang member
+            {
+              this.NPC_array[i].interaction_start = timeCounter;
+              this.NPC_array[this.NPC_array[i].fighting].interaction_start = timeCounter;
+            }
           }
       }
       //
@@ -274,7 +279,48 @@ function NPC_controller(room, outside, navigate){
 
           }
           // For fight, one npc will disappear, the other back to idle
+          else if(this.NPC_array[i].intention == 3)
+          {
+            luck = Math.floor((Math.random()*10)+1);
+            if(luck < 5) // This NPC disappears 
+            {
+              this.NPC_array[this.NPC_array[i].fighting].intention = 0;
+              this.NPC_array[this.NPC_array[i].fighting].fighting = -1;
+              if(this.NPC_array[i].inside)
+              {
+                this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].occupied = false
+                this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = -1
+              }
+              else
+              {
+                this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].occupied = false
+                this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = -1
+              }
+              this.NPC_array.splice(i, 1);
+
+            } 
+            else // The NPC he is fighting with disappears
+            {
+              this.NPC_array[i].intention = 0;
+              this.NPC_array[i].fighting = -1;
+              if(this.NPC_array[this.NPC_array[i].fighting].inside)
+              {
+                this.room.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].occupied = false
+                this.room.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].npc = -1
+              }
+              else
+              {
+                this.outside.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].occupied = false
+                this.outside.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].npc = -1
+              }
+              this.NPC_array.splice(this.NPC_array[i].fighting,1);
+            }
+          }
           // For interrogation, police stay, if NPC is gang member, dissapear
+          else if(this.NPC_array[i].intention == 4)
+          {
+
+          }
         }
       }
       //
@@ -284,7 +330,7 @@ function NPC_controller(room, outside, navigate){
       // Testing recruitment
       if(timeCounter < 5)
       {
-        this.recruitment(6, 13);
+        this.fighting(6, 1);
 
       }
 
@@ -343,6 +389,62 @@ function NPC_controller(room, outside, navigate){
       else if(this.NPC_array[neutral].y != outside.row - 1 && !outside.map[this.NPC_array[neutral].x][this.NPC_array[neutral].y + 1].occupied) // Bottom is free
       {
         this.NPC_array[gang].destination = new Point(this.NPC_array[neutral].x, this.NPC_array[neutral].y + 1);
+        this.NPC_array[gang].destination_inside = false;
+      }
+    } 
+  }
+
+  this.fighting = function(gang, gang2){
+
+    this.NPC_array[gang].fighting = gang2;
+    this.NPC_array[gang].intention = 3;
+    this.NPC_array[gang2].fighting = gang;
+    this.NPC_array[gang2].intention = 3;
+
+    // Find an adjacent location ard e 2nd gang member for the 1sst gang member to go to
+    if(this.NPC_array[gang2].inside) // NPC is indoors
+    {
+      if(this.NPC_array[gang2].x != 0 && !room.map[this.NPC_array[gang2].x - 1][this.NPC_array[gang2].y].occupied) // Left side is available
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x - 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].x != room.column -1 && !room.map[this.NPC_array[gang2].x + 1][this.NPC_array[gang2].y].occupied) // Right side is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x + 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].y != 0 && !room.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y - 1].occupied) // Top is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y - 1);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].y != room.row - 1 && !room.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y + 1].occupied) // Bottom is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y + 1);
+        this.NPC_array[gang].destination_inside = true;
+      }
+    }
+    else // NPC is outdoors
+    {
+      if(this.NPC_array[gang2].x != 0 && !outside.map[this.NPC_array[gang2].x - 1][this.NPC_array[gang2].y].occupied) // Left side is available
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x - 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].x != outside.column -1 && !outside.map[this.NPC_array[gang2].x + 1][this.NPC_array[gang2].y].occupied) // Right side is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x + 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].y != 0 && !outside.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y - 1].occupied) // Top is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y - 1);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].y != outside.row - 1 && !outside.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y + 1].occupied) // Bottom is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y + 1);
         this.NPC_array[gang].destination_inside = false;
       }
     } 
