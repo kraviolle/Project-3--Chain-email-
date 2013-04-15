@@ -13,6 +13,7 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.recruiting = -1; // States the ID of the NPC which this NPC is trying to recruit
 	this.recruited = -1;// States the ID of the NPC which is trying to recruit this NPC
 	this.fighting = -1; // States the ID of the gang member that this NPC is fighting
+	this.interrogate = -1; // States the ID of the police or the person being interrogated
 	//
 	// Condition for pathfinding - HS
 	this.condition = 0;

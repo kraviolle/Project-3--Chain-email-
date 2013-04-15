@@ -230,6 +230,11 @@ function NPC_controller(room, outside, navigate){
               this.NPC_array[i].interaction_start = timeCounter;
               this.NPC_array[this.NPC_array[i].fighting].interaction_start = timeCounter;
             }
+            else if(this.NPC_array[i].intention == 5)
+            {
+              this.NPC_array[i].interaction_start = timeCounter;
+              this.NPC_array[this.NPC_array[i].interrogate].interaction_start = timeCounter;
+            }
           }
       }
       //
@@ -317,10 +322,34 @@ function NPC_controller(room, outside, navigate){
             }
           }
           // For interrogation, police stay, if NPC is gang member, dissapear
-          else if(this.NPC_array[i].intention == 4)
+          else if(this.NPC_array[i].intention == 5)
           {
-
+            if(this.NPC_array[i].faction == 3)
+            {
+              if(this.NPC_array[this.NPC_array[i].interrogate].faction == 1 || this.NPC_array[this.NPC_array[i].interrogate].faction == 2)
+              {
+                if(this.NPC_array[this.NPC_array[i].interrogate].inside)
+                {
+                  this.room.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].occupied = false
+                  this.room.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].npc = -1
+                }
+                else
+                {
+                  this.outside.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].occupied = false
+                  this.outside.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].npc = -1
+                }
+                this.NPC_array.splice(this.NPC_array[i].interrogate, 1);
+              }
+              else
+              {
+                this.NPC_array[this.NPC_array[i].interrogate].intention = 0;
+                this.NPC_array[this.NPC_array[i].interrogate].interrogate = -1;
+              }
+              this.NPC_array[i].intention = 0;
+              this.NPC_array[i].interrogate = -1;
+            }
           }
+          // End for interrogate
         }
       }
       //
@@ -330,7 +359,7 @@ function NPC_controller(room, outside, navigate){
       // Testing recruitment
       if(timeCounter < 5)
       {
-        this.fighting(6, 1);
+        this.interrogate(0, 14);
 
       }
 
@@ -402,6 +431,62 @@ function NPC_controller(room, outside, navigate){
     this.NPC_array[gang2].intention = 3;
 
     // Find an adjacent location ard e 2nd gang member for the 1sst gang member to go to
+    if(this.NPC_array[gang2].inside) // NPC is indoors
+    {
+      if(this.NPC_array[gang2].x != 0 && !room.map[this.NPC_array[gang2].x - 1][this.NPC_array[gang2].y].occupied) // Left side is available
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x - 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].x != room.column -1 && !room.map[this.NPC_array[gang2].x + 1][this.NPC_array[gang2].y].occupied) // Right side is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x + 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].y != 0 && !room.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y - 1].occupied) // Top is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y - 1);
+        this.NPC_array[gang].destination_inside = true;
+      }
+      else if(this.NPC_array[gang2].y != room.row - 1 && !room.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y + 1].occupied) // Bottom is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y + 1);
+        this.NPC_array[gang].destination_inside = true;
+      }
+    }
+    else // NPC is outdoors
+    {
+      if(this.NPC_array[gang2].x != 0 && !outside.map[this.NPC_array[gang2].x - 1][this.NPC_array[gang2].y].occupied) // Left side is available
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x - 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].x != outside.column -1 && !outside.map[this.NPC_array[gang2].x + 1][this.NPC_array[gang2].y].occupied) // Right side is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x + 1, this.NPC_array[gang2].y);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].y != 0 && !outside.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y - 1].occupied) // Top is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y - 1);
+        this.NPC_array[gang].destination_inside = false;
+      }
+      else if(this.NPC_array[gang2].y != outside.row - 1 && !outside.map[this.NPC_array[gang2].x][this.NPC_array[gang2].y + 1].occupied) // Bottom is free
+      {
+        this.NPC_array[gang].destination = new Point(this.NPC_array[gang2].x, this.NPC_array[gang2].y + 1);
+        this.NPC_array[gang].destination_inside = false;
+      }
+    } 
+  }
+
+  this.interrogate = function(gang, gang2){
+    // Gang in this function refers to the police
+    this.NPC_array[gang].interrogate = gang2;
+    this.NPC_array[gang].intention = 5;
+    this.NPC_array[gang2].interrogate = gang;
+    this.NPC_array[gang2].intention = 5;
+
+    // Find an adjacent location ard e gang member for the police to go to
     if(this.NPC_array[gang2].inside) // NPC is indoors
     {
       if(this.NPC_array[gang2].x != 0 && !room.map[this.NPC_array[gang2].x - 1][this.NPC_array[gang2].y].occupied) // Left side is available
