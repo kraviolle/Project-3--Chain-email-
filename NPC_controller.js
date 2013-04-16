@@ -5,6 +5,7 @@ function NPC_controller(room, outside, navigate){
   this.room = room;
   this.outside = outside;
   this.npc_movement = 0;
+  this.last_count = 0; 
   // Initialize all idle points.
 
 
@@ -246,7 +247,7 @@ function NPC_controller(room, outside, navigate){
       //
       if(this.NPC_array[i].intention > 1) // Any interaction with another NPC
       {
-        if(timeCounter - this.NPC_array[i].interaction_start > 5)// Check if time now - time start more than allocated duration
+        if(timeCounter - this.NPC_array[i].interaction_start > 7)// Check if time now - time start more than allocated duration
         {
           console.log(i);
           // If so
@@ -371,9 +372,33 @@ function NPC_controller(room, outside, navigate){
       // Testing recruitment
       if(timeCounter < 5)
       {
-        this.interrogate(0, 11);
+        this.fighting(1, 6);
+        //this.recruitment(1, 5);
+        //this.interrogate(0, 6);
 
       }
+
+      //Randomly creating an interaction every 5 seconds
+      if(timeCounter - this.last_count > 5)
+      {
+        var action = Math.floor((Math.random()*5)+1);
+        var NPC_1 = -1;
+        var random_index;
+        while(NPC_1 != -1)
+        {
+          console.log('INSIDE');
+          random_index = Math.floor((Math.random()*this.NPC_array.length));
+          if(this.NPC_array[random_index].intention = 0); // NPC must be idling
+          {
+            NPC_1 = random_index;
+          }
+          alert('Randomly picked NPC is ' + NPC_1);
+        }
+        this.last_count = timeCounter;
+      }
+
+      
+
 
     }
 
