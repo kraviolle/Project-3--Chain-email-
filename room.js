@@ -159,6 +159,7 @@ function outdoor(start_x, start_y){
   this.column = 16;
   this.row = 8;
   this.door_thickness = 8;
+  this.flag=0;
   
   for(var i = 0; i < this.column; i++)
   {
@@ -275,10 +276,13 @@ function outdoor(start_x, start_y){
 	 */
 	 
 		if(this.player_direction==1){				//UP
-			ctx.drawImage(heroimg, 60,0,20,26,herox, heroy,30,30);
-			//this.testingX=this.testingX-20;
-			//if(this.testingX<40){this.testingX=60;}
-			
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=40;}
+			else{testx=60;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,30,30);
 		}
 		
 		if(this.player_direction==2){				//Down

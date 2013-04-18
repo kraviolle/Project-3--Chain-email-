@@ -93,6 +93,7 @@ function load() {
 
 							if (Outside.active) {
 								Outside.player_direction = 4;
+								Outside.player_key = 1;
 								if (Outside.player_position.x != (Outside.column - 1)
 										&& !Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) {
 									Outside.player_position.x = Outside.player_position.x + 1; // Change position of player in room
@@ -120,6 +121,7 @@ function load() {
 
 							if (Outside.active) {
 								Outside.player_direction = 1;
+								Outside.player_key = 1;
 								if (Outside.player_position.y != 0
 										&& !Outside.map[Outside.player_position.x][Outside.player_position.y - 1].occupied) {
 									Outside.player_position.y = Outside.player_position.y - 1; // Change position of player in room
@@ -169,6 +171,7 @@ function load() {
 
 							else if (Outside.active) {
 								Outside.player_direction = 2;
+								Outside.player_key = 1;
 								if (Outside.player_position.y != (Outside.row - 1)
 										&& !Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied) {
 									Outside.player_position.y = Outside.player_position.y + 1; // Change position of player in room
