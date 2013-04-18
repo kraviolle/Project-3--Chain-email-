@@ -101,37 +101,60 @@ function NPC_controller(room, outside, navigate){
 
   this.drawNPC = function(inside){
       // If inside == true, draw NPC for within the room, otherwise, draw NPC for outside the room
+	  var npcimg= new Image();
+	  
+	  
       for(var i = 0; i < this.NPC_array.length; i++)
       {
         if(!inside)
         {
         if(!this.NPC_array[i].inside)
         {
-          ctx.beginPath();
-          ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.outside.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.outside.cellsize/2, this.outside.cellsize/2 - 2, 0, 2*Math.PI, true);
+          npcx =this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x;
+		  npcy = this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y;
+		  //ctx.beginPath();
+          //ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.outside.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.outside.cellsize/2, this.outside.cellsize/2 - 2, 0, 2*Math.PI, true);
       
           switch (this.NPC_array[i].faction)
           {
             case 0: // Neutral
-            ctx.fillStyle = 'white';
+            npcimg.src="images/neutral.png";
             break;
             case 1: // Your lackey
-            ctx.fillStyle = 'red';
+            //ctx.fillStyle = 'red';
+			npcimg.src="images/friendly.png";
             break;
             case 2: // Rival
-            ctx.fillStyle = 'blue';
+            npcimg.src="images/rival.png";
             break;
             case 3: // Policeman
-            ctx.fillStyle = 'green';
+            npcimg.src="images/rival.png";
             break;
           }
           
+		  switch (this.NPC_array[i].direction){
+		  
+		  case 1: //UP
+            ctx.drawImage(npcimg, 60,0,20,26,npcx, npcy,30,30);
+            break;
+            case 2: // DOWN
+            ctx.drawImage(npcimg, 20,0,20,26,npcx, npcy,30,30);
+            break;
+            case 3: // LEFT
+            ctx.drawImage(npcimg, 140,0,20,26,npcx, npcy,30,30);
+            break;
+            case 4: // RIGHT
+            ctx.drawImage(npcimg, 100,0,20,26,npcx, npcy,30,30);
+            break;
+		  }
           
-          ctx.fill();
-          ctx.lineWidth = 2;
+		  
+		  
+          //ctx.fill();
+          //ctx.lineWidth = 2;
           // line color
-          ctx.strokeStyle = 'black';
-          ctx.stroke();
+          //ctx.strokeStyle = 'black';
+          //ctx.stroke();
         }
         }
         else
