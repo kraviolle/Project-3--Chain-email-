@@ -739,6 +739,7 @@ this.steering = function(NPC, destination, inside, condition){
 		place.map[NPC.x + 1][NPC.y].occupied = false;//Old position unoccupied
 		place.map[NPC.x + 1][NPC.y].npc = -1;// Old position NPC changed back to -1
 		NPC.direction=3;
+		NPC.key=1;
 	}
 
 	this.move_right = function(NPC, place){
@@ -748,6 +749,7 @@ this.steering = function(NPC, destination, inside, condition){
 		place.map[NPC.x - 1][NPC.y].occupied = false;//Old position unoccupied
 		place.map[NPC.x - 1][NPC.y].npc = -1;// Old position NPC changed back to -1
 		NPC.direction=4;
+		NPC.key=1;
 	}
 
 	this.move_up = function(NPC, place){
@@ -757,6 +759,7 @@ this.steering = function(NPC, destination, inside, condition){
 		place.map[NPC.x][NPC.y + 1].occupied = false;//Old position unoccupied
 		place.map[NPC.x][NPC.y + 1].npc = -1;// Old position NPC changed back to -1
 		NPC.direction=1;
+		NPC.key=1;
 	}
 
 	this.move_down = function(NPC, place){
@@ -766,6 +769,7 @@ this.steering = function(NPC, destination, inside, condition){
 		place.map[NPC.x][NPC.y - 1].occupied = false;//Old position unoccupied
 		place.map[NPC.x][NPC.y - 1].npc = -1;// Old position NPC changed back to -1
 		NPC.direction=2;
+		NPC.key=1;
 	}
 
 }

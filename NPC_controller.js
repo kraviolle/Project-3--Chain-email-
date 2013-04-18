@@ -7,6 +7,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   this.npc_movement = 0;
   this.last_count = 0; 
   this.last_count_2 = 0;
+  this.key=0;
+  this.flag=0;
   // Initialize all idle points.
 
 
@@ -136,16 +138,43 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 		  switch (this.NPC_array[i].direction){
 		  
 		  case 1: //UP
-            ctx.drawImage(npcimg, 60,0,20,26,npcx, npcy,30,30);
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=40;}
+				else{srcx=60;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,30,30);
             break;
+			
             case 2: // DOWN
-            ctx.drawImage(npcimg, 20,0,20,26,npcx, npcy,30,30);
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=0;}
+				else{srcx=20;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,30,30);
             break;
+			
             case 3: // LEFT
-            ctx.drawImage(npcimg, 140,0,20,26,npcx, npcy,30,30);
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=140;}
+				else{srcx=120;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,30,30);
             break;
+			
             case 4: // RIGHT
-            ctx.drawImage(npcimg, 100,0,20,26,npcx, npcy,30,30);
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=100;}
+				else{srcx=80;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,30,30);
             break;
 		  }
           
