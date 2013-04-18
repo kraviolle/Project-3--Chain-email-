@@ -187,6 +187,10 @@ function outdoor(start_x, start_y){
     for(var j = 0; j < this.row; j++)
     {
       this.map[i][j] = new cell(start_x + (i * this.cellsize), start_y + (j * this.cellsize));
+      if(j == 2)
+      {
+        this.map[i][j].occupied = true;
+      }
     }
   }
 
@@ -427,8 +431,8 @@ function city(start_x, start_y){
   this.active = false; // This signifies that player is in the city
   this.map = [];
   this.cellsize = 40;
-  this.column = 10;
-  this.row = 5;
+  this.column = 15;
+  this.row = 10;
 
   for(var i = 0; i < this.column; i++)
   {
@@ -481,6 +485,84 @@ function city(start_x, start_y){
           ctx.stroke();
         }
 
+        //Draw the building
+        for(var i = 2; i < 5; i++)
+        {
+          for(var j = 1; j < 3; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        for(var i = 6; i < 9; i++)
+        {
+          for(var j = 1; j < 3; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        for(var i = 10; i < 13; i++)
+        {
+          for(var j = 1; j < 3; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        for(var i = 2; i < 5; i++)
+        {
+          for(var j = 5; j < 7; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        for(var i = 6; i < 9; i++)
+        {
+          for(var j = 5; j < 7; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
+
+        for(var i = 10; i < 13; i++)
+        {
+          for(var j = 5; j < 7; j++)
+          {
+            this.map[i][j].occupied = true;
+            ctx.beginPath();
+            ctx.rect(this.map[i][j].point.x, this.map[i][j].point.y, this.cellsize, this.cellsize);      
+            ctx.fillStyle = 'grey';
+            ctx.fill();
+
+          }
+        }
         
   }
 

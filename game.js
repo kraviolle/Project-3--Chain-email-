@@ -116,6 +116,7 @@ function load() {
 								{
 									Outside.active = false;
 									city_level.active = true;
+									city_level.player_direction = 2;
 								}
 								else if (Outside.player_position.x != (Outside.column - 1)
 										&& !Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) {
@@ -127,7 +128,7 @@ function load() {
 								}
 							}
 
-							if (city_level.active) {
+							else if (city_level.active) {
 								city_level.player_direction = 4;
 								city_level.player_key = 1;
 								if (city_level.player_position.x != (city_level.column - 1)
@@ -183,7 +184,14 @@ function load() {
 							if (city_level.active) {
 								city_level.player_direction = 1;
 								city_level.player_key=1;
-								if (city_level.player_position.y != 0
+								if((city_level.player_position.x == 3 && city_level.player_position.y == 3) || (city_level.player_position.x == 7 && city_level.player_position.y == 3) || (city_level.player_position.x == 11 && city_level.player_position.y == 3) || (city_level.player_position.x == 3 && city_level.player_position.y == 7) || (city_level.player_position.x == 7 && city_level.player_position.y == 7) || (city_level.player_position.x == 11 && city_level.player_position.y == 7))
+								{
+									city_level.active = false;
+									Outside.active = true;
+									Outside.player_direction = 3;
+								}
+
+								else if (city_level.player_position.y != 0
 										&& !city_level.map[city_level.player_position.x][city_level.player_position.y - 1].occupied) {
 									city_level.player_position.y = city_level.player_position.y - 1; // Change position of player in room
 									city_level.map[city_level.player_position.x][city_level.player_position.y].occupied = true; // Change new position to occupied
