@@ -49,6 +49,7 @@ function load() {
 							if (lobby.active)// If player in the room
 							{
 								lobby.player_direction = 3;
+								lobby.player_key=1;
 								if (lobby.player_position.x != 0
 										&& !lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // Not at the left most column
 								{
@@ -81,6 +82,7 @@ function load() {
 							//go right
 							if (lobby.active) {
 								lobby.player_direction = 4;
+								lobby.player_key=1;
 								if (lobby.player_position.x != (lobby.column - 1)
 										&& !lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied) {
 									lobby.player_position.x = lobby.player_position.x + 1; // Change position of player in room
@@ -109,6 +111,7 @@ function load() {
 							//go up
 							if (lobby.active) {
 								lobby.player_direction = 1;
+								lobby.player_key=1;
 								if (lobby.player_position.y != 0
 										&& !lobby.map[lobby.player_position.x][lobby.player_position.y - 1].occupied) {
 									lobby.player_position.y = lobby.player_position.y - 1; // Change position of player in room
@@ -148,6 +151,7 @@ function load() {
 							//go down
 							if (lobby.active) {
 								lobby.player_direction = 2;
+								lobby.player_key=1;
 								if (lobby.player_position.y != (lobby.row - 1)
 										&& !lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied) {
 									lobby.player_position.y = lobby.player_position.y + 1; // Change position of player in room

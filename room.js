@@ -15,7 +15,7 @@ function room(start_x, start_y){
 
   this.active = false; // This signifies that player is within the room
 	this.map = [];
-	this.cellsize = 50;
+	this.cellsize = 40;
 	this.column = 8;
 	this.row = 8;
 	this.door_thickness = 8;
@@ -87,46 +87,65 @@ function room(start_x, start_y){
 	}
 
 	this.drawplayer = function(){
-		  ctx.beginPath();
+		  var heroimg= new Image();
+	  heroimg.src="images/hero.png";
+	  herox =this.map[this.player_position.x][this.player_position.y].point.x;
+	  heroy = this.map[this.player_position.x][this.player_position.y].point.y;
+	  
+	  
+	  
+	  // Removing the black dot as player
+	 /* ctx.beginPath();     
       ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
-     	ctx.fillStyle = 'black';
-      ctx.fill();
-     	ctx.lineWidth = 2;
-     	// line color
-      	ctx.strokeStyle = 'black';
-      	ctx.stroke();
-
-    switch(this.player_direction)
-    {
-      case 1: // UP
-      ctx.beginPath();
-      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/4, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = 'black';
       ctx.fill();
       ctx.lineWidth = 2;
-      break;
-      case 2: // DOWN
-      ctx.beginPath();
-      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + (3 * this.cellsize/4), 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      ctx.lineWidth = 2;
-      break;
-      case 3: // LEFT
-      ctx.beginPath();
-      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/4, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      ctx.lineWidth = 2;
-      break;
-      case 4: // RIGHT
-      ctx.beginPath();
-      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + (3 * this.cellsize/4), this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, 2, 0, 2*Math.PI, true);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      ctx.lineWidth = 2;
-      break;
-    }
+      // line color
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+	 */
+	 
+		if(this.player_direction==1){				//UP
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=40;}
+			else{testx=60;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+		}
+		
+		if(this.player_direction==2){				//Down
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=0;}
+			else{testx=20;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+		}
+		
+		if(this.player_direction==3){				//Left
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=120;}
+			else{testx=140;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+				
+				
+		}
+		
+		if(this.player_direction==4){				//Right
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=80;}
+			else{testx=100;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+		}
 	}
 
 	this.draw = function(){
