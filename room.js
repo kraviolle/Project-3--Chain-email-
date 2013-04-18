@@ -364,6 +364,19 @@ function outdoor(start_x, start_y){
   this.list[10] = new Point(11,3);
   this.list[11] = new Point(14,7);
 
+  this.list_flag = [];
+  this.list_flag[0] = 0;
+  this.list_flag[1] = 0;
+  this.list_flag[2] = 0;
+  this.list_flag[3] = 0;
+  this.list_flag[4] = 0;
+  this.list_flag[5] = 0;
+  this.list_flag[6] = 0;
+  this.list_flag[7] = 0;
+  this.list_flag[8] = 0;
+  this.list_flag[9] = 0;
+  this.list_flag[10] = 0;
+  this.list_flag[11] = 0;
 
 
 }

@@ -24,10 +24,10 @@ function load() {
 	var simulator = new Controller(level3, level2); //Lionel
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
-	var debug_mode = true; // HS
+	var debug_mode = false; // HS
 	var debugWrite = new debugWriter(level2, level3); //Daryl
-	var building_test = [];
-	building_test[0] = 1;
+	var building_test = [1,2,1,3,2,1,4,2,1];
+	//building_test[0] = 1;
 	
 	//------------------------------
 	//  End initialization of object
