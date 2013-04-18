@@ -29,6 +29,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
 				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
+				}
 				break;
 			case 2:
 				// move npc from north to west
@@ -36,6 +40,10 @@ function Controller(level3, level2) {
 				if(L3.playerCity == 3){
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
+				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
 				}
 				break;
 			case 3:
@@ -45,6 +53,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
 				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
+				}
 				break;
 			case 4:
 				// move npc from west to east
@@ -52,6 +64,10 @@ function Controller(level3, level2) {
 				if(L3.playerCity == 2){
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
+				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
 				}
 				break;
 			case 5:
@@ -61,6 +77,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
 				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
+				}
 				break;
 			default:
 				// move npc from north to east
@@ -68,6 +88,10 @@ function Controller(level3, level2) {
 				if(L3.playerCity == 2){
 					console.log("NPC "+npcType+" moving into current city.");
 					this.npcMoveIntoCurrCity(npcType);
+				}
+				if(L3.playerCity == 2){
+					console.log("NPC "+npcType+" moving from current city.");
+					this.npcMoveFromCurrCity(npcType);
 				}
 			}// end switch
 		}// end for
@@ -107,11 +131,10 @@ function Controller(level3, level2) {
 		default:
 			// do nothing
 			console.log("NPC moved: no movement");
-			/*city1.population++;
-			city2.population--;*/
 		}// end switch
 	}// this.moveNPC*/
 
+	/* Level 3 interactions */
 	this.interactLevel3 = function(){
 		console.log("~~~~~Start L3 Interaction Simulation~~~~~");
 		var interactAmt = 0;
@@ -150,16 +173,21 @@ function Controller(level3, level2) {
 		console.log("building: "+building);*/
 		if(npcType == 1 && L2.hospital.neutral > 80){//neutral
 			L2.hospital.neutral--;
+			L2.out_H.push(1);
 			if(building == 1){
 				L2.buildingOne.neutral++;
+				L2.in_B1.push(1);
 				console.log("Hospital: neutral move to buildingOne");
 			} else if(building == 2){
 				L2.buildingTwo.neutral++;
+				L2.in_B2.push(1);
 				console.log("Hospital: neutral move to buildingTwo");
 			}//end if-else
 		} else if(npcType == 2 && L2.hospital.police > 15){//police
 			L2.hospital.police--;
+			L2.out_H.push(2);
 			L2.policeStation.police++;
+			L2.in_PS.push(2);
 			console.log("Hospital: police move to policeStation");
 		}
 		// move npc from police station
@@ -169,23 +197,30 @@ function Controller(level3, level2) {
 		console.log("building: "+building);*/
 		if(npcType == 1 && L2.policeStation.neutral > 0){//neutral
 			L2.policeStation.neutral--;
+			L2.out_PS.push(1);
 			if(building == 1){
 				L2.buildingOne.neutral++;
+				L2.in_B1.push(1);
 				console.log("Police Station: neutral move to buildingOne");
 			} else if(building == 2){
 				L2.buildingTwo.neutral++;
+				L2.in_B2.push(1);
 				console.log("Police Station: neutral move to buildingTwo");
 			}//end if-else
 		} else if(npcType == 2 && L2.policeStation.police > 20){//police
 			L2.policeStation.police--;
+			L2.out_PS.push(2);
 			if(building == 1){
 				L2.buildingOne.police++;
+				L2.in_B1.push(2);
 				console.log("Police Station: police move to buildingOne");
 			} else if(building == 2){
 				L2.buildingTwo.police++;
+				L2.in_B2.push(2);
 				console.log("Police Station: police move to buildingTwo");
 			} else if(building == 3){
 				L2.hospital.police++;
+				L2.in_H.push(2);
 				console.log("Police Station: police move to hospital");
 			}//end if-else
 		}
@@ -196,35 +231,46 @@ function Controller(level3, level2) {
 		console.log("building: "+building);*/
 		if(npcType == 1 && L2.buildingOne.neutral > 0){//neutral
 			L2.buildingOne.neutral--;
+			L2.out_B1.push(1);
 			if(building == 1){
 				L2.buildingTwo.neutral++;
+				L2.in_B2.push(1);
 				console.log("buildingOne: neutral move to buildingTwo");
 			} else if(building == 2){
 				L2.policeStation.neutral++;
+				L2.in_PS.push(1);
 				console.log("buildingOne: neutral move to policeStation");
 			} else if(building == 3){
 				L2.hospital.neutral++;
+				L2.in_H.push(1);
 				console.log("buildingOne: neutral move to hospital");
 			}//end if-else
 		} else if(npcType == 2 && L2.buildingOne.police > 15){//police
 			L2.buildingOne.police--;
+			L2.out_B1.push(2);
 			if(building == 1){
 				L2.buildingTwo.police++;
+				L2.in_B2.push(2);
 				console.log("buildingOne: police move to buildingTwo");
 			} else if(building == 2){
 				L2.policeStation.police++;
+				L2.in_PS.push(2);
 				console.log("buildingOne: police move to policeStation");
 			}//end if-else
 		} else if(npcType == 3 && L2.buildingOne.rivals > 0){//rivals
 			L2.buildingOne.rivals--;
+			L2.out_B1.push(3);
 			if(building == 1 || building == 2 || building == 3){
 				L2.buildingTwo.rivals++;
+				L2.in_B2.push(3);
 				console.log("buildingOne: rival move to buildingTwo");
 			}//end if
 		} else if(npcType == 4 && L2.buildingOne.allied > 0){//allied
 			L2.buildingOne.allied--;
+			L2.out_B1.push(4);
 			if(building == 1 || building == 2 || building == 3){
 				L2.buildingTwo.allied++;
+				L2.in_B2.push(4);
 				console.log("buildingOne: allied move to buildingTwo");
 			}//end if
 		}
@@ -235,41 +281,53 @@ function Controller(level3, level2) {
 		console.log("building: "+building);*/
 		if(npcType == 1 && L2.buildingTwo.neutral > 0){//neutral
 			L2.buildingTwo.neutral--;
+			L2.out_B2.push(1);
 			if(building == 1){
 				L2.buildingOne.neutral++;
+				L2.in_B1.push(1);
 				console.log("buildingTwo: neutral move to buildingOne");
 			} else if(building == 2){
 				L2.policeStation.neutral++;
+				L2.in_PS.push(1);
 				console.log("buildingTwo: neutral move to policeStation");
 			} else if(building == 3){
 				L2.hospital.neutral++;
+				L2.in_H.push(1);
 				console.log("buildingTwo: neutral move to hospital");
 			}//end if-else
 		} else if(npcType == 2 && L2.buildingTwo.police > 15){//police
 			L2.buildingTwo.police--;
+			L2.out_B2.push(2);
 			if(building == 1){
 				L2.buildingOne.police++;
+				L2.in_B1.push(2);
 				console.log("buildingTwo: police move to buildingOne");
 			} else if(building == 2){
 				L2.policeStation.police++;
+				L2.in_PS.push(2);
 				console.log("buildingTwo: police move to policeStation");
 			}//end if-else
 		} else if(npcType == 3 && L2.buildingTwo.rivals > 0){//rivals
 			L2.buildingTwo.rivals--;
+			L2.out_B2.push(3);
 			if(building == 1 || building == 2 || building == 3){
 				L2.buildingOne.rivals++;
+				L2.in_B1.push(3);
 				console.log("buildingTwo: rival move to buildingOne");
 			}//end if
 		} else if(npcType == 4 && L2.buildingTwo.allied > 0){//allied
 			L2.buildingTwo.allied--;
+			L2.out_B2.push(4);
 			if(building == 1 || building == 2 || building == 3){
 				L2.buildingOne.allied++;
+				L2.in_B1.push(4);
 				console.log("buildingTwo: allied move to buildingOne");
 			}//end if
 		}
 		console.log("=======End L2 Movement Simulation=======");
 	}// this.cityMovement*/
 
+	/* Level 2 interactions */
 	this.interactLevel2 = function(){
 		console.log("~~~~~Start L2 Interaction Simulation~~~~~");
 		var interactAmt = 0;
@@ -292,7 +350,7 @@ function Controller(level3, level2) {
 			}
 		}//end for
 		console.log("~~~~~End L2 Interaction Simulation~~~~~");
-	}
+	}//end interactLevel2*/
 
 	/* Variance function */
 	this.variance = function() {
@@ -301,8 +359,9 @@ function Controller(level3, level2) {
 			tempVariance = Math.random();
 		}while(tempVariance > 0.3);
 		variance = tempVariance.toFixed(2);
-	}//this.variance*/
+	}//end variance*/
 
+	/* Level 3 NPC interactions */
 	this.npcMatchUp1 = function(npcType1, npcType2, city){
 		// Simulate interaction
 		var number;
@@ -381,8 +440,9 @@ function Controller(level3, level2) {
 				}// end if-else
 			}// end if
 		}
-	}
+	}//end npcMatchUp1*/
 
+	/* Level 2 NPC interactions */
 	this.npcMatchUp2 = function(npcType1, npcType2, building){
 		// Simulate interaction
 		if (npcType1 == 2 || npcType2 == 2) {// police vs.
@@ -440,8 +500,9 @@ function Controller(level3, level2) {
 				}// end if-else
 			}// end if
 		}
-	}
+	}//end npcMatchUp2*/
 
+	/* Level 3 NPC movement into current city */
 	this.npcMoveIntoCurrCity = function(type){
 		var moveRandom = 0;
 		switch(type){
@@ -449,26 +510,32 @@ function Controller(level3, level2) {
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
 			if (moveRandom == 1) {
 				L2.hospital.neutral++;
+				L2.in_H.push(1);
 				console.log("Neutral moved to hospital.");
 			} else if (moveRandom == 2) {
 				L2.buildingOne.neutral++;
+				L2.in_B1.push(1);
 				console.log("Neutral moved to buildingOne.");
 			} else if (moveRandom == 3) {
 				L2.buildingTwo.neutral++;
+				L2.in_B2.push(1);
 				console.log("Neutral moved to buildingTwo.");
 			}
 			break;
 		case 2:
 			L2.policeStation.police++;
+			L2.in_PS.push(2);
 			console.log("Police moved to police station.");
 			break;
 		case 3:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.rivals++;
+				L2.in_B1.push(3);
 				console.log("Rival moved to buildingOne.");
 			} else if (moveRandom == 2) {
 				L2.buildingTwo.rivals++;
+				L2.in_B2.push(3);
 				console.log("Rival moved to buildingTwo.");
 			}
 			break;
@@ -476,14 +543,70 @@ function Controller(level3, level2) {
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.allied++;
+				L2.in_B1.push(4);
 				console.log("Ally moved to buildingOne.");
 			} else if (moveRandom == 2) {
 				L2.buildingTwo.allied++;
+				L2.in_B2.push(4);
 				console.log("Ally moved to buildingTwo.");
 			}
 			break;
 		default:
-			//do nothing
+			console.log("No movement into current city.");
 		}
-	}
+	}//end npcMoveIntoCurrCity*/
+
+	/* Level 3 NPC movement from current city */
+	this.npcMoveFromCurrCity = function(type){
+		var moveRandom = 0;
+		switch(type){
+		case 1:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
+			if (moveRandom == 1) {
+				L2.hospital.neutral--;
+				L2.out_H.push(1);
+				console.log("Neutral moved from hospital.");
+			} else if (moveRandom == 2) {
+				L2.buildingOne.neutral--;
+				L2.out_B1.push(1);
+				console.log("Neutral moved from buildingOne.");
+			} else if (moveRandom == 3) {
+				L2.buildingTwo.neutral--;
+				L2.out_B2.push(1);
+				console.log("Neutral moved from buildingTwo.");
+			}
+			break;
+		case 2:
+			L2.policeStation.police--;
+			L2.out_PS.push(2);
+			console.log("Police moved from police station.");
+			break;
+		case 3:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
+			if (moveRandom == 1) {
+				L2.buildingOne.rivals--;
+				L2.out_B1.push(3);
+				console.log("Rival moved from buildingOne.");
+			} else if (moveRandom == 2) {
+				L2.buildingTwo.rivals--;
+				L2.out_B2.push(3);
+				console.log("Rival moved from buildingTwo.");
+			}
+			break;
+		case 4:
+			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
+			if (moveRandom == 1) {
+				L2.buildingOne.allied--;
+				L2.out_B1.push(4);
+				console.log("Ally moved from buildingOne.");
+			} else if (moveRandom == 2) {
+				L2.buildingTwo.allied--;
+				L2.out_B2.push(4);
+				console.log("Ally moved from buildingTwo.");
+			}
+			break;
+		default:
+			console.log("No movement from current city.");
+		}
+	}//end npcMoveIntoCurrCity*/
 }

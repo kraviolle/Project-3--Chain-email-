@@ -325,19 +325,43 @@ function load() {
 	/* 1s = 10 mins in-game*/
 	var timeCounter = 0;
 	var skipTime = 0;
+	var clearData = 1;
 	var timer = new timeInterval(1000, function(){
 		timeCounter++;
 		if((timeCounter%18) == 0){//3 hrs in-game
+			if(clearData == 1){
+				level2.clearArrays();
+				clearData = 0;
+			}
 			//L3 simulation
 			simulator.countryMovement();
 			simulator.interactLevel3();
 		}
 		if ((timeCounter%6) == 0){//1 hrs in-game
+			if(clearData == 1){
+				level2.clearArrays();
+				clearData = 0;
+			}
 			//L2 simulation
 			simulator.cityMovement();
 			simulator.interactLevel2();
 			level2.compressDataL3(level3);
 		}
+		/*console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		console.log("hospital queues");
+		console.log(level2.in_H.join(","));
+		console.log(level2.out_H.join(","));
+		console.log("police station queues");
+		console.log(level2.in_PS.join(","));
+		console.log(level2.out_PS.join(","));
+		console.log("building 1 queues");
+		console.log(level2.in_B1.join(","));
+		console.log(level2.out_B1.join(","));
+		console.log("building 2 queues");
+		console.log(level2.in_B2.join(","));
+		console.log(level2.out_B2.join(","));
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");*/
+		clearData = 1;
     });
     timer.run();
     //End Timer*/

@@ -80,8 +80,17 @@ function levelThree() {
 }
 
 function levelTwo() {
-	/*Data to display*/
 	var totalLocations = 4;
+	/*Queues for movement of NPCs*/
+	this.in_H = [];
+	this.out_H = [];
+	this.in_PS = [];
+	this.out_PS = [];
+	this.in_B1 = [];
+	this.out_B1 = [];
+	this.in_B2 = [];
+	this.out_B2 = [];
+	/*Data to display*/
 	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo
 	this.hospital = {
 		neutral : 115,
@@ -143,7 +152,7 @@ function levelTwo() {
 
 	this.totalLoc = function(){
 		return totalLocations;
-	}
+	}//end totalLoc
 
 	this.decompressDataL3 = function(level3){
 		var tempPop, tempNeutral, tempPolice, tempRivals, tempAllied, tempVariance;
@@ -206,7 +215,7 @@ function levelTwo() {
 		tempPolice -= this.buildingOne.police;
 		tempRivals -= this.buildingOne.rivals;
 		tempAllied -= this.buildingOne.allied;
-	}
+	}//end decompressDataL3
 
 	this.compressDataL3 = function(level3){
 		var tempNeutral, tempPolice, tempRivals, tempAllied;
@@ -238,5 +247,37 @@ function levelTwo() {
 		default:
 			//do nothing
 		}
-	}
+	}//end compressDataL3
+
+	this.clearArrays = function(){
+		var i = 0;
+		/*hospital queues*/
+		for (i = 0; i < this.in_H.length; i++) {
+			this.in_H.pop();
+		}
+		for (i = 0; i < this.out_H.length; i++) {
+			this.out_H.pop();
+		}
+		/*police station queues*/
+		for (i = 0; i < this.in_PS.length; i++) {
+			this.in_PS.pop();
+		}
+		for (i = 0; i < this.out_PS.length; i++) {
+			this.out_PS.pop();
+		}
+		/*building one queues*/
+		for (i = 0; i < this.in_B1.length; i++) {
+			this.in_B1.pop();
+		}
+		for (i = 0; i < this.out_B1.length; i++) {
+			this.out_B1.pop();
+		}
+		/*building two queues*/
+		for (i = 0; i < this.in_B2.length; i++) {
+			this.in_B2.pop();
+		}
+		for (i = 0; i < this.out_B2.length; i++) {
+			this.out_B2.pop();
+		}
+	}//end clearArray
 }
