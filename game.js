@@ -25,6 +25,7 @@ function load() {
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
 	var debug_mode = true; // HS
+	var debugWrite = new debugWriter(level2, level3); //Daryl
 	var building_test = [];
 	building_test[0] = 1;
 	
@@ -375,6 +376,8 @@ function load() {
 			console.log(level2.out_B2.join(","));
 			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		}//*/
+		debugWrite.printLvl2();
+		debugWrite.printLvl3();
 		clearData = 1;
     });
     timer.run();
