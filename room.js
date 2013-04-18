@@ -286,17 +286,35 @@ function outdoor(start_x, start_y){
 		}
 		
 		if(this.player_direction==2){				//Down
-			ctx.drawImage(heroimg, 20,0,20,26,herox, heroy,30,30);
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=0;}
+			else{testx=20;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,30,30);
 		}
 		
 		if(this.player_direction==3){				//Left
-			ctx.drawImage(heroimg, 140,0,20,26,herox, heroy,30,30);
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=120;}
+			else{testx=140;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,30,30);
 				
 				
 		}
 		
 		if(this.player_direction==4){				//Right
-			ctx.drawImage(heroimg, 100,0,20,26,herox, heroy,30,30);
+			if(this.player_key==1){
+			this.flag=!this.flag;
+			this.player_key=0;
+			}
+			if(this.flag==0){testx=80;}
+			else{testx=100;}
+			ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,30,30);
 		}
     /*switch(this.player_direction)
     {
