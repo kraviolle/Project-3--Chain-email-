@@ -331,7 +331,7 @@ function load() {
 
 		if(timeCounter%5 == 0)
 		{
-		//npc_controller.NPC_enter(2, building_test, building_test);
+			//npc_controller.decompress();
 		}
 
 
@@ -360,7 +360,8 @@ function load() {
 			if(clearData == 1){
 				level2.clearArrays();
 				clearData = 0;
-				npc_controller.NPC_enter(2, level2.in_B1, building_test); // HS :x
+				//npc_controller.NPC_enter(2, level2.in_B1, building_test); // HS :x
+				npc_controller.decompress();
 			}
 			//L2 simulation
 			simulator.cityMovement();

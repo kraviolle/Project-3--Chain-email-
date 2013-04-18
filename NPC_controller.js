@@ -908,7 +908,23 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       //use building 2
 
     }
-
   }
 
+  this.decompress = function(){
+    // Get no. the different number of each type of NPC
+    // Initialize them into positions of the outside list
+    var neutral_npc = 10;
+
+    for(var i = 0; i < neutral_npc; i++)
+    {
+      if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
+      {
+        this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,0,123,false));
+        this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = true;
+        this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
+        this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
+      }
+    }
+
+  }
 }
