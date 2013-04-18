@@ -7,7 +7,7 @@ function load() {
 	ctx = canvas.getContext("2d");
 	// Debug
 	debug = document.getElementById("debug");
-	ctxDebug = canvas.getContext("2d");
+	ctxDebug = debug.getContext("2d");
 
 	//-------------------
 	//  Init Objects Here
@@ -315,7 +315,7 @@ function load() {
 		npc_controller.interaction_simulate(timeCounter);
 
 		writeMessage(canvas, timeCounter);
-			
+		
 
 
 	}, screenUpdateTime);
@@ -349,20 +349,22 @@ function load() {
 			simulator.interactLevel2();
 			level2.compressDataL3(level3);
 		}
-		/*console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		console.log("hospital queues");
-		console.log(level2.in_H.join(","));
-		console.log(level2.out_H.join(","));
-		console.log("police station queues");
-		console.log(level2.in_PS.join(","));
-		console.log(level2.out_PS.join(","));
-		console.log("building 1 queues");
-		console.log(level2.in_B1.join(","));
-		console.log(level2.out_B1.join(","));
-		console.log("building 2 queues");
-		console.log(level2.in_B2.join(","));
-		console.log(level2.out_B2.join(","));
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");*/
+		if(clearData == 0){
+			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("hospital queues");
+			console.log(level2.in_H.join(","));
+			console.log(level2.out_H.join(","));
+			console.log("police station queues");
+			console.log(level2.in_PS.join(","));
+			console.log(level2.out_PS.join(","));
+			console.log("building 1 queues");
+			console.log(level2.in_B1.join(","));
+			console.log(level2.out_B1.join(","));
+			console.log("building 2 queues");
+			console.log(level2.in_B2.join(","));
+			console.log(level2.out_B2.join(","));
+			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");//*/
+		}
 		clearData = 1;
     });
     timer.run();

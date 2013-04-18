@@ -163,7 +163,7 @@ function Controller(level3, level2) {
 	}
 
 	/* NPC movement across the city
-	/* When determining which type, will add 1 more to simulate chance of no movement*/
+	/* When determining which type, will +1 more to simulate no movement*/
 	this.cityMovement = function() {
 		console.log("=======Start L2 Movement Simulation=======");
 		// move npc from hospital

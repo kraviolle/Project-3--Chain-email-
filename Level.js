@@ -154,6 +154,7 @@ function levelTwo() {
 		return totalLocations;
 	}//end totalLoc
 
+	/* Get data from Level 3 and decompress it */
 	this.decompressDataL3 = function(level3){
 		var tempPop, tempNeutral, tempPolice, tempRivals, tempAllied, tempVariance;
 		switch(level3.playerCity){
@@ -217,6 +218,7 @@ function levelTwo() {
 		tempAllied -= this.buildingOne.allied;
 	}//end decompressDataL3
 
+	/* Compress data in Level 2 to send to Level 3 */
 	this.compressDataL3 = function(level3){
 		var tempNeutral, tempPolice, tempRivals, tempAllied;
 		tempNeutral = this.hospital.neutral + this.policeStation.neutral + 
@@ -249,6 +251,7 @@ function levelTwo() {
 		}
 	}//end compressDataL3
 
+	/* Clear the queues for buildings */
 	this.clearArrays = function(){
 		var i = 0;
 		/*hospital queues*/
