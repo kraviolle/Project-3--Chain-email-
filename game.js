@@ -77,6 +77,21 @@ function load() {
 								}
 							}
 
+							if (city_level.active)// If player in city level
+							{
+								city_level.player_key = 1;
+								city_level.player_direction = 3;
+								if (city_level.player_position.x != 0
+										&& !city_level.map[city_level.player_position.x - 1][city_level.player_position.y].occupied) // Not at the left most column
+								{
+									city_level.player_position.x = city_level.player_position.x - 1; // Change position of player in room
+									city_level.map[city_level.player_position.x][city_level.player_position.y].occupied = true; // Change new position to occupied
+									city_level.map[city_level.player_position.x + 1][city_level.player_position.y].occupied = false;// Change old position to unoccupied
+									console.log(city_level.player_position.x + ','
+											+ city_level.player_position.y);
+								}
+							}
+
 						}//end if(event.keyCode == 37)
 
 						if (event.keyCode == 39) {
@@ -111,6 +126,20 @@ function load() {
 											+ Outside.player_position.y);
 								}
 							}
+
+							if (city_level.active) {
+								city_level.player_direction = 4;
+								city_level.player_key = 1;
+								if (city_level.player_position.x != (city_level.column - 1)
+										&& !city_level.map[city_level.player_position.x + 1][city_level.player_position.y].occupied) {
+									city_level.player_position.x = city_level.player_position.x + 1; // Change position of player in room
+									city_level.map[city_level.player_position.x][city_level.player_position.y].occupied = true; // Change new position to occupied
+									city_level.map[city_level.player_position.x - 1][city_level.player_position.y].occupied = false;// Change old position to unoccupied
+									console.log(city_level.player_position.x + ','
+											+ city_level.player_position.y);
+								}
+							}
+
 						}//end if(event.keyCode == 39)
 
 						if (event.keyCode == 38) {
@@ -148,6 +177,19 @@ function load() {
 									lobby.map[3][7].occupied = true;
 									lobby.active = true;
 									lobby.player_direction = 1;
+								}
+							}
+
+							if (city_level.active) {
+								city_level.player_direction = 1;
+								city_level.player_key=1;
+								if (city_level.player_position.y != 0
+										&& !city_level.map[city_level.player_position.x][city_level.player_position.y - 1].occupied) {
+									city_level.player_position.y = city_level.player_position.y - 1; // Change position of player in room
+									city_level.map[city_level.player_position.x][city_level.player_position.y].occupied = true; // Change new position to occupied
+									city_level.map[city_level.player_position.x][city_level.player_position.y + 1].occupied = false;// Change old position to unoccupied
+									console.log(city_level.player_position.x + ','
+											+ city_level.player_position.y);
 								}
 							}
 
@@ -189,6 +231,19 @@ function load() {
 									Outside.map[Outside.player_position.x][Outside.player_position.y - 1].occupied = false;// Change old position to unoccupied
 									console.log(Outside.player_position.x + ','
 											+ Outside.player_position.y);
+								}
+							}
+
+							else if (city_level.active) {
+								city_level.player_direction = 2;
+								city_level.player_key = 1;
+								if (city_level.player_position.y != (city_level.row - 1)
+										&& !city_level.map[city_level.player_position.x][city_level.player_position.y + 1].occupied) {
+									city_level.player_position.y = city_level.player_position.y + 1; // Change position of player in room
+									city_level.map[city_level.player_position.x][city_level.player_position.y].occupied = true; // Change new position to occupied
+									city_level.map[city_level.player_position.x][city_level.player_position.y - 1].occupied = false;// Change old position to unoccupied
+									console.log(city_level.player_position.x + ','
+											+ city_level.player_position.y);
 								}
 							}
 						}//end if (event.keyCode == 40)
