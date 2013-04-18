@@ -349,7 +349,7 @@ function load() {
 			simulator.interactLevel2();
 			level2.compressDataL3(level3);
 		}
-		if(clearData == 0){
+		/*if(clearData == 0){
 			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			console.log("hospital queues");
 			console.log(level2.in_H.join(","));
@@ -363,8 +363,8 @@ function load() {
 			console.log("building 2 queues");
 			console.log(level2.in_B2.join(","));
 			console.log(level2.out_B2.join(","));
-			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");//*/
-		}
+			console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		}//*/
 		clearData = 1;
     });
     timer.run();
