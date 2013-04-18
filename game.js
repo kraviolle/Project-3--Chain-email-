@@ -23,10 +23,10 @@ function load() {
 	level2.decompressDataL3(level3);
 	var simulator = new Controller(level3, level2); //Lionel
 	var navigate = new pathfinding(lobby, Outside); //HS
-	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
+	var npc_controller = new NPC_controller(lobby, Outside, navigate, level2.playerLocation, level2.out_B1, level2.out_B2); // HS
 	var debug_mode = false; // HS
 	var debugWrite = new debugWriter(level2, level3); //Daryl
-	var building_test = [1,2,1,3,2,1,4,2,1];
+	var building_test = [];
 	//building_test[0] = 1;
 	
 	//------------------------------
@@ -353,7 +353,7 @@ function load() {
 			if(clearData == 1){
 				level2.clearArrays();
 				clearData = 0;
-				npc_controller.NPC_enter(2, building_test, building_test);
+				npc_controller.NPC_enter(2, level2.in_B1, building_test); // HS :x
 			}
 			//L2 simulation
 			simulator.cityMovement();

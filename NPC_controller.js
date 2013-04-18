@@ -1,4 +1,4 @@
-function NPC_controller(room, outside, navigate){
+function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
   this.NPC_array = []; // Stores the data of NPC at a location
   //this.idle = []; // Stores the idle locations on the map and signifies whether it is in the room or outside
@@ -262,6 +262,40 @@ function NPC_controller(room, outside, navigate){
             {
               this.NPC_array[i].interaction_start++;
               this.NPC_array[this.NPC_array[i].interrogate].interaction_start++;
+            }
+            else if(this.NPC_array[i].intention == 6)
+            {
+              var convert = 1;
+              switch(this.NPC_array[i].faction)
+              {
+                case 0:
+                convert = 1;
+                break;
+                case 1:
+                convert = 3;
+                break;
+                case 2:
+                convert = 4;
+                break;
+                case 3:
+                convert = 2;
+                break;
+              }
+
+              switch(player_pos)
+              {
+                case 2:
+                B1_OUT.push(convert);
+                break;
+                case 3:
+                B2_OUT.push(convert);
+                break;
+              }
+              
+              this.outside.map[15][3].occupied = false;
+              this.NPC_array.splice(i, 1);
+              // Add to leaving list the type of NPC
+              break;
             }
           }
       }
@@ -692,7 +726,21 @@ function NPC_controller(room, outside, navigate){
     } 
   }
 
+  this.leave = function(NPC){ // This NPC will leave this area
+    this.NPC_array[NPC].intention = 6;
+    this.NPC_array[NPC].destination = new Point(15 , 3);
+    this.NPC_array[NPC].destination_inside = false;
+  }
+
   this.NPC_enter = function(player_location, building1, building2){ //This creates NPC that are entering this area from another area
+
+    //Testing the leaving function
+    if(this.NPC_array.length > 0)
+    {
+      this.leave(Math.floor((Math.random()*this.NPC_array.length)));
+      console.log('leave');
+    }
+
 
     var npc_type = 0;
 
