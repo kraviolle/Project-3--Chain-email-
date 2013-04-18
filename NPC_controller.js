@@ -398,7 +398,9 @@ function NPC_controller(room, outside, navigate){
           random_index = Math.floor((Math.random()*this.NPC_array.length));
           console.log('Random index: ' + random_index);
           console.log('Random faction is ' + this.NPC_array[random_index].faction);
-          if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction == 1)); // NPC must be idling
+          var npc_intent = this.NPC_array[random_index].intention;
+          var npc_faction = this.NPC_array[random_index].faction;
+          if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction == 1)) // NPC must be idling
           {
             NPC_1 = random_index;
           }
@@ -417,7 +419,7 @@ function NPC_controller(room, outside, navigate){
           // Find either a gang member or neutral NPC
           do{
             random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 2)); // NPC must be idling
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 2)) // NPC must be idling
           {
             NPC_2 = random_index2;
           }
