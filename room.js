@@ -158,7 +158,7 @@ function outdoor(start_x, start_y){
   this.column = 16;
   this.row = 8;
   this.door_thickness = 8;
-  //this.testingX=60;
+  
   for(var i = 0; i < this.column; i++)
   {
     this.map[i] = [];
@@ -246,7 +246,7 @@ function outdoor(start_x, start_y){
 			
 	// Test to draw img.
 	var Testimg = new Image();        //- KEN , drawing over your cells. the door is positioned as such. will add more background stuff nxt time.
-	Testimg.src= "images/Test.png";
+	Testimg.src= "images/city.png";
 	ctx.drawImage(Testimg, 0,0);
 	
 	
@@ -259,7 +259,7 @@ function outdoor(start_x, start_y){
 	  herox =this.map[this.player_position.x][this.player_position.y].point.x;
 	  heroy = this.map[this.player_position.x][this.player_position.y].point.y;
 	  
-	  ctx.drawImage(heroimg, 0,0,20,24,herox, heroy,30,30);
+	  
 	  
 	  // Removing the black dot as player
 	 /* ctx.beginPath();     
@@ -272,24 +272,24 @@ function outdoor(start_x, start_y){
         ctx.stroke();
 	 */
 		if(this.player_direction==1){				//UP
-			ctx.drawImage(heroimg, this.testingX,0,20,24,herox, heroy,30,30);
+			ctx.drawImage(heroimg, 60,0,20,26,herox, heroy,30,30);
 			//this.testingX=this.testingX-20;
 			//if(this.testingX<40){this.testingX=60;}
 			
 		}
 		
 		if(this.player_direction==2){				//Down
-			ctx.drawImage(heroimg, 20,0,20,24,herox, heroy,30,30);
+			ctx.drawImage(heroimg, 20,0,20,26,herox, heroy,30,30);
 		}
 		
 		if(this.player_direction==3){				//Left
-			ctx.drawImage(heroimg, 140,0,20,24,herox, heroy,30,30);
+			ctx.drawImage(heroimg, 140,0,20,26,herox, heroy,30,30);
 				
 				
 		}
 		
 		if(this.player_direction==4){				//Right
-			ctx.drawImage(heroimg, 100,0,20,24,herox, heroy,30,30);
+			ctx.drawImage(heroimg, 100,0,20,26,herox, heroy,30,30);
 		}
     /*switch(this.player_direction)
     {
