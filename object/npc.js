@@ -25,6 +25,7 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.attack=20;
 	this.defense=20;
 	this.message="HELLO";
+	this.direction=2;  			//Start looking down,   1- Up, 2-down, 3-Left ,4-right
 	
 	if(faction==0){
 		choice=Math.random();
