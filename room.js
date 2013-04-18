@@ -421,3 +421,149 @@ function outdoor(start_x, start_y){
 
 
 }
+
+function city(start_x, start_y){
+
+  this.active = false; // This signifies that player is in the city
+  this.map = [];
+  this.cellsize = 40;
+  this.column = 10;
+  this.row = 5;
+
+  for(var i = 0; i < this.column; i++)
+  {
+    this.map[i] = [];
+
+    for(var j = 0; j < this.row; j++)
+    {
+      this.map[i][j] = new cell(start_x + (i * this.cellsize), start_y + (j * this.cellsize));
+    }
+  }
+
+  //
+  // Create this into player class
+  //
+  // Initialize player position to the door
+  this.map[3][3].player = true;
+  this.map[3][3].occupied = false;
+  this.player_position = new Point(3,3); //Cell coordinates of the player
+  this.player_direction = 2; // 1 = up, 2 = down, 3 = left, 4 = right
+  this.player_key = 0;
+  //
+  // Create this into player class
+  //
+
+  this.drawroom = function(){
+
+    // Drawing the entire room
+    ctx.beginPath();
+    ctx.rect(start_x, start_y, this.column * this.cellsize, this.row * this.cellsize);      
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+
+        // Drawing the grid
+        for(var i = 0; i < this.column; i++)
+        {
+          ctx.beginPath();
+          ctx.moveTo(start_x + (i * this.cellsize), start_y);
+          ctx.lineTo(start_x + (i * this.cellsize), start_y + (this.row * this.cellsize));
+          ctx.stroke();
+        }
+
+        for(var j = 0; j < this.row; j++)
+        {
+          ctx.beginPath();
+          ctx.moveTo(start_x, start_y + (j * this.cellsize));
+          ctx.lineTo(start_x + (this.column * this.cellsize), start_y + (j * this.cellsize));
+          ctx.stroke();
+        }
+
+        
+  }
+
+  this.drawplayer = function(){
+      var heroimg= new Image();
+    heroimg.src="images/hero.png";
+    herox =this.map[this.player_position.x][this.player_position.y].point.x;
+    heroy = this.map[this.player_position.x][this.player_position.y].point.y;
+    
+    
+    
+    // Removing the black dot as player
+   /* ctx.beginPath();     
+      ctx.arc(this.map[this.player_position.x][this.player_position.y].point.x + this.cellsize/2, this.map[this.player_position.x][this.player_position.y].point.y + this.cellsize/2, this.cellsize/2 - 2, 0, 2*Math.PI, true);
+      ctx.fillStyle = 'black';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      // line color
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+   */
+   
+    if(this.player_direction==1){       //UP
+      if(this.player_key==1){
+      this.flag=!this.flag;
+      this.player_key=0;
+      }
+      if(this.flag==0){testx=40;}
+      else{testx=60;}
+      ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+    }
+    
+    if(this.player_direction==2){       //Down
+      if(this.player_key==1){
+      this.flag=!this.flag;
+      this.player_key=0;
+      }
+      if(this.flag==0){testx=0;}
+      else{testx=20;}
+      ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+    }
+    
+    if(this.player_direction==3){       //Left
+      if(this.player_key==1){
+      this.flag=!this.flag;
+      this.player_key=0;
+      }
+      if(this.flag==0){testx=120;}
+      else{testx=140;}
+      ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+        
+        
+    }
+    
+    if(this.player_direction==4){       //Right
+      if(this.player_key==1){
+      this.flag=!this.flag;
+      this.player_key=0;
+      }
+      if(this.flag==0){testx=80;}
+      else{testx=100;}
+      ctx.drawImage(heroimg, testx,0,20,26,herox,heroy,40,40);
+    }
+  }
+
+  this.draw = function(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    this.drawroom();
+    this.drawplayer();
+    
+  }
+
+  this.draw_debug = function(){
+    for(var i = 0; i < this.column; i++)
+    {
+      for(var j = 0; j < this.row; j++)
+      {
+          ctx.font="10px Arial";
+          ctx.fillStyle = 'black';
+          ctx.fillText(this.map[i][j].occupied, this.map[i][j].point.x + this.cellsize/4,this.map[i][j].point.y + this.cellsize/4); // Occupied status
+          ctx.fillText(this.map[i][j].npc,this.map[i][j].point.x+this.cellsize/4,this.map[i][j].point.y + (this.cellsize/2)); // NPC ID
+      }
+    }
+  }
+
+}

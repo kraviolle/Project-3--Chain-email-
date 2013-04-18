@@ -26,6 +26,7 @@ function load() {
 	var npc_controller = new NPC_controller(lobby, Outside, navigate, level2.playerLocation, level2.out_B1, level2.out_B2); // HS
 	var debug_mode = false; // HS
 	var debugWrite = new debugWriter(level2, level3); //Daryl
+	var city_level = new city(20, 20); //HS
 	var building_test = [];
 	//building_test[0] = 1;
 	
@@ -96,7 +97,12 @@ function load() {
 							if (Outside.active) {
 								Outside.player_direction = 4;
 								Outside.player_key = 1;
-								if (Outside.player_position.x != (Outside.column - 1)
+								if(Outside.player_position.x == 15 && Outside.player_position.y == 3)
+								{
+									Outside.active = false;
+									city_level.active = true;
+								}
+								else if (Outside.player_position.x != (Outside.column - 1)
 										&& !Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) {
 									Outside.player_position.x = Outside.player_position.x + 1; // Change position of player in room
 									Outside.map[Outside.player_position.x][Outside.player_position.y].occupied = true; // Change new position to occupied
@@ -317,6 +323,10 @@ function load() {
 				npc_controller.drawNPC_debug(false);
 			}
 
+		}
+
+		if (city_level.active){
+			city_level.draw();
 		}
 
 
