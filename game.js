@@ -59,8 +59,9 @@ function load() {
 								}
 							}
 
-							if (Outside.active)// If player in the room
+							if (Outside.active)// If player outside
 							{
+								Outside.player_key = 1;
 								Outside.player_direction = 3;
 								if (Outside.player_position.x != 0
 										&& !Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied) // Not at the left most column

@@ -42,7 +42,8 @@ function room(start_x, start_y){
 	this.map[3][7].player = true;
 	this.map[3][7].occupied = false;
 	this.player_position = new Point(3,7); //Cell coordinates of the player
-  this.player_direction = 1; // 1 = up, 2 = down, 3 = left, 4 = right
+	this.player_direction = 1; // 1 = up, 2 = down, 3 = left, 4 = right
+	this.player_key = 0;
   //
   // Create this into player class
   //
@@ -174,6 +175,7 @@ function outdoor(start_x, start_y){
   this.map[15][4].occupied = true;
   this.player_position = new Point(15,4); //Cell coordinates of the player
   this.player_direction = 3; // 1 = up, 2 = down, 3 = left, 4 = right
+  this.player_key = 0;
   //
   // Create this into player class
   //
@@ -271,6 +273,7 @@ function outdoor(start_x, start_y){
         ctx.strokeStyle = 'black';
         ctx.stroke();
 	 */
+	 
 		if(this.player_direction==1){				//UP
 			ctx.drawImage(heroimg, 60,0,20,26,herox, heroy,30,30);
 			//this.testingX=this.testingX-20;

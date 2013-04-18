@@ -129,7 +129,7 @@ function NPC_controller(room, outside, navigate){
             npcimg.src="images/rival.png";
             break;
             case 3: // Policeman
-            npcimg.src="images/rival.png";
+            npcimg.src="images/police.png";
             break;
           }
           
