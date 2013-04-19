@@ -511,11 +511,11 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
           //console.log('Random faction is ' + this.NPC_array[random_index].faction);
           var npc_intent = this.NPC_array[random_index].intention;
           var npc_faction = this.NPC_array[random_index].faction;
-          var npc_timer = Date().getTime() - (this.NPC_array[random_index].movement_start_time);
+          /*var npc_timer = Date().getTime() - (this.NPC_array[random_index].movement_start_time);
           if(npc_intent == 1 && npc_timer >= 1000){//if NPC is trying to do something for more than 10s, stop and break
             this.NPC_array[random_index].returnToIdle();
             continue;
-          }
+          }*/
           if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction != 0)) // NPC must be idling
           {
             NPC_1 = random_index;
@@ -601,10 +601,10 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     // gang, neutral are the ID of the two NPC
     this.NPC_array[gang].recruiting = neutral;
     this.NPC_array[gang].intention = 2;
-    this.NPC_array[gang].movement_start_time = Date().getTime();
+    //this.NPC_array[gang].movement_start_time = Date().getTime();
     this.NPC_array[neutral].recruited = gang;
     this.NPC_array[neutral].intention = 2;
-     this.NPC_array[neutral].movement_start_time = Date().getTime();
+     //this.NPC_array[neutral].movement_start_time = Date().getTime();
 
     // Find an adjacent location ard neutral npc for the gang member to go to
     if(this.NPC_array[neutral].inside) // NPC is indoors
@@ -659,10 +659,10 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
     this.NPC_array[gang].fighting = gang2;
     this.NPC_array[gang].intention = 3;
-    this.NPC_array[gang].movement_start_time = Date().getTime();
+    //this.NPC_array[gang].movement_start_time = Date().getTime();
     this.NPC_array[gang2].fighting = gang;
     this.NPC_array[gang2].intention = 3;
-    this.NPC_array[gang2].movement_start_time = Date().getTime();
+    //this.NPC_array[gang2].movement_start_time = Date().getTime();
 
     // Find an adjacent location ard e 2nd gang member for the 1sst gang member to go to
     if(this.NPC_array[gang2].inside) // NPC is indoors
@@ -717,10 +717,10 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     // Gang in this function refers to the police
     this.NPC_array[gang].interrogate = gang2;
     this.NPC_array[gang].intention = 5;
-    this.NPC_array[gang].movement_start_time = Date().getTime();
+    //this.NPC_array[gang].movement_start_time = Date().getTime();
     this.NPC_array[gang2].interrogate = gang;
     this.NPC_array[gang2].intention = 5;
-    this.NPC_array[gang2].movement_start_time = Date().getTime();
+    //this.NPC_array[gang2].movement_start_time = Date().getTime();
 
     // Find an adjacent location ard e gang member for the police to go to
     if(this.NPC_array[gang2].inside) // NPC is indoors
@@ -780,7 +780,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       if(this.NPC_array[random_npc].intention == 0)
       {
         this.NPC_array[random_npc].intention = 6;
-		this.NPC_array[NPC].movement_start_time = Date().getTime();
+		//this.NPC_array[NPC].movement_start_time = Date().getTime();
         this.NPC_array[random_npc].destination = new Point(15 , 3);
         this.NPC_array[random_npc].destination_inside = false;
       }
@@ -835,7 +835,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
             this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
             this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
             this.NPC_array[this.NPC_array.length - 1].intention = 1;
-            this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
+            //this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
             outside.list_flag[i] = 1;
             break;
           }
@@ -859,7 +859,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
             this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
             this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
             this.NPC_array[this.NPC_array.length - 1].intention = 1;
-            this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
+            //this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
             outside.list_flag[i] = 1;
             break;
           }
@@ -883,7 +883,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
             this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
             this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
             this.NPC_array[this.NPC_array.length - 1].intention = 1;
-            this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
+            //this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
             outside.list_flag[i] = 1;
             break;
           }
@@ -907,7 +907,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
             this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
             this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
             this.NPC_array[this.NPC_array.length - 1].intention = 1;
-            this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
+            //this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
             outside.list_flag[i] = 1;
             break;
           }
@@ -926,7 +926,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
           {
             this.NPC_array[this.NPC_array[length - 1]].destination = new Point(this.outside.idle_location.array[i].x, this.outside.idle_location.array[i].y);
             this.NPC_array[this.NPC_array[length - 1]].intention = 1;
-            this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
+            //this.NPC_array[this.NPC_array.length - 1].movement_start_time = Date().getTime();
             break;
           }
         }
