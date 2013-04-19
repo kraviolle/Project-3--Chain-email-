@@ -15,7 +15,17 @@ function debugWriter(levelTwo, levelThree){
 					+ "--Neutral: " + Math.floor(levelTwo.buildingTwo.neutral) + "<br/>"
 					+ "--Polics: " + Math.floor(levelTwo.buildingTwo.police) + "<br/>"
 					+ "--Rivals: " + Math.floor(levelTwo.buildingTwo.rivals) + "<br/>"
-					+ "--Allied: " + Math.floor(levelTwo.buildingTwo.allied) + "<br/>";
+					+ "--Allied: " + Math.floor(levelTwo.buildingTwo.allied) + "<br/>"
+					+ "Building Three - Total: " + Math.floor(levelTwo.buildingThreePopulation()) + "<br/>"
+					+ "--Neutral: " + Math.floor(levelTwo.buildingThree.neutral) + "<br/>"
+					+ "--Police: " + Math.floor(levelTwo.buildingThree.police) + "<br/>"
+					+ "--Rivals: " + Math.floor(levelTwo.buildingThree.rivals) + "<br/>"
+					+ "--Allied: " + Math.floor(levelTwo.buildingThree.allied) + "<br/><br/>"
+					+ "Building Four - Total: " + Math.floor(levelTwo.buildingTwoPopulation() ) + "<br/>"
+					+ "--Neutral: " + Math.floor(levelTwo.buildingFour.neutral) + "<br/>"
+					+ "--Polics: " + Math.floor(levelTwo.buildingFour.police) + "<br/>"
+					+ "--Rivals: " + Math.floor(levelTwo.buildingFour.rivals) + "<br/>"
+					+ "--Allied: " + Math.floor(levelTwo.buildingFour.allied) + "<br/>";
 					
 			document.getElementById("lvl2Data").innerHTML = lvl2string;
 	 }
