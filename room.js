@@ -346,12 +346,21 @@ function outdoor(start_x, start_y){
     }
   }
 
-}
+  
+  this.list = [];
+  this.list[0] = new Point(0,3);
+  this.list[1] = new Point(0,6);
+  this.list[2] = new Point(2,4);
+  this.list[3] = new Point(4,3);
+  this.list[4] = new Point(4,5);
+  this.list[5] = new Point(3,7);
+  this.list[6] = new Point(7,7);
+  this.list[7] = new Point(9,5);
+  this.list[8] = new Point(11,6);
+  this.list[9] = new Point(13,7);
+  this.list[10] = new Point(11,3);
+  this.list[11] = new Point(14,7);
 
-function idle_location(x, y, where, occupancy){
 
-  this.point = new Point(x,y);
-  this.inside = where; // true signifies inside the room, false signifies outside the room
-  this.occupied = occupancy; // true signifies occupied, false signifies unoccupied
-  this.NPC = -1; // If -1 means not occupied. If occupied, stores the index of the NPC at the location
+
 }

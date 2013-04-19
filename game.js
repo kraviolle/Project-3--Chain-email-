@@ -25,6 +25,8 @@ function load() {
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate); // HS
 	var debug_mode = true; // HS
+	var building_test = [];
+	building_test[0] = 1;
 	
 	//------------------------------
 	//  End initialization of object
@@ -315,7 +317,13 @@ function load() {
 		//npc_controller.interaction_simulate(timeCounter);
 
 		writeMessage(canvas, timeCounter);
-		
+
+		// Testing the NPC_enter function
+
+		if(timeCounter%5 == 0)
+		{
+		//npc_controller.NPC_enter(2, building_test, building_test);
+		}
 
 
 	}, screenUpdateTime);
@@ -343,6 +351,7 @@ function load() {
 			if(clearData == 1){
 				level2.clearArrays();
 				clearData = 0;
+				npc_controller.NPC_enter(2, building_test, building_test);
 			}
 			//L2 simulation
 			simulator.cityMovement();
