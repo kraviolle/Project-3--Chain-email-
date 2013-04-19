@@ -219,39 +219,49 @@ function NPC_controller(room, outside, navigate){
           {
             this.NPC_array[i].destination.x = -1;
             this.NPC_array[i].destination.y = -1;
+            this.NPC_array[i].interaction_start++;
             if(this.NPC_array[i].intention == 1) // If original intention of NPC was to move, NPC will go back to idle after reaching new position
             {
               this.NPC_array[i].intention = 0; 
             }
             else if(this.NPC_array[i].intention ==2) // If the NPC wants to recruit a neutral NPC, the timer only starts when they are next to each other
             {
-              this.NPC_array[i].interaction_start = timeCounter;
-              this.NPC_array[this.NPC_array[i].recruiting].interaction_start = timeCounter;
+              this.NPC_array[i].interaction_start ++;
+              this.NPC_array[this.NPC_array[i].recruiting].interaction_start ++;
             }
             else if(this.NPC_array[i].intention == 3) // This NPC is gonna fight another gang member
             {
-              this.NPC_array[i].interaction_start = timeCounter;
-              this.NPC_array[this.NPC_array[i].fighting].interaction_start = timeCounter;
+              this.NPC_array[i].interaction_start ++;
+              this.NPC_array[this.NPC_array[i].fighting].interaction_start ++;
             }
             else if(this.NPC_array[i].intention == 5)
             {
-              this.NPC_array[i].interaction_start = timeCounter;
-              this.NPC_array[this.NPC_array[i].interrogate].interaction_start = timeCounter;
+              this.NPC_array[i].interaction_start++;
+              this.NPC_array[this.NPC_array[i].interrogate].interaction_start++;
             }
           }
       }
       //
       //  End of moving to destination
       //
+      if(this.NPC_array[i].destination.x == -1 && this.NPC_array[i].intention > 1 && this.NPC_array[i].interaction_start > 0)
+      {
+        if(this.npc_movement%15 == 0)
+        {
+        this.NPC_array[i].interaction_start++;
+        }
+        this.npc_movement++;
+      }
 
       //
       //  If NPC is admist an interaction, check if its over, if so trigger action
       //
       if(this.NPC_array[i].intention > 1) // Any interaction with another NPC
       {
-        if(timeCounter - this.NPC_array[i].interaction_start > 7)// Check if time now - time start more than allocated duration
+        console.log('Interaction start: ' + this.NPC_array[i].interaction_start);
+        if(this.NPC_array[i].interaction_start > 7)// Check if time now - time start more than allocated duration
         {
-          console.log(i);
+          //console.log(i);
           // If so
           // For recruitment, recruiter back to idle, neutral 50% chance of becoming recruiters gang, back to idle
           if(this.NPC_array[i].intention == 2)
@@ -260,6 +270,8 @@ function NPC_controller(room, outside, navigate){
             {//REcruiter
               this.NPC_array[i].intention = 0; // Recruiter back to idle
               this.NPC_array[this.NPC_array[i].recruiting].intention = 0;
+              this.NPC_array[i].interaction_start = 0;
+              this.NPC_array[this.NPC_array[i].recruiting].interaction_start = 0;
               luck = Math.floor((Math.random()*10)+1);
               console.log(luck + ' First');
               if(luck < 4)
@@ -269,10 +281,13 @@ function NPC_controller(room, outside, navigate){
               this.NPC_array[this.NPC_array[i].recruiting].recruited = -1;
               this.NPC_array[i].recruiting = -1;
             }
+            /*
             else
             {//Recruitee
               this.NPC_array[i].intention = 0;
               this.NPC_array[this.NPC_array[i].recruited].intention = 0;
+              this.NPC_array[i].interaction_start = 0;
+              this.NPC_array[this.NPC_array[i].recruited].interaction_start = 0;
               luck = Math.floor((Math.random()*10)+1);
               console.log(luck + ' 2nd');
               if(luck <4)
@@ -283,6 +298,7 @@ function NPC_controller(room, outside, navigate){
               this.NPC_array[i].recruited = 0;
 
             }
+            */
             
 
           }
@@ -294,6 +310,7 @@ function NPC_controller(room, outside, navigate){
             {
               this.NPC_array[this.NPC_array[i].fighting].intention = 0;
               this.NPC_array[this.NPC_array[i].fighting].fighting = -1;
+              this.NPC_array[this.NPC_array[i].fighting].interaction_start = 0;
               if(this.NPC_array[i].inside)
               {
                 this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].occupied = false
@@ -311,6 +328,7 @@ function NPC_controller(room, outside, navigate){
             {
               this.NPC_array[i].intention = 0;
               this.NPC_array[i].fighting = -1;
+              this.NPC_array[i].interaction_start = 0;
               if(this.NPC_array[this.NPC_array[i].fighting].inside)
               {
                 this.room.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].occupied = false
@@ -347,9 +365,11 @@ function NPC_controller(room, outside, navigate){
               {
                 this.NPC_array[this.NPC_array[i].interrogate].intention = 0;
                 this.NPC_array[this.NPC_array[i].interrogate].interrogate = -1;
+                this.NPC_array[this.NPC_array[i].interrogate].interaction_start = 0;
               }
               this.NPC_array[i].intention = 0;
               this.NPC_array[i].interrogate = -1;
+              this.NPC_array[i].interaction_start = 0;
             }
           }
           // End for interrogate
@@ -386,7 +406,7 @@ function NPC_controller(room, outside, navigate){
   }
   this.interaction_simulate = function(timeCounter){
     //Randomly creating an interaction every 10 seconds
-      if(timeCounter - this.last_count_2 > 5)
+      if(timeCounter - this.last_count_2 > 7)
       {
         //var action = Math.floor((Math.random()*5)+1);
         var NPC_1 = -1;
@@ -396,21 +416,21 @@ function NPC_controller(room, outside, navigate){
 
         do{
           random_index = Math.floor((Math.random()*this.NPC_array.length));
-          console.log('Random index: ' + random_index);
-          console.log('Random faction is ' + this.NPC_array[random_index].faction);
+          //console.log('Random index: ' + random_index);
+          //console.log('Random faction is ' + this.NPC_array[random_index].faction);
           var npc_intent = this.NPC_array[random_index].intention;
           var npc_faction = this.NPC_array[random_index].faction;
-          if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction == 1)) // NPC must be idling
+          if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction != 0)) // NPC must be idling
           {
             NPC_1 = random_index;
           }
-          console.log('Randomly picked NPC is ' + NPC_1);
+          //console.log('Randomly picked NPC is ' + NPC_1);
         }
         while(NPC_1 == -1);
         
-        //console.log('Randomly picked NPC is ' + this.NPC_array[NPC_1].faction);
+        console.log('Randomly picked NPC is ' + NPC_1);
         
-        /*
+        
         //Base on which NPC is selected, decide which actions are legal.
         switch(this.NPC_array[NPC_1].faction){
           case 0: // Neutral - Legal actions - Nothing for now
@@ -423,18 +443,19 @@ function NPC_controller(room, outside, navigate){
           {
             NPC_2 = random_index2;
           }
-          console.log('Randomly picked NPC2 is ' + NPC_2);
           }
           while(NPC_2 == -1);
 
+          console.log('Randomly picked NPC2 is ' + NPC_2);
+
           if(this.NPC_array[random_index2].faction == 0)
           {
-            //this.recruitment(NPC_1, NPC_2);
+            this.recruitment(NPC_1, NPC_2);
             console.log('Recruitment - L1');
           }
           else if(this.NPC_array[random_index2].faction == 2)
           {
-            //this.fighting(NPC_1, NPC_2);
+            this.fighting(NPC_1, NPC_2);
             console.log('Fighting - L1');
           }
           break;
@@ -442,20 +463,20 @@ function NPC_controller(room, outside, navigate){
           // Find either a gang member or neutral NPC
           while(NPC_2 == -1){
           random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 1)); // NPC must be idling
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 1)) // NPC must be idling
           {
             NPC_2 = random_index2;
           }
-          console.log('Randomly picked NPC2 is ' + NPC_2);
+          console.log('Randomly picked NPC3 is ' + NPC_2);
           }
           if(this.NPC_array[random_index2].faction == 0)
           {
-            //this.recruitment(NPC_1, NPC_2);
+            this.recruitment(NPC_1, NPC_2);
             console.log('Recruitment - L1');
           }
           else if(this.NPC_array[random_index2].faction == 1)
           {
-            //this.fighting(NPC_1, NPC_2);
+            this.fighting(NPC_1, NPC_2);
             console.log('Fighting - L1');
           }
   
@@ -464,17 +485,17 @@ function NPC_controller(room, outside, navigate){
           // Find any random NPC
           while(NPC_2 == -1){
           random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2); // NPC must be idling
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2) // NPC must be idling
           {
             NPC_2 = random_index2;
           }
           console.log('Randomly picked NPC2 is ' + NPC_2);
           }
-          //this.interrogate(NPC_1, NPC_2);
+          this.interrogate(NPC_1, NPC_2);
           console.log('Interrogate - L1');
           break;
         }
-        */
+        
         this.last_count_2 = timeCounter;
       }
   }
