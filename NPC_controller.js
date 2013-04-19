@@ -193,28 +193,70 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         {
           if(this.NPC_array[i].inside)
           {
-          ctx.beginPath();
-          ctx.arc(this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.room.cellsize/2, this.room.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.room.cellsize/2, this.room.cellsize/2 - 2, 0, 2*Math.PI, true);
+          npcx =this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x;
+		  npcy = this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y;
+		  //ctx.beginPath();
+          //ctx.arc(this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.x + this.outside.cellsize/2, this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].point.y + this.outside.cellsize/2, this.outside.cellsize/2 - 2, 0, 2*Math.PI, true);
+      
           switch (this.NPC_array[i].faction)
           {
             case 0: // Neutral
-            ctx.fillStyle = 'white';
+            npcimg.src="images/neutral.png";
             break;
             case 1: // Your lackey
-            ctx.fillStyle = 'red';
+            //ctx.fillStyle = 'red';
+			npcimg.src="images/friendly.png";
             break;
             case 2: // Rival
-            ctx.fillStyle = 'blue';
+            npcimg.src="images/rival.png";
             break;
             case 3: // Policeman
-            ctx.fillStyle = 'green';
+            npcimg.src="images/police.png";
             break;
           }
-          ctx.fill();
-          ctx.lineWidth = 2;
-          // line color
-          ctx.strokeStyle = 'black';
-          ctx.stroke();
+          
+		  switch (this.NPC_array[i].direction){
+		  
+		  case 1: //UP
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=40;}
+				else{srcx=60;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,4,40);
+            break;
+			
+            case 2: // DOWN
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=0;}
+				else{srcx=20;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,40,40);
+            break;
+			
+            case 3: // LEFT
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=140;}
+				else{srcx=120;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,40,40);
+            break;
+			
+            case 4: // RIGHT
+				if(this.NPC_array[i].key==1){
+					this.flag=!this.flag;
+					this.NPC_array[i].key=0;
+				}
+				if(this.flag==0){srcx=100;}
+				else{srcx=80;}
+			ctx.drawImage(npcimg, srcx,0,20,26,npcx, npcy,40,40);
+            break;
+		  }
         }
       }
       }

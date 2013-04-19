@@ -301,12 +301,12 @@ function load() {
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
 										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc);
-									var textbox= new Image();			// Textbox
-									textbox.src="images/textbox.png";
-									ctx.drawImage(textbox,0,280);
-									ctx.font="20px Arial";
-									ctx.fillStyle = 'black';
-									ctx.filltext(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message, 50,300);
+									//var textbox= new Image();			// Textbox
+									//textbox.src="images/textbox.png";
+									//ctx.drawImage(textbox,0,280);
+									//ctx.font="20px Arial";
+									//ctx.fillStyle = 'black';
+									//ctx.filltext(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message, 50,300);
 									}
 								}
 								if(Outside.player_position.y != (Outside.row - 1) && Outside.player_direction == 2 && Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied)// If facing down and NPC below

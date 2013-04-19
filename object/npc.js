@@ -28,11 +28,35 @@ function NPC(pos_x,pos_y,faction,id, where){// passes in the X & Y coordinates t
 	this.direction=2;  			//Start looking down,   1- Up, 2-down, 3-Left ,4-right
 	this.key=0;
 	
-	if(faction==0){
+	switch(faction){
+		case 0:
 		choice=Math.random();
 		if(choice<0.5){
 		this.message = "Oh hi ! I want no trouble...";}
 		else{this.message="I heard there is a fight going on...";}
+		break;
+		
+		case 1:
+		choice=Math.random();
+		if(choice<0.5){
+		this.message = "Hi BOSS !!";}
+		else{this.message="What can do for you mate !";}
+		break;
+		
+		case 2:
+		choice=Math.random();
+		if(choice<0.5){
+		this.message = "You want a  piece of me !?";}
+		else{this.message="I'm not afraid of you";}
+		break;
+		
+		case 3:
+		choice=Math.random();
+		if(choice<0.5){
+		this.message = "Behave yourself...";}
+		else{this.message="I'm watching you...";}
+		break;
+		
 	}
 	
 	
