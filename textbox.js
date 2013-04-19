@@ -2,16 +2,16 @@ function textBox(){
 	
 	this.tLastChange = 0;
 	this.tElapsed = 0;
-	this.timeframe = 5;
+	this.timeframe = 3;
 	this.boxID = document.getElementById('texthere');
 	
 	this.defaultTxt = "............";
 	
 	this.writeonly = function(txt){
-		boxID.innerHTML = txt;
+		this.boxID.innerHTML = txt;
 	}
 	
-	this.writeonly(defaultTxt);
+	this.writeonly(this.defaultTxt);
 	
 	this.write = function(time, txt){
 		this.tLastChange = time;
@@ -22,7 +22,7 @@ function textBox(){
 	
 	this.update = function(time){
 		this.tElapsed = time - this.tLastChange;
-		if(this.tElapsed > timeframe)
-			writeonly(defaultTxt);
+		if(this.tElapsed > this.timeframe)
+			this.writeonly(this.defaultTxt);
 	}
 }

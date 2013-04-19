@@ -28,6 +28,7 @@ function load() {
 	var debugWrite = new debugWriter(level2, level3); //Daryl
 	var city_level = new city(20, 20); //HS
 	var building_test = [];
+	var tbox = new textBox();
 	//building_test[0] = 1;
 	
 	//------------------------------
@@ -381,6 +382,7 @@ function load() {
 		abstraction.mousepos_y = mousePos.y;
 		abstraction.Mouseclick();
 		renderingEngine.Draw_level(abstraction.abst_level);
+		//tbox.write(timeCounter, "CLICK");
 		//var message = 'Level: ' + abstraction.abst_level;
 		//writeMessage(canvas, message);
 	}, false);
@@ -396,6 +398,7 @@ function load() {
 	//------------------
 	setInterval(function() {
 		
+		tbox.update(timeCounter);
 		if (lobby.active){
 			lobby.draw();
 			npc_controller.drawNPC(true);
