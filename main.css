@@ -1,8 +1,19 @@
-html {
+html, body{
+	width: 100%;
+	height: 100%;
 }
 
 body {
-overflow:hidden;
+	background:fixed;
+	background-image: url("images/woodbackground.jpg");
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div{
+	
 }
 
 #gameArea {
@@ -12,6 +23,7 @@ overflow:hidden;
     /*background-image:url('');*/
 	margin: 1%;
     margin-bottom: 0px;
+    background-color: white;
 }
 
 #game {
@@ -27,4 +39,24 @@ overflow:hidden;
 	width: 380px;
 	height: 500px;
 	overflow: auto;
+	background-color: white;
+	opacity: 0.6;
+	padding-left:10px;
+	padding-top:10px;
+	text-align:center;
+}
+
+#lvl2Title, #lvl3Title{
+	font-weight:500;
+	font-size: 20px;
+}
+
+#lvl3Holder{
+	visibility: hidden;	
+}
+
+#lvl2Holder, #lvl3Holder{
+	position: absolute;
+	top: 40px;
+	right: 120px;
 }
