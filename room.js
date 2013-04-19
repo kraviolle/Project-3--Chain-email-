@@ -86,7 +86,7 @@ function room(start_x, start_y){
       	ctx.stroke();
 		
 		var bimg=new Image();
-		bimg.src="images/interior1.png";
+		bimg.src="images/interior3.png";
 		ctx.drawImage(bimg,10,10);
 	}
 
@@ -276,7 +276,7 @@ function outdoor(start_x, start_y){
 			
 	// Test to draw img.
 	var Testimg = new Image();        //- KEN , drawing over your cells. the door is positioned as such. will add more background stuff nxt time.
-	Testimg.src= "images/city.png";
+	Testimg.src= "images/building1.png";
 	ctx.drawImage(Testimg, 0,0);
 	
 	
@@ -567,7 +567,10 @@ function city(start_x, start_y){
 
           }
         }
-        
+        var cityimg= new Image();
+		cityimg.src= "images/city.png";
+		ctx.drawImage(cityimg, 10,10);
+		
   }
 
   this.drawplayer = function(){
