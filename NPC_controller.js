@@ -40,11 +40,12 @@ function NPC_controller(room, outside, navigate){
   this.outside.map[9][7].occupied = true;
   this.outside.map[9][7].npc = this.NPC_array.length - 1;
   
-  this.NPC_array.push(new NPC(14,3,0,123,false));
-  this.outside.map[14][3].occupied = true;
-  this.outside.map[14][3].npc = this.NPC_array.length - 1;
+  this.NPC_array.push(new NPC(14,4,0,123,false));
+  this.outside.map[14][4].occupied = true;
+  this.outside.map[14][4].npc = this.NPC_array.length - 1;
 
 
+  /*
   // Initializing NPC in the room
   this.NPC_array.push(new NPC(6,7,0,123,true));
   this.room.map[6][7].occupied = true;
@@ -73,7 +74,7 @@ function NPC_controller(room, outside, navigate){
   this.NPC_array.push(new NPC(7,1,2,123,true));
   this.room.map[7][1].occupied = true;
   this.room.map[7][1].npc = this.NPC_array.length - 1;
-
+  */
 
   //Testing pathfinding
   /*
@@ -375,7 +376,7 @@ function NPC_controller(room, outside, navigate){
       {
         //this.fighting(1, 6);
         //this.recruitment(1, 5);
-        this.interrogate(0, 6);
+        //this.interrogate(0, 6);
 
       }
 
@@ -387,45 +388,51 @@ function NPC_controller(room, outside, navigate){
     //Randomly creating an interaction every 10 seconds
       if(timeCounter - this.last_count_2 > 5)
       {
-        var action = Math.floor((Math.random()*5)+1);
+        //var action = Math.floor((Math.random()*5)+1);
         var NPC_1 = -1;
         var NPC_2 = -1;
         var random_index;
         var random_index2;
 
-        while(NPC_1 == -1)
-        {
+        do{
           random_index = Math.floor((Math.random()*this.NPC_array.length));
           console.log('Random index: ' + random_index);
-          if(this.NPC_array[random_index].intention = 0 && this.NPC_array[random_index].faction != 0); // NPC must be idling
+          console.log('Random faction is ' + this.NPC_array[random_index].faction);
+          if((this.NPC_array[random_index].intention == 0) && (this.NPC_array[random_index].faction == 1)); // NPC must be idling
           {
             NPC_1 = random_index;
           }
           console.log('Randomly picked NPC is ' + NPC_1);
         }
-
+        while(NPC_1 == -1);
+        
+        //console.log('Randomly picked NPC is ' + this.NPC_array[NPC_1].faction);
+        
+        /*
         //Base on which NPC is selected, decide which actions are legal.
         switch(this.NPC_array[NPC_1].faction){
           case 0: // Neutral - Legal actions - Nothing for now
           break;
           case 1: // Your gang - Legal actions - Fight, recruit
           // Find either a gang member or neutral NPC
-          while(NPC_2 == -1){
-          random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention = 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 2)); // NPC must be idling
+          do{
+            random_index2 = Math.floor((Math.random()*this.NPC_array.length));
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 2)); // NPC must be idling
           {
             NPC_2 = random_index2;
           }
           console.log('Randomly picked NPC2 is ' + NPC_2);
           }
+          while(NPC_2 == -1);
+
           if(this.NPC_array[random_index2].faction == 0)
           {
-            this.recruitment(NPC_1, NPC_2);
+            //this.recruitment(NPC_1, NPC_2);
             console.log('Recruitment - L1');
           }
           else if(this.NPC_array[random_index2].faction == 2)
           {
-            this.fighting(NPC_1, NPC_2);
+            //this.fighting(NPC_1, NPC_2);
             console.log('Fighting - L1');
           }
           break;
@@ -433,7 +440,7 @@ function NPC_controller(room, outside, navigate){
           // Find either a gang member or neutral NPC
           while(NPC_2 == -1){
           random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention = 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 1)); // NPC must be idling
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2 && (this.NPC_array[random_index2].faction == 0 || this.NPC_array[random_index2].faction == 1)); // NPC must be idling
           {
             NPC_2 = random_index2;
           }
@@ -441,12 +448,12 @@ function NPC_controller(room, outside, navigate){
           }
           if(this.NPC_array[random_index2].faction == 0)
           {
-            this.recruitment(NPC_1, NPC_2);
+            //this.recruitment(NPC_1, NPC_2);
             console.log('Recruitment - L1');
           }
           else if(this.NPC_array[random_index2].faction == 1)
           {
-            this.fighting(NPC_1, NPC_2);
+            //this.fighting(NPC_1, NPC_2);
             console.log('Fighting - L1');
           }
   
@@ -455,17 +462,17 @@ function NPC_controller(room, outside, navigate){
           // Find any random NPC
           while(NPC_2 == -1){
           random_index2 = Math.floor((Math.random()*this.NPC_array.length));
-          if(this.NPC_array[random_index2].intention = 0 && random_index != random_index2); // NPC must be idling
+          if(this.NPC_array[random_index2].intention == 0 && random_index != random_index2); // NPC must be idling
           {
             NPC_2 = random_index2;
           }
           console.log('Randomly picked NPC2 is ' + NPC_2);
           }
-          this.interrogate(NPC_1, NPC_2);
+          //this.interrogate(NPC_1, NPC_2);
           console.log('Interrogate - L1');
           break;
         }
-
+        */
         this.last_count_2 = timeCounter;
       }
   }

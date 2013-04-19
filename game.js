@@ -312,6 +312,8 @@ function load() {
 		// Runs the AI for NPC simulations
 		npc_controller.NPC_simulate(timeCounter);
 
+		npc_controller.interaction_simulate(timeCounter);
+
 		writeMessage(canvas, timeCounter);
 			
 
