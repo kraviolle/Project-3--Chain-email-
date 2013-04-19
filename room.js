@@ -84,6 +84,10 @@ function room(start_x, start_y){
       	ctx.lineWidth = 1;
       	ctx.strokeStyle = 'black';
       	ctx.stroke();
+		
+		var bimg=new Image();
+		bimg.src="images/interior1.png";
+		ctx.drawImage(bimg,10,10);
 	}
 
 	this.drawplayer = function(){
