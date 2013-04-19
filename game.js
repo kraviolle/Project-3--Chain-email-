@@ -300,7 +300,7 @@ function load() {
 								{
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc);
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message);
 									//var textbox= new Image();			// Textbox
 									//textbox.src="images/textbox.png";
 									//ctx.drawImage(textbox,0,280);
@@ -313,21 +313,21 @@ function load() {
 								{
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].message + Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc);
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].message);
 									}
 								}
 								if(Outside.player_position.x != 0 && Outside.player_direction == 3 && Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied) // If facing left and NPC left
 								{
 									if(Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc].message + Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc);
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc].message);
 									}
 								}
 								if(Outside.player_position.x != (Outside.column - 1) && Outside.player_direction == 4 && Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) // If facing right and NPC left
 								{
 									if(Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc].message + Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc);
+										alert(npc_controller.NPC_array[Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc].message);
 									}
 								}
 							}
@@ -338,28 +338,28 @@ function load() {
 								{
 									if(lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc].message + lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc);
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y - 1].npc].message);
 									}
 								}
 								if(lobby.player_position.y != (lobby.row - 1) && lobby.player_direction == 2 && lobby.map[lobby.player_position.x][lobby.player_position.y + 1].occupied)// If facing down and NPC below
 								{
 									if(lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc].message + lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc);
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x][lobby.player_position.y + 1].npc].message);
 									}
 								}
 								if(lobby.player_position.x != 0 && lobby.player_direction == 3 && lobby.map[lobby.player_position.x - 1][lobby.player_position.y].occupied) // If facing left and NPC left
 								{
 									if(lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc].message + lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc);
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x - 1][lobby.player_position.y].npc].message);
 									}
 								}
 								if(lobby.player_position.x != (lobby.column - 1) && lobby.player_direction == 4 && lobby.map[lobby.player_position.x + 1][lobby.player_position.y].occupied) // If facing right and NPC left
 								{
 									if(lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
 									{
-										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc].message + lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc);
+										alert(npc_controller.NPC_array[lobby.map[lobby.player_position.x + 1][lobby.player_position.y].npc].message);
 									}
 								}
 							}
