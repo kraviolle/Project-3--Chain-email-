@@ -303,7 +303,12 @@ function load() {
 									{
 										tbox.write(timeCounter,npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message);
 										if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction==2){
-										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction=0;}
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction=0;
+										switch(level2.playerLocation){
+										case 2:
+										level2.buildingOne.rivals--;
+										level2.buildingOne.neutral++;}
+										}
 										else if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction==0){
 										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction=1;}
 									//var textbox= new Image();			// Textbox
