@@ -308,22 +308,22 @@ function outdoor(start_x, start_y, level2){
       
       case 2: //Building1
       outimg.src= "images/building1.png";
-	  inimg.src= "images/interior1.png"
+	 
       break;
 	  
       case 3: // building2
       outimg.src= "images/building2.png";
-	  inimg.src= "images/interior2.png"
+	 
       break;
 	  
       case 4: // building3
       outimg.src= "images/building3.png";
-	  inimg.src= "images/interior3.png"
+	 
       break;
 	  
 	  case 5: // building4
-	  outimg.src= "images/building3.png";
-	  inimg.src= "images/interior4.png"
+	  outimg.src= "images/building4.png";
+	 
 	  break;
 	  }
 	      
