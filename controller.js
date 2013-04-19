@@ -33,6 +33,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
 				}
+				if(npcType != 5){
+					L3.out_E.push(npcType);
+					L3.in_W.push(npcType);
+				}
 				break;
 			case 2:
 				// move npc from north to west
@@ -44,6 +48,10 @@ function Controller(level3, level2) {
 				if(L3.playerCity == 2){
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
+				}
+				if(npcType != 5){
+					L3.out_N.push(npcType);
+					L3.in_W.push(npcType);
 				}
 				break;
 			case 3:
@@ -57,6 +65,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
 				}
+				if(npcType != 5){
+					L3.out_E.push(npcType);
+					L3.in_N.push(npcType);
+				}
 				break;
 			case 4:
 				// move npc from west to east
@@ -68,6 +80,10 @@ function Controller(level3, level2) {
 				if(L3.playerCity == 2){
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
+				}
+				if(npcType != 5){
+					L3.out_W.push(npcType);
+					L3.in_E.push(npcType);
 				}
 				break;
 			case 5:
@@ -81,6 +97,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
 				}
+				if(npcType != 5){
+					L3.out_W.push(npcType);
+					L3.in_N.push(npcType);
+				}
 				break;
 			default:
 				// move npc from north to east
@@ -93,6 +113,10 @@ function Controller(level3, level2) {
 					console.log("NPC "+npcType+" moving from current city.");
 					this.npcMoveFromCurrCity(npcType);
 				}
+				if(npcType != 5){
+					L3.out_N.push(npcType);
+					L3.in_E.push(npcType);
+				}
 			}// end switch
 		}// end for
 		console.log("=======End L3 Simulation=======");
@@ -101,8 +125,6 @@ function Controller(level3, level2) {
 	/* Move NPC from one city to another */
 	this.moveNPCity = function(npc, city1, city2) {
 		// move npc type from city1 to city2
-		/*city1.population--;
-		city2.population++;*/
 		switch (npc) {
 		case 1:
 			// move neutral

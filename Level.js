@@ -46,6 +46,13 @@ function level() {
 }
 
 function levelThree() {
+	/*Queues for movement of NPCs*/
+	this.in_N = [];
+	this.out_N = [];
+	this.in_E = [];
+	this.out_E = [];
+	this.in_W = [];
+	this.out_W = [];
 	/*Data to display*/
 	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.northCity = {
