@@ -301,6 +301,10 @@ function load() {
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc != -1) // Ensures that the NPC index contains a proper number
 									{
 										tbox.write(timeCounter,npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].message);
+										if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction==2){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction=0;}
+										else if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction==0){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y - 1].npc].faction=1;}
 									//var textbox= new Image();			// Textbox
 									//textbox.src="images/textbox.png";
 									//ctx.drawImage(textbox,0,280);
@@ -312,21 +316,30 @@ function load() {
 								if(Outside.player_position.y != (Outside.row - 1) && Outside.player_direction == 2 && Outside.map[Outside.player_position.x][Outside.player_position.y + 1].occupied)// If facing down and NPC below
 								{
 									if(Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc != -1) // Ensures that the NPC index contains a proper number
-									{
+									{if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].faction==2){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].faction=0;}
+										else if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].faction==0){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].faction=1;}
 										tbox.write(timeCounter,npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y + 1].npc].message);
 									}
 								}
 								if(Outside.player_position.x != 0 && Outside.player_direction == 3 && Outside.map[Outside.player_position.x - 1][Outside.player_position.y].occupied) // If facing left and NPC left
 								{
 									if(Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
-									{
+									{if(npc_controller.NPC_array[Outside.map[Outside.player_position.x-1][Outside.player_position.y ].npc].faction==2){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x-1][Outside.player_position.y ].npc].faction=0;}
+										else if(npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y].npc].faction==0){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x][Outside.player_position.y].npc].faction=1;}
 										tbox.write(timeCounter,npc_controller.NPC_array[Outside.map[Outside.player_position.x - 1][Outside.player_position.y].npc].message);
 									}
 								}
 								if(Outside.player_position.x != (Outside.column - 1) && Outside.player_direction == 4 && Outside.map[Outside.player_position.x + 1][Outside.player_position.y].occupied) // If facing right and NPC left
 								{
 									if(Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc != -1) // Ensures that the NPC index contains a proper number
-									{
+									{if(npc_controller.NPC_array[Outside.map[Outside.player_position.x+1][Outside.player_position.y].npc].faction==2){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x+1][Outside.player_position.y].npc].faction=0;}
+										else if(npc_controller.NPC_array[Outside.map[Outside.player_position.x+1][Outside.player_position.y].npc].faction==0){
+										npc_controller.NPC_array[Outside.map[Outside.player_position.x+1][Outside.player_position.y].npc].faction=1;}
 										tbox.write(timeCounter,npc_controller.NPC_array[Outside.map[Outside.player_position.x + 1][Outside.player_position.y].npc].message);
 									}
 								}
