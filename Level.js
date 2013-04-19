@@ -49,22 +49,22 @@ function levelThree() {
 	/*Data to display*/
 	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.northCity = {
-		neutral : 830,
-		police : 114,
-		rivals : 56,
-		allied : 80
+		neutral : 25,
+		police : 8,
+		rivals : 6,
+		allied : 0
 	};
 	this.eastCity = {
-		neutral : 723,
-		police : 179,
-		rivals : 98,
-		allied : 75
+		neutral : 21,
+		police : 6,
+		rivals : 9,
+		allied : 1
 	};
 	this.westCity = {
-		neutral : 912,
-		police : 64,
-		rivals : 24,
-		allied : 6
+		neutral : 19,
+		police : 12,
+		rivals : 10,
+		allied : 3
 	};
 
 	/*Get total population per city*/
@@ -90,27 +90,43 @@ function levelTwo() {
 	this.out_B1 = [];
 	this.in_B2 = [];
 	this.out_B2 = [];
+	this.in_B3 = [];
+	this.out_B3 = [];
+	this.in_B4 = [];
+	this.out_B4 = [];
 	/*Data to display*/
-	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo
+	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo, 4-buildingThree, 5-buildingFour
 	this.hospital = {
-		neutral : 115,
-		police : 57
+		neutral : 1,
+		police : 1
 	};
 	this.policeStation = {
-		neutral : 225,
-		police : 156
+		neutral : 1,
+		police : 1
 	};
 	this.buildingOne = {
-		neutral : 266,
-		police : 20,
-		rivals : 72,
-		allied : 12
+		neutral : 1,
+		police : 1,
+		rivals : 1,
+		allied : 1
 	};
 	this.buildingTwo = {
-		neutral : 266,
-		police : 20,
-		rivals : 72,
-		allied : 45
+		neutral : 1,
+		police : 1,
+		rivals : 1,
+		allied : 1
+	};
+	this.buildingThree = {
+		neutral : 1,
+		police : 1,
+		rivals : 1,
+		allied : 1
+	};
+	this.buildingFour = {
+		neutral : 1,
+		police : 1,
+		rivals : 1,
+		allied : 1
 	};
 	/*Get total population per building*/
 	this.hospitalPopulation = function(){
@@ -123,6 +139,12 @@ function levelTwo() {
 		return this.buildingOne.neutral+this.buildingOne.police+this.buildingOne.rivals+this.buildingOne.allied;
 	}
 	this.buildingTwoPopulation = function(){
+		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
+	}
+	this.buildingThreePopulation = function(){
+		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
+	}
+	this.buildingFourPopulation = function(){
 		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
 	}
 
@@ -159,21 +181,18 @@ function levelTwo() {
 		var tempPop, tempNeutral, tempPolice, tempRivals, tempAllied, tempVariance;
 		switch(level3.playerCity){
 		case 1:
-			tempPop = level3.northCityPopulation();
 			tempNeutral = level3.northCity.neutral;
 			tempPolice = level3.northCity.police;
 			tempRivals = level3.northCity.rivals;
 			tempAllied = level3.northCity.allied;
 			break;
 		case 2:
-			tempPop = level3.eastCityPopulation();
 			tempNeutral = level3.eastCity.neutral;
 			tempPolice = level3.eastCity.police;
 			tempRivals = level3.eastCity.rivals;
 			tempAllied = level3.eastCity.allied;
 			break;
 		case 3:
-			tempPop = level3.westCityPopulation();
 			tempNeutral = level3.westCity.neutral;
 			tempPolice = level3.westCity.police;
 			tempRivals = level3.westCity.rivals;
@@ -183,39 +202,71 @@ function levelTwo() {
 			//do nothing
 		}
 		//fill hospital
-		tempVariance = Math.random();
-		tempVariance = tempVariance.toFixed(2);
-		this.hospital.neutral = tempVariance * tempNeutral;
-		this.hospital.police = tempVariance * tempPolice;
+		do{
+			tempVariance = Math.random();
+		}while(tempVariance > 0.4 || tempVariance < 0.3);
+		console.log("hos var:"+tempVariance);
+		this.hospital.neutral = Math.ceil(tempVariance * tempNeutral);
+		this.hospital.police = Math.ceil(tempVariance * tempPolice);
 		tempNeutral -= this.hospital.neutral;
 		tempPolice -= this.hospital.police;
 		//fill police station
-		tempVariance = Math.random();
-		tempVariance = tempVariance.toFixed(2);
-		this.policeStation.neutral = tempVariance * tempNeutral;
-		this.policeStation.police = tempVariance * tempPolice;
+		do{
+			tempVariance = Math.random();
+		}while(tempVariance > 0.4 || tempVariance < 0.3);
+		console.log("ps var:"+tempVariance);
+		this.policeStation.neutral = Math.ceil(tempVariance * tempNeutral);
+		this.policeStation.police = Math.ceil(tempVariance * tempPolice);
 		tempNeutral -= this.policeStation.neutral;
 		tempPolice -= this.policeStation.police;
 		//fill buildingOne
-		tempVariance = Math.random();
-		tempVariance = tempVariance.toFixed(2);
-		this.buildingOne.neutral = tempVariance * tempNeutral;
-		this.buildingOne.police = tempVariance * tempPolice;
-		this.buildingOne.rivals = tempVariance * tempRivals;
-		this.buildingOne.allied = tempVariance * tempAllied;
+		do{
+			tempVariance = Math.random();
+		}while(tempVariance > 0.4 || tempVariance < 0.15);
+		console.log("b1 var:"+tempVariance);
+		this.buildingOne.neutral = Math.ceil(tempVariance * tempNeutral);
+		this.buildingOne.police = Math.ceil(tempVariance * tempPolice);
+		this.buildingOne.rivals = Math.ceil(tempVariance * tempRivals);
+		this.buildingOne.allied = Math.ceil(tempVariance * tempAllied);
 		tempNeutral -= this.buildingOne.neutral;
 		tempPolice -= this.buildingOne.police;
 		tempRivals -= this.buildingOne.rivals;
 		tempAllied -= this.buildingOne.allied;
 		//fill buildingTwo
-		this.buildingOne.neutral = tempNeutral;
-		this.buildingOne.police = tempPolice;
-		this.buildingOne.rivals = tempRivals;
-		this.buildingOne.allied = tempAllied;
-		tempNeutral -= this.buildingOne.neutral;
-		tempPolice -= this.buildingOne.police;
-		tempRivals -= this.buildingOne.rivals;
-		tempAllied -= this.buildingOne.allied;
+		do{
+			tempVariance = Math.random();
+		}while(tempVariance > 0.4 || tempVariance < 0.15);
+		console.log("b2 var:"+tempVariance);
+		this.buildingTwo.neutral = Math.ceil(tempVariance * tempNeutral);
+		this.buildingTwo.police = Math.ceil(tempVariance * tempPolice);
+		this.buildingTwo.rivals = Math.ceil(tempVariance * tempRivals);
+		this.buildingTwo.allied = Math.ceil(tempVariance * tempAllied);
+		tempNeutral -= this.buildingTwo.neutral;
+		tempPolice -= this.buildingTwo.police;
+		tempRivals -= this.buildingTwo.rivals;
+		tempAllied -= this.buildingTwo.allied;
+		//fill buildingThree
+		do{
+			tempVariance = Math.random();
+		}while(tempVariance > 0.4 || tempVariance < 0.15);
+		console.log("b3 var:"+tempVariance);
+		this.buildingThree.neutral = Math.ceil(tempVariance * tempNeutral);
+		this.buildingThree.police = Math.ceil(tempVariance * tempPolice);
+		this.buildingThree.rivals = Math.ceil(tempVariance * tempRivals);
+		this.buildingThree.allied = Math.ceil(tempVariance * tempAllied);
+		tempNeutral -= this.buildingThree.neutral;
+		tempPolice -= this.buildingThree.police;
+		tempRivals -= this.buildingThree.rivals;
+		tempAllied -= this.buildingThree.allied;
+		//fill buildingFour
+		this.buildingFour.neutral = tempNeutral;
+		this.buildingFour.police = tempPolice;
+		this.buildingFour.rivals = tempRivals;
+		this.buildingFour.allied = tempAllied;
+		tempNeutral -= this.buildingFour.neutral;
+		tempPolice -= this.buildingFour.police;
+		tempRivals -= this.buildingFour.rivals;
+		tempAllied -= this.buildingFour.allied;
 	}//end decompressDataL3
 
 	/* Compress data in Level 2 to send to Level 3 */
