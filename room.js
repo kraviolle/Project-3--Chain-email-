@@ -11,7 +11,7 @@ function cell(x,y){
     this.npc = -1; // Saves the index of the NPC in the NPC controller here
 }
 
-function room(start_x, start_y){
+function room(start_x, start_y, level2){
 
   this.active = false; // This signifies that player is within the room
 	this.map = [];
@@ -19,6 +19,7 @@ function room(start_x, start_y){
 	this.column = 8;
 	this.row = 8;
 	this.door_thickness = 8;
+	
 
 	for(var i = 0; i < this.column; i++)
 	{
@@ -85,9 +86,35 @@ function room(start_x, start_y){
       	ctx.strokeStyle = 'black';
       	ctx.stroke();
 		
-		var bimg=new Image();
-		bimg.src="images/interior1.png";
-		ctx.drawImage(bimg,10,10);
+		
+		
+		var inimg= new Image();
+	
+	switch(level2.playerLocation)						//where is the player ? 
+    {
+      
+      case 2: //Building1
+     
+	  inimg.src= "images/interior1.png"
+      break;
+	  
+      case 3: // building2
+      
+	  inimg.src= "images/interior2.png"
+      break;
+	  
+      case 4: // building3
+      
+	  inimg.src= "images/interior3.png"
+      break;
+	  
+	  case 5: // building4
+	
+	  inimg.src= "images/interior4.png"
+	  break;
+	  }
+	      
+	ctx.drawImage(inimg, 10,10);
 	}
 
 	this.drawplayer = function(){
@@ -174,7 +201,7 @@ function room(start_x, start_y){
 
 }
 
-function outdoor(start_x, start_y){
+function outdoor(start_x, start_y, level2){
 
   this.active = true; // Player is outside
   this.map = [];
@@ -272,12 +299,35 @@ function outdoor(start_x, start_y){
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'black';
         ctx.stroke();
-		
-			
-	// Test to draw img.
-	var Testimg = new Image();        //- KEN , drawing over your cells. the door is positioned as such. will add more background stuff nxt time.
-	Testimg.src= "images/building2.png";
-	ctx.drawImage(Testimg, 0,0);
+	
+	var outimg = new Image();
+	var inimg= new Image();
+	
+	switch(level2.playerLocation)						//where is the player ? 
+    {
+      
+      case 2: //Building1
+      outimg.src= "images/building1.png";
+	  inimg.src= "images/interior1.png"
+      break;
+	  
+      case 3: // building2
+      outimg.src= "images/building2.png";
+	  inimg.src= "images/interior2.png"
+      break;
+	  
+      case 4: // building3
+      outimg.src= "images/building3.png";
+	  inimg.src= "images/interior3.png"
+      break;
+	  
+	  case 5: // building4
+	  outimg.src= "images/building3.png";
+	  inimg.src= "images/interior4.png"
+	  break;
+	  }
+	      
+	ctx.drawImage(outimg, 0,0);
 	
 	
         

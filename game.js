@@ -14,13 +14,14 @@ function load() {
 	//-------------------
 	var abstraction = new level(); // HS
 	var renderingEngine = new Renderer(); // HS
-	var lobby = new room(20, 20); // HS
-	var Outside = new outdoor(20, 20); // HS
+	
 	var FPS = 30; //HS
 	var screenUpdateTime = 1000 / FPS; //HS
 	var level3 = new levelThree(); //Lionel
 	var level2 = new levelTwo(); //Lionel
 	level2.decompressDataL3(level3);
+	var Outside = new outdoor(20, 20, level2); // HS
+	var lobby = new room(20, 20, level2); // HS
 	var simulator = new Controller(level3, level2); //Lionel
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate, level2.playerLocation, level2.out_B1, level2.out_B2); // HS
