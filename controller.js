@@ -745,8 +745,9 @@ function Controller(level3, level2) {
 	/* Level 3 NPC movement into current city */
 	this.npcMoveIntoCurrCity = function(type){
 		var moveRandom = 0;
+		console.log("Type:"+type);
 		switch(type){
-		case 1: //neutral
+		case 1:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
 			if (moveRandom == 1) {
 				L2.hospital.neutral++;
@@ -768,13 +769,14 @@ function Controller(level3, level2) {
 				L2.buildingFour.neutral++;
 				L2.in_B4.push(1);
 				console.log("Neutral moved to buildingFour.");
+			}
 			break;
-		case 2: //police
+		case 2:
 			L2.policeStation.police++;
 			L2.in_PS.push(2);
 			console.log("Police moved to police station.");
 			break;
-		case 3: //rival
+		case 3:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.rivals++;
@@ -794,7 +796,7 @@ function Controller(level3, level2) {
 				console.log("Rival moved to buildingFour.");
 			}
 			break;
-		case 4: //ally
+		case 4:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.allied++;
@@ -823,7 +825,7 @@ function Controller(level3, level2) {
 	this.npcMoveFromCurrCity = function(type){
 		var moveRandom = 0;
 		switch(type){
-		case 1: //neutral
+		case 1:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
 			if (moveRandom == 1) {
 				L2.hospital.neutral--;
@@ -847,12 +849,12 @@ function Controller(level3, level2) {
 				console.log("Neutral moved from buildingFour.");
 			}
 			break;
-		case 2: //police
+		case 2:
 			L2.policeStation.police--;
 			L2.out_PS.push(2);
 			console.log("Police moved from police station.");
 			break;
-		case 3: //rival
+		case 3:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.rivals--;
@@ -872,7 +874,7 @@ function Controller(level3, level2) {
 				console.log("Rival moved from buildingFour.");
 			}
 			break;
-		case 4: //allied
+		case 4:
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.allied--;
