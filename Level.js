@@ -49,22 +49,22 @@ function levelThree() {
 	/*Data to display*/
 	this.playerCity = 1;//1-North, 2-East, 3-West
 	this.northCity = {
-		neutral : 25,
-		police : 8,
-		rivals : 6,
+		neutral : 35,
+		police : 18,
+		rivals : 9,
 		allied : 0
 	};
 	this.eastCity = {
-		neutral : 21,
-		police : 6,
+		neutral : 31,
+		police : 10,
 		rivals : 9,
-		allied : 1
+		allied : 2
 	};
 	this.westCity = {
-		neutral : 19,
-		police : 12,
-		rivals : 10,
-		allied : 3
+		neutral : 21,
+		police : 13,
+		rivals : 11,
+		allied : 5
 	};
 
 	/*Get total population per city*/
@@ -80,7 +80,7 @@ function levelThree() {
 }
 
 function levelTwo() {
-	var totalLocations = 4;
+	var totalLocations = 6;
 	/*Queues for movement of NPCs*/
 	this.in_H = [];
 	this.out_H = [];
@@ -142,10 +142,10 @@ function levelTwo() {
 		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
 	}
 	this.buildingThreePopulation = function(){
-		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
+		return this.buildingThree.neutral+this.buildingThree.police+this.buildingThree.rivals+this.buildingThree.allied;
 	}
 	this.buildingFourPopulation = function(){
-		return this.buildingTwo.neutral+this.buildingTwo.police+this.buildingTwo.rivals+this.buildingTwo.allied;
+		return this.buildingFour.neutral+this.buildingFour.police+this.buildingFour.rivals+this.buildingFour.allied;
 	}
 
 	/*Use this function for moving to jail only*/
@@ -157,7 +157,12 @@ function levelTwo() {
 				this.buildingOne.rivals  -= number;
 				this.policeStation.population += number;
 				this.policeStation.neutral += number;
-			} else if(type == 4 && this.buildingOne.allied >= number){}
+			} else if(type == 4 && this.buildingOne.allied >= number){
+				this.buildingOne.population -= number;
+				this.buildingOne.allied  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			}
 			break;
 		case 3:
 			if(type == 3 && this.buildingTwo.rivals >= number){
@@ -165,7 +170,38 @@ function levelTwo() {
 				this.buildingTwo.rivals  -= number;
 				this.policeStation.population += number;
 				this.policeStation.neutral += number;
-			} else if(type == 4 && this.buildingTwo.allied >= number){}
+			} else if(type == 4 && this.buildingTwo.allied >= number){
+				this.buildingTwo.population -= number;
+				this.buildingTwo.allied  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			}
+			break;
+		case 4:
+			if(type == 3 && this.buildingThreePopulation.rivals >= number){
+				this.buildingThreePopulation.population -= number;
+				this.buildingThreePopulation.rivals  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			} else if(type == 4 && this.buildingThreePopulation.allied >= number){
+				this.buildingThreePopulation.population -= number;
+				this.buildingThreePopulation.allied  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			}
+			break;
+		case 5:
+			if(type == 3 && this.buildingFour.rivals >= number){
+				this.buildingFour.population -= number;
+				this.buildingFour.rivals  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			} else if(type == 4 && this.buildingFour.allied >= number){
+				this.buildingFour.population -= number;
+				this.buildingFour.allied  -= number;
+				this.policeStation.population += number;
+				this.policeStation.neutral += number;
+			}
 			break;
 		default:
 			//do nothing
@@ -273,11 +309,15 @@ function levelTwo() {
 	this.compressDataL3 = function(level3){
 		var tempNeutral, tempPolice, tempRivals, tempAllied;
 		tempNeutral = this.hospital.neutral + this.policeStation.neutral + 
-					  this.buildingOne.neutral + this.buildingTwo.neutral;
+					  this.buildingOne.neutral + this.buildingTwo.neutral+ 
+					  this.buildingThree.neutral + this.buildingFour.neutral;
 		tempPolice = this.hospital.police + this.policeStation.police + 
-					 this.buildingOne.police + this.buildingTwo.police;
-		tempRivals = this.buildingOne.rivals + this.buildingTwo.rivals;
-		tempAllied = this.buildingOne.allied + this.buildingTwo.allied;
+					 this.buildingOne.police + this.buildingTwo.police+ 
+					 this.buildingThree.police + this.buildingFour.police;
+		tempRivals = this.buildingOne.rivals + this.buildingTwo.rivals+ 
+					 this.buildingThree.rivals + this.buildingFour.rivals;
+		tempAllied = this.buildingOne.allied + this.buildingTwo.allied+ 
+					 this.buildingThree.allied + this.buildingFour.allied;
 		switch(level3.playerCity){
 		case 1:
 			level3.northCity.neutral = tempNeutral;
@@ -332,6 +372,20 @@ function levelTwo() {
 		}
 		for (i = 0; i < this.out_B2.length; i++) {
 			this.out_B2.pop();
+		}
+		/*building three queues*/
+		for (i = 0; i < this.in_B3.length; i++) {
+			this.in_B3.pop();
+		}
+		for (i = 0; i < this.out_B3.length; i++) {
+			this.out_B3.pop();
+		}
+		/*building four queues*/
+		for (i = 0; i < this.in_B4.length; i++) {
+			this.in_B4.pop();
+		}
+		for (i = 0; i < this.out_B4.length; i++) {
+			this.out_B4.pop();
 		}
 	}//end clearArray
 }

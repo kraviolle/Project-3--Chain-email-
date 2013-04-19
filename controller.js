@@ -560,7 +560,7 @@ function Controller(level3, level2) {
 	this.npcMoveFromCurrCity = function(type){
 		var moveRandom = 0;
 		switch(type){
-		case 1:
+		case 1: //neutral
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-1)) + 1);
 			if (moveRandom == 1) {
 				L2.hospital.neutral--;
@@ -574,14 +574,22 @@ function Controller(level3, level2) {
 				L2.buildingTwo.neutral--;
 				L2.out_B2.push(1);
 				console.log("Neutral moved from buildingTwo.");
+			} else if (moveRandom == 4) {
+				L2.buildingThree.neutral--;
+				L2.out_B3.push(1);
+				console.log("Neutral moved from buildingTwo.");
+			} else if (moveRandom == 5) {
+				L2.buildingFour.neutral--;
+				L2.out_B4.push(1);
+				console.log("Neutral moved from buildingTwo.");
 			}
 			break;
-		case 2:
+		case 2: //police
 			L2.policeStation.police--;
 			L2.out_PS.push(2);
 			console.log("Police moved from police station.");
 			break;
-		case 3:
+		case 3: //rival
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.rivals--;
@@ -593,7 +601,7 @@ function Controller(level3, level2) {
 				console.log("Rival moved from buildingTwo.");
 			}
 			break;
-		case 4:
+		case 4: //allied
 			moveRandom = Math.floor((Math.random() * (L2.totalLoc()-2)) + 1);
 			if (moveRandom == 1) {
 				L2.buildingOne.allied--;
