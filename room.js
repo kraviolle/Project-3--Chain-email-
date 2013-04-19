@@ -86,12 +86,12 @@ function room(start_x, start_y){
       	ctx.stroke();
 		
 		var bimg=new Image();
-		bimg.src="images/interior3.png";
+		bimg.src="images/interior1.png";
 		ctx.drawImage(bimg,10,10);
 	}
 
 	this.drawplayer = function(){
-		  var heroimg= new Image();
+		var heroimg= new Image();
 	  heroimg.src="images/hero.png";
 	  herox =this.map[this.player_position.x][this.player_position.y].point.x;
 	  heroy = this.map[this.player_position.x][this.player_position.y].point.y;

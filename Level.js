@@ -98,8 +98,9 @@ function levelTwo() {
 	this.playerLocation = 2;//0-hospital, 1-policeStation, 2-buildingOne, 3-buildingTwo, 4-buildingThree, 5-buildingFour
 	this.hospital = {
 		neutral : 1,
-		police : 1
-	};
+		police : 1,
+		//src : "images/hospital.png"
+		};
 	this.policeStation = {
 		neutral : 1,
 		police : 1
