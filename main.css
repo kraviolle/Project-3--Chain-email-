@@ -40,7 +40,7 @@ div{
 	height: 500px;
 	overflow: auto;
 	background-color: white;
-	opacity: 0.5;
+	opacity: 0.6;
 	padding-left:10px;
 	padding-top:10px;
 	text-align:center;
@@ -51,7 +51,12 @@ div{
 	font-size: 20px;
 }
 
-#lvl2Data, #lvl3Data{
-	margin-left: auto;
-	margin-right: auto;
+#lvl3Holder{
+	visibility: hidden;	
+}
+
+#lvl2Holder, #lvl3Holder{
+	position: absolute;
+	top: 40px;
+	right: 120px;
 }
