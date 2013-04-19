@@ -276,7 +276,7 @@ function outdoor(start_x, start_y){
 			
 	// Test to draw img.
 	var Testimg = new Image();        //- KEN , drawing over your cells. the door is positioned as such. will add more background stuff nxt time.
-	Testimg.src= "images/building1.png";
+	Testimg.src= "images/building2.png";
 	ctx.drawImage(Testimg, 0,0);
 	
 	
