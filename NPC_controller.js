@@ -12,7 +12,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   // Initialize all idle points.
 
 
-  
+  /*
   // Initialize NPCs. Location starts with 15 neutral NPCs.
   // Initializing NPC outside
   this.NPC_array.push(new NPC(10,3,3,123,false));
@@ -109,6 +109,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 	  
       for(var i = 0; i < this.NPC_array.length; i++)
       {
+        if(this.NPC_array[i].intention != -1)
+        {
         if(!inside)
         {
         if(!this.NPC_array[i].inside)
@@ -216,6 +218,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         }
       }
       }
+      }
   }
 
   this.drawNPC_debug = function(inside){
@@ -255,6 +258,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     //Run through every NPC in the array
     for(var i = 0; i < this.NPC_array.length; i++)
     {
+      if(this.NPC_array[i].intention != -1)
+      {  
       //
       //  IF npc is not at is destination, move to its destination
       //
@@ -323,7 +328,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
               }
               
               this.outside.map[15][3].occupied = false;
-              this.NPC_array.splice(i, 1);
+              this.destroy(i);
+              //this.NPC_array.splice(i, 1);
               // Add to leaving list the type of NPC
               break;
             }
@@ -409,7 +415,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
                 this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].occupied = false
                 this.outside.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = -1
               }
-              this.NPC_array.splice(i, 1);
+              //this.NPC_array.splice(i, 1);
+              this.destroy(i);
 
             } 
             else // The NPC he is fighting with disappears
@@ -427,7 +434,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
                 this.outside.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].occupied = false
                 this.outside.map[this.NPC_array[this.NPC_array[i].fighting].x][this.NPC_array[this.NPC_array[i].fighting].y].npc = -1
               }
-              this.NPC_array.splice(this.NPC_array[i].fighting,1);
+              //this.NPC_array.splice(this.NPC_array[i].fighting,1);
+              this.destroy(this.NPC_array[i].fighting);
             }
           }
           // For interrogation, police stay, if NPC is gang member, dissapear
@@ -447,7 +455,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
                   this.outside.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].occupied = false
                   this.outside.map[this.NPC_array[this.NPC_array[i].interrogate].x][this.NPC_array[this.NPC_array[i].interrogate].y].npc = -1
                 }
-                this.NPC_array.splice(this.NPC_array[i].interrogate, 1);
+                //this.NPC_array.splice(this.NPC_array[i].interrogate, 1);
+                this.destroy(this.NPC_array[i].interrogate);
               }
               else
               {
@@ -470,6 +479,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       //
       //  Update the NPC index stored in the map 
       //
+      /*
       if(this.NPC_array[i].inside)
       {
         room.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = i;
@@ -478,17 +488,18 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       {
         outside.map[this.NPC_array[i].x][this.NPC_array[i].y].npc = i;
       }
+      */
 
       // Testing recruitment
       if(timeCounter < 2)
       {
-        this.fighting(1, 6);
+        //this.fighting(1, 6);
         //this.recruitment(1, 5);
         //this.interrogate(0, 6);
 
       }
 
-
+    }
     }
     }
 
@@ -1327,6 +1338,12 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       }
     }
   }
+  }
+  this.destroy = function(NPC)
+  {
+    outside.map[this.NPC_array[NPC].x][this.NPC_array[NPC].y].npc = -1;
+    this.NPC_array[NPC].intention = -1;
+
   }
 
   this.decompress = function(building){

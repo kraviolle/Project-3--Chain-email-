@@ -464,7 +464,7 @@ function load() {
 	var clearData = 1;
 	var timer = new timeInterval(1000, function(){
 		timeCounter++;
-		//npc_controller.interaction_simulate(timeCounter);
+		npc_controller.interaction_simulate(timeCounter);
 		if((timeCounter%18) == 0){//3 hrs in-game
 			if(clearData == 1){
 				level2.clearArrays();
