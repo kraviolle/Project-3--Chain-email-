@@ -31,6 +31,7 @@ function load() {
 	var building_test = [];
 	var tbox = new textBox();
 	//building_test[0] = 1;
+	npc_controller.decompress(level2.buildingOne);
 	
 	//------------------------------
 	//  End initialization of object
