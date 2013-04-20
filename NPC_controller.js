@@ -761,33 +761,35 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     this.NPC_array[NPC].destination_inside = false;
   }
 
-  this.NPC_enter = function(player_location, building1, building2){ //This creates NPC that are entering this area from another area
+  this.NPC_enter = function(level2){ //This creates NPC that are entering this area from another area
 
+    /*
     //Testing the leaving function
     if(this.NPC_array.length > 0)
     {
       this.leave(Math.floor((Math.random()*this.NPC_array.length)));
       console.log('leave');
     }
-
+    */
 
     var npc_type = 0;
-
+    if(outside.active)
+    {
     //Feed in the queue for the building where the player is
     //Unload the queue every '10's
     //If the entering position is unoccupied, initialize the npc to that position and give it a random idle position that is not occupied 
-    if(player_location == 2) // Building 1
+    if(level2.playerLocation == 2) // Building 1
     {
       //make sure that the queue contain somebody
-      if(building1.length > 0)
+      if(level2.in_B1.length > 0 && this.NPC_array.length < 12)
       {
       
       //use building 1
       if(!outside.map[15][3].occupied)
       {
-        npc_type = building1.shift();
+        npc_type = level2.in_B1.shift();
         //initialize NPC here
-        console.log('SHIFT: ' + npc_type);
+        //console.log('SHIFT: ' + npc_type);
         switch(npc_type){
           case 1:
           this.NPC_array.push(new NPC(15,3,0,123,false));
@@ -906,8 +908,394 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     else if(player_location == 3)
     {
       //use building 2
+      //make sure that the queue contain somebody
+      if(level2.in_B2.length > 0 && this.NPC_array.length < 12)
+      {
+      
+      //use building 1
+      if(!outside.map[15][3].occupied)
+      {
+        npc_type = level2.in_B2.shift();
+        //initialize NPC here
+        //console.log('SHIFT: ' + npc_type);
+        switch(npc_type){
+          case 1:
+          this.NPC_array.push(new NPC(15,3,0,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 2:
+          this.NPC_array.push(new NPC(15,3,3,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;          
+          case 3:
+          this.NPC_array.push(new NPC(15,3,1,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 4:
+          this.NPC_array.push(new NPC(15,3,2,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+        }
+        
+        /*
+        this.NPC_array.push(new NPC(15,3,**************************,123,false));
+        this.outside.map[15][3].occupied = true;
+        this.outside.map[15][3].npc = this.NPC_array.length - 1;
+        // Find list of idle positions
+        for(var i = 0; i < this.outside.idle_location.array.length; i++)
+        {
+          if(!outside.map[this.outside.idle_location.array[i].x][this.outside.idle_location.array[i].y].occupied)
+          {
+            this.NPC_array[this.NPC_array[length - 1]].destination = new Point(this.outside.idle_location.array[i].x, this.outside.idle_location.array[i].y);
+            this.NPC_array[this.NPC_array[length - 1]].intention = 1;
+            break;
+          }
+        }
+        */
+
+      }
+
+      }
+
 
     }
+
+    else if(player_location == 4)
+    {
+
+      //use building 2
+      //make sure that the queue contain somebody
+      if(level2.in_B3.length > 0 && this.NPC_array.length < 12)
+      {
+      
+      //use building 1
+      if(!outside.map[15][3].occupied)
+      {
+        npc_type = level2.in_B3.shift();
+        //initialize NPC here
+        //console.log('SHIFT: ' + npc_type);
+        switch(npc_type){
+          case 1:
+          this.NPC_array.push(new NPC(15,3,0,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 2:
+          this.NPC_array.push(new NPC(15,3,3,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;          
+          case 3:
+          this.NPC_array.push(new NPC(15,3,1,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 4:
+          this.NPC_array.push(new NPC(15,3,2,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+        }
+        
+        /*
+        this.NPC_array.push(new NPC(15,3,**************************,123,false));
+        this.outside.map[15][3].occupied = true;
+        this.outside.map[15][3].npc = this.NPC_array.length - 1;
+        // Find list of idle positions
+        for(var i = 0; i < this.outside.idle_location.array.length; i++)
+        {
+          if(!outside.map[this.outside.idle_location.array[i].x][this.outside.idle_location.array[i].y].occupied)
+          {
+            this.NPC_array[this.NPC_array[length - 1]].destination = new Point(this.outside.idle_location.array[i].x, this.outside.idle_location.array[i].y);
+            this.NPC_array[this.NPC_array[length - 1]].intention = 1;
+            break;
+          }
+        }
+        */
+
+      }
+
+      }
+
+    }
+
+    else if(player_location == 5)
+    {
+      //use building 2
+      //make sure that the queue contain somebody
+      if(level2.in_B4.length > 0 && this.NPC_array.length < 12)
+      {
+      
+      //use building 1
+      if(!outside.map[15][3].occupied)
+      {
+        npc_type = level2.in_B4.shift();
+        //initialize NPC here
+        //console.log('SHIFT: ' + npc_type);
+        switch(npc_type){
+          case 1:
+          this.NPC_array.push(new NPC(15,3,0,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 2:
+          this.NPC_array.push(new NPC(15,3,3,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;          
+          case 3:
+          this.NPC_array.push(new NPC(15,3,1,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+          case 4:
+          this.NPC_array.push(new NPC(15,3,2,123,false));
+          this.outside.map[15][3].occupied = true;
+          this.outside.map[15][3].npc = this.NPC_array.length - 1;
+          // Find list of idle positions
+          for(var i = 0; i < this.outside.list.length; i++)
+          {
+            //Update and clear the flags of locations that have been occupied
+            if(outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && outside.list_flag[i] == 1)
+            {
+              outside.list_flag[i] = 0;
+            }
+
+            if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied && !outside.list_flag[i])
+          {
+            this.NPC_array[this.NPC_array.length - 1].destination = new Point(this.outside.list[i].x, this.outside.list[i].y);
+            this.NPC_array[this.NPC_array.length - 1].destination_inside = false;
+            this.NPC_array[this.NPC_array.length - 1].intention = 1;
+            outside.list_flag[i] = 1;
+            break;
+          }
+          }
+          break;
+        }
+        
+        /*
+        this.NPC_array.push(new NPC(15,3,**************************,123,false));
+        this.outside.map[15][3].occupied = true;
+        this.outside.map[15][3].npc = this.NPC_array.length - 1;
+        // Find list of idle positions
+        for(var i = 0; i < this.outside.idle_location.array.length; i++)
+        {
+          if(!outside.map[this.outside.idle_location.array[i].x][this.outside.idle_location.array[i].y].occupied)
+          {
+            this.NPC_array[this.NPC_array[length - 1]].destination = new Point(this.outside.idle_location.array[i].x, this.outside.idle_location.array[i].y);
+            this.NPC_array[this.NPC_array[length - 1]].intention = 1;
+            break;
+          }
+        }
+        */
+
+      }
+
+      }
+    }
+  }
   }
 
   this.decompress = function(building){

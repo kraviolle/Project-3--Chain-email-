@@ -467,7 +467,7 @@ function load() {
 			if(clearData == 1){
 				level2.clearArrays();
 				clearData = 0;
-				//npc_controller.NPC_enter(2, level2.in_B1, building_test); // HS :x
+				npc_controller.NPC_enter(level2); // HS :x
 				//npc_controller.decompress(level2.buildingOne);
 			}
 			//L2 simulation
