@@ -250,7 +250,8 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   this.NPC_simulate = function(timeCounter){
 
     var luck;
-
+    if(outside.active)
+    {
     //Run through every NPC in the array
     for(var i = 0; i < this.NPC_array.length; i++)
     {
@@ -489,11 +490,14 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
 
     }
+    }
 
   }
   this.interaction_simulate = function(timeCounter){
     //Randomly creating an interaction every 10 seconds
-      if(timeCounter - this.last_count_2 > 7)
+      if(outside.active)
+      {
+      if(timeCounter - this.last_count_2 > 10)
       {
         //var action = Math.floor((Math.random()*5)+1);
         var NPC_1 = -1;
@@ -590,6 +594,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         
         this.last_count_2 = timeCounter;
       }
+    }
   }
 
   this.recruitment = function(gang, neutral){

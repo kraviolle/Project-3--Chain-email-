@@ -376,6 +376,7 @@ function load() {
 	//--------------------------------------------------------
 	//  Registering mouse position on mouse click - Hong Shing
 	//--------------------------------------------------------
+	/*
 	canvas.addEventListener('mousedown', function(evt) {
 		var mousePos = getMousePos(canvas, evt);
 		abstraction.mousepos_x = mousePos.x;
@@ -386,6 +387,7 @@ function load() {
 		//var message = 'Level: ' + abstraction.abst_level;
 		//writeMessage(canvas, message);
 	}, false);
+*/
 	//--------------------------------------------------------
 	//  End
 	//--------------------------------------------------------
@@ -462,6 +464,7 @@ function load() {
 	var clearData = 1;
 	var timer = new timeInterval(1000, function(){
 		timeCounter++;
+		//npc_controller.interaction_simulate(timeCounter);
 		if((timeCounter%18) == 0){//3 hrs in-game
 			if(clearData == 1){
 				level2.clearArrays();
