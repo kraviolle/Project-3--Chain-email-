@@ -617,9 +617,9 @@ function city(start_x, start_y){
 
           }
         }
-       // var cityimg= new Image();
-		//cityimg.src= "images/city.png";
-		//ctx.drawImage(cityimg, 10,10);
+        var cityimg= new Image();
+		cityimg.src= "images/city.png";
+		ctx.drawImage(cityimg, 10,10);
 		
   }
 
