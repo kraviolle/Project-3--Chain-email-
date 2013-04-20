@@ -184,13 +184,23 @@ function load() {
 							if (city_level.active) {
 								city_level.player_direction = 1;
 								city_level.player_key=1;
-								if((city_level.player_position.x == 3 && city_level.player_position.y == 3) || (city_level.player_position.x == 7 && city_level.player_position.y == 3) || (city_level.player_position.x == 11 && city_level.player_position.y == 3) || (city_level.player_position.x == 3 && city_level.player_position.y == 7) || (city_level.player_position.x == 7 && city_level.player_position.y == 7) || (city_level.player_position.x == 11 && city_level.player_position.y == 7))
+								if((city_level.player_position.x == 3 && city_level.player_position.y == 3))
 								{
 									city_level.active = false;
 									Outside.active = true;
 									Outside.player_direction = 3;
 									npc_controller.decompress(level2.buildingOne);
-								}
+								}  
+								else if((city_level.player_position.x == 7 && city_level.player_position.y == 3))
+								{}
+								else if((city_level.player_position.x == 11 && city_level.player_position.y == 3))  
+								{}
+								else if((city_level.player_position.x == 3 && city_level.player_position.y == 7))  
+								{}
+								else if((city_level.player_position.x == 7 && city_level.player_position.y == 7)) 
+								{} 
+								else if((city_level.player_position.x == 11 && city_level.player_position.y == 7))
+								{}
 
 								else if (city_level.player_position.y != 0
 										&& !city_level.map[city_level.player_position.x][city_level.player_position.y - 1].occupied) {
