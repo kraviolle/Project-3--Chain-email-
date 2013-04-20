@@ -109,7 +109,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 	  
       for(var i = 0; i < this.NPC_array.length; i++)
       {
-        if(this.NPC_array[i].intention != -1)
+        if(this.NPC_array[i].intention != -10)
         {
         if(!inside)
         {
@@ -258,7 +258,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     //Run through every NPC in the array
     for(var i = 0; i < this.NPC_array.length; i++)
     {
-      if(this.NPC_array[i].intention != -1)
+      if(this.NPC_array[i].intention != -10)
       {  
       //
       //  IF npc is not at is destination, move to its destination
@@ -1342,7 +1342,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   this.destroy = function(NPC)
   {
     outside.map[this.NPC_array[NPC].x][this.NPC_array[NPC].y].npc = -1;
-    this.NPC_array[NPC].intention = -1;
+    this.NPC_array[NPC].intention = -10;
 
   }
 

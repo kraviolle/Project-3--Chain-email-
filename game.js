@@ -25,7 +25,7 @@ function load() {
 	var simulator = new Controller(level3, level2); //Lionel
 	var navigate = new pathfinding(lobby, Outside); //HS
 	var npc_controller = new NPC_controller(lobby, Outside, navigate, level2.playerLocation, level2.out_B1, level2.out_B2); // HS
-	var debug_mode = true; // HS
+	var debug_mode = false; // HS
 	var debugWrite = new debugWriter(level2, level3); //Daryl
 	var city_level = new city(20, 20); //HS
 	var building_test = [];
@@ -470,6 +470,7 @@ function load() {
 			if(clearData == 1){
 				level2.clearArrays();
 				clearData = 0;
+				npc_controller.leave();
 			}
 			//L3 simulation
 			simulator.countryMovement();
@@ -480,7 +481,7 @@ function load() {
 				level2.clearArrays();
 				clearData = 0;
 				npc_controller.NPC_enter(level2); // HS :x
-				npc_controller.leave();
+				//npc_controller.leave();
 			}
 			//L2 simulation
 			simulator.cityMovement();
