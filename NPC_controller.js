@@ -12,7 +12,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   // Initialize all idle points.
 
 
-  /*
+  
   // Initialize NPCs. Location starts with 15 neutral NPCs.
   // Initializing NPC outside
   this.NPC_array.push(new NPC(10,3,3,123,false));
@@ -482,7 +482,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
       // Testing recruitment
       if(timeCounter < 2)
       {
-        //this.fighting(1, 6);
+        this.fighting(1, 6);
         //this.recruitment(1, 5);
         //this.interrogate(0, 6);
 
@@ -495,7 +495,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   }
   this.interaction_simulate = function(timeCounter){
     //Randomly creating an interaction every 10 seconds
-      if(outside.active)
+      if(outside.active && this.NPC_array.length > 3)
       {
       if(timeCounter - this.last_count_2 > 10)
       {
