@@ -46,7 +46,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
   this.NPC_array.push(new NPC(14,4,0,123,false));
   this.outside.map[14][4].occupied = true;
   this.outside.map[14][4].npc = this.NPC_array.length - 1;
-  */
+  
 
   /*
   // Initializing NPC in the room
@@ -926,10 +926,36 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     var blue_npc = building.rivals;
     var red_npc = building.allied;
     var police_npc = building.police;
+    var total = 0;
 
+    /*
+    var i = 0;
+    this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,0,123,false));
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = true;
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
+    this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
+
+    var i = 1;
+    this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,1,123,false));
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = true;
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
+    this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
+
+    var i = 2;
+    this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,2,123,false));
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = true;
+    this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
+    this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
+    */
+    
     //Neutral
     for(var i = 0; i < neutral_npc; i++)
     {
+      if(i > this.outside.list.length - 1)
+      {
+        break;
+      }
+
       if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
       {
         this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,0,123,false));
@@ -937,15 +963,19 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
         this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
       }
-      if(i == this.outside.list.length - 1)
+      
+    }
+    total += neutral_npc;
+    //Blue
+    
+    
+    for(var i = total; i < (total + blue_npc); i++)
+    {
+      if(i > this.outside.list.length - 1)
       {
         break;
       }
-    }
 
-    //Blue
-    for(var i = 0; i < neutral_npc; i++)
-    {
       if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
       {
         this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,2,123,false));
@@ -953,15 +983,17 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
         this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
       }
-      if(i == this.outside.list.length - 1)
+      
+    }
+    total += blue_npc;
+    //Red
+    
+    for(var i = total; i < (total + red_npc); i++)
+    {
+      if(i > this.outside.list.length - 1)
       {
         break;
       }
-    }
-
-    //Red
-    for(var i = 0; i < neutral_npc; i++)
-    {
       if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
       {
         this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,1,123,false));
@@ -969,27 +1001,27 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
         this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
       }
-      if(i == this.outside.list.length - 1)
+      
+    }
+
+    total += red_npc;
+    //Police
+    for(var i = total; i < (total + police_npc); i++)
+    {
+      if(i >= this.outside.list.length - 1)
       {
         break;
       }
-    }
-
-    //Police
-    for(var i = 0; i < neutral_npc; i++)
-    {
       if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
       {
-        this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,0,123,false));
+        this.NPC_array.push(new NPC(this.outside.list[i].x,this.outside.list[i].y,3,123,false));
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = true;
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
         this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
       }
-      if(i == this.outside.list.length - 1)
-      {
-        break;
-      }
-    }
+    }  
+    
 
   }
+
 }
