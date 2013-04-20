@@ -910,11 +910,24 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     }
   }
 
-  this.decompress = function(){
+  this.decompress = function(building){
+
+    //Empty the NPC controller
+    this.NPC_array.length = 0;
+    //Empty all the positions
+    for(var i = 0; i < this.outside.list.length; i++)
+    {
+      this.outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied = false;
+    }
+
     // Get no. the different number of each type of NPC
     // Initialize them into positions of the outside list
-    var neutral_npc = 10;
+    var neutral_npc = building.neutral;
+    var blue_npc;
+    var red_npc;
+    var green_npc;
 
+    //Neutral
     for(var i = 0; i < neutral_npc; i++)
     {
       if(!outside.map[this.outside.list[i].x][this.outside.list[i].y].occupied)
@@ -924,7 +937,17 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
         this.outside.map[this.outside.list[i].x][this.outside.list[i].y].npc = this.NPC_array.length - 1;
         this.NPC_array[this.NPC_array.length - 1].direction = Math.floor((Math.random()*4 + 1));
       }
+      if(i == this.outside.list.length - 1)
+      {
+        break;
+      }
     }
+
+    //Blue
+
+    //Red
+
+    //Police
 
   }
 }

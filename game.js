@@ -189,6 +189,7 @@ function load() {
 									city_level.active = false;
 									Outside.active = true;
 									Outside.player_direction = 3;
+									npc_controller.decompress(level2.buildingOne);
 								}
 
 								else if (city_level.player_position.y != 0
@@ -434,7 +435,7 @@ function load() {
 				level2.clearArrays();
 				clearData = 0;
 				//npc_controller.NPC_enter(2, level2.in_B1, building_test); // HS :x
-				npc_controller.decompress();
+				//npc_controller.decompress(level2.buildingOne);
 			}
 			//L2 simulation
 			simulator.cityMovement();
