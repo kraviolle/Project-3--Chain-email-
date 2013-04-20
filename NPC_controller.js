@@ -755,10 +755,19 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
     } 
   }
 
-  this.leave = function(NPC){ // This NPC will leave this area
-    this.NPC_array[NPC].intention = 6;
-    this.NPC_array[NPC].destination = new Point(15 , 3);
-    this.NPC_array[NPC].destination_inside = false;
+  this.leave = function(){ // This NPC will leave this area
+    // Leave if more than 6 NPC
+
+    if(this.NPC_array.length > 6)
+    {
+      var random_npc = Math.floor((Math.random()*this.NPC_array.length));
+      if(this.NPC_array[random_npc].intention == 0)
+      {
+        this.NPC_array[random_npc].intention = 6;
+        this.NPC_array[random_npc].destination = new Point(15 , 3);
+        this.NPC_array[random_npc].destination_inside = false;
+      }
+    }
   }
 
   this.NPC_enter = function(level2){ //This creates NPC that are entering this area from another area
