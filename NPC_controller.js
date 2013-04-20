@@ -905,7 +905,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
       }
     }
-    else if(player_location == 3)
+    else if(level2.playerLocation == 3)
     {
       //use building 2
       //make sure that the queue contain somebody
@@ -1036,7 +1036,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
     }
 
-    else if(player_location == 4)
+    else if(level2.playerLocation == 4)
     {
 
       //use building 2
@@ -1167,7 +1167,7 @@ function NPC_controller(room, outside, navigate, player_pos, B1_OUT, B2_OUT){
 
     }
 
-    else if(player_location == 5)
+    else if(level2.playerLocation == 5)
     {
       //use building 2
       //make sure that the queue contain somebody
